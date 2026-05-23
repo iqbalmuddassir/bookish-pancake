@@ -15,17 +15,43 @@
           --heading: #0f172a;
           --shadow: 0 20px 40px rgba(15, 23, 42, 0.1);
           --radius: 24px;
+          --border: rgba(0,0,0,0.05);
+        }
+
+        body.dark-mode {
+          --bg: #0f172a;
+          --surface: rgba(30, 41, 59, 0.9);
+          --primary: #2dd4bf;
+          --primary-dark: #14b8a6;
+          --text: #e2e8f0;
+          --heading: #f8fafc;
+          --shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+          --border: rgba(255,255,255,0.1);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body:not(.light-mode) {
+              --bg: #0f172a;
+              --surface: rgba(30, 41, 59, 0.9);
+              --primary: #2dd4bf;
+              --primary-dark: #14b8a6;
+              --text: #e2e8f0;
+              --heading: #f8fafc;
+              --shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+              --border: rgba(255,255,255,0.1);
+            }
         }
 
         body {
           margin: 0;
           font-family: 'Inter', -apple-system, system-ui, sans-serif;
           color: var(--text);
-          background:
-            radial-gradient(circle at top left, #dff7f2 0%, transparent 40%),
-            radial-gradient(circle at bottom right, #e8f0ff 0%, transparent 40%),
-            var(--bg);
+          background-color: var(--bg);
+          background-image:
+            radial-gradient(circle at top left, rgba(223, 247, 242, 0.5) 0%, transparent 40%),
+            radial-gradient(circle at bottom right, rgba(232, 240, 255, 0.5) 0%, transparent 40%);
           line-height: 1.6;
+          transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         .container {
@@ -33,6 +59,27 @@
           margin: 0 auto;
           padding: 0 24px;
         }
+
+        #themeToggle {
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            z-index: 1000;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--text);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+        #themeToggle:hover { transform: scale(1.1); }
 
         .hero {
           text-align: center;
@@ -50,7 +97,8 @@
 
         .hero p {
           font-size: clamp(1.1rem, 3vw, 1.4rem);
-          color: #4b5563;
+          color: var(--text);
+          opacity: 0.8;
           max-width: 750px;
           margin: 0 auto 48px;
         }
@@ -119,6 +167,7 @@
           min-width: 220px;
           max-width: 220px;
           flex-shrink: 0;
+          border-radius: 20px;
           overflow: hidden;
           box-shadow: var(--shadow);
           transition: transform 0.3s ease;
@@ -146,7 +195,7 @@
           backdrop-filter: blur(12px);
           padding: 48px 40px;
           border-radius: var(--radius);
-          border: 1px solid rgba(229, 231, 235, 0.6);
+          border: 1px solid var(--border);
           box-shadow: var(--shadow);
           transition: all 0.4s ease;
         }
@@ -171,17 +220,19 @@
 
         .feature-card p {
           font-size: 1.05rem;
-          color: #64748b;
+          color: var(--text);
+          opacity: 0.8;
           margin: 0;
         }
 
         .how-it-works {
-          background: white;
+          background: var(--surface);
           padding: 100px 40px;
           border-radius: 48px;
           margin: 100px 0;
           text-align: center;
           box-shadow: 0 40px 100px rgba(0,0,0,0.03);
+          border: 1px solid var(--border);
         }
 
         .how-it-works h2 {
@@ -189,6 +240,7 @@
           margin-bottom: 60px;
           font-weight: 900;
           letter-spacing: -0.02em;
+          color: var(--heading);
         }
 
         .steps {
@@ -211,15 +263,17 @@
         }
 
         .step p {
-          color: #64748b;
+          color: var(--text);
+          opacity: 0.8;
           font-size: 1rem;
         }
 
         footer {
           text-align: center;
           padding: 80px 0;
-          border-top: 1px solid #e5e7eb;
-          color: #94a3b8;
+          border-top: 1px solid var(--border);
+          color: var(--text);
+          opacity: 0.7;
         }
 
         .footer-links {
@@ -242,10 +296,12 @@
           .how-it-works { padding: 60px 24px; }
           .feature-card { padding: 32px; }
           .video-container { width: 100%; }
+          #themeToggle { top: 16px; right: 16px; width: 38px; height: 38px; font-size: 1rem; }
         }
     </style>
 </head>
 <body>
+<button id="themeToggle" aria-label="Toggle theme">🌓</button>
 
 <div class="container">
     <header class="hero">
@@ -330,7 +386,7 @@
     </section>
 
     <footer>
-        <p>&copy; 2024 Al-Quran Education. Designed & Developed by Muddassir Iqbal.</p>
+        <p>&copy; 2024-<span class="curr-year"></span> Al-Quran Education • Designed & Developed by Muddassir Iqbal</p>
         <div class="footer-links">
             <a href="terms_and_conditions.html">Terms & Conditions</a>
             <a href="mailto:iqbal.muddassir@gmail.com">Get Support</a>
@@ -338,5 +394,31 @@
     </footer>
 </div>
 
+<script>
+    const themeToggle = document.getElementById('themeToggle');
+    const body = document.body;
+    const savedTheme = localStorage.getItem('quran-app-theme');
+    if (savedTheme) body.classList.add(savedTheme);
+
+    themeToggle.addEventListener('click', () => {
+        if (body.classList.contains('dark-mode')) {
+            body.classList.remove('dark-mode');
+            body.classList.add('light-mode');
+            localStorage.setItem('quran-app-theme', 'light-mode');
+        } else if (body.classList.contains('light-mode')) {
+            body.classList.remove('light-mode');
+            body.classList.add('dark-mode');
+            localStorage.setItem('quran-app-theme', 'dark-mode');
+        } else {
+            const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            body.classList.add(isDark ? 'light-mode' : 'dark-mode');
+            localStorage.setItem('quran-app-theme', isDark ? 'light-mode' : 'dark-mode');
+        }
+    });
+
+    document.querySelectorAll('.curr-year').forEach(el => {
+        el.textContent = new Date().getFullYear();
+    });
+</script>
 </body>
 </html>

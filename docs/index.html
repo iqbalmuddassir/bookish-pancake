@@ -3,123 +3,187 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Muddassir Iqbal | Project Portfolio</title>
+    <title>Muddassir Iqbal | Project Hub</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #f8fafc;
-            --text: #1e293b;
-            --primary: #0f172a;
-            --accent-1: #4f46e5;
-            --accent-2: #0f766e;
-            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+            --bg: #ffffff;
+            --text: #0f172a;
+            --subtext: #64748b;
+            --card-bg: #f8fafc;
+            --card-border: #e2e8f0;
+            --accent-dm: #4f46e5;
+            --accent-quran: #0f766e;
+            --shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+        }
+
+        body.dark-mode {
+            --bg: #0f172a;
+            --text: #f8fafc;
+            --subtext: #94a3b8;
+            --card-bg: #1e293b;
+            --card-border: #334155;
+            --shadow: 0 20px 25px -5px rgb(0 0 0 / 0.3);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body:not(.light-mode) {
+                --bg: #0f172a;
+                --text: #f8fafc;
+                --subtext: #94a3b8;
+                --card-bg: #1e293b;
+                --card-border: #334155;
+                --shadow: 0 20px 25px -5px rgb(0 0 0 / 0.3);
+            }
         }
 
         body {
             margin: 0;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: var(--bg);
             color: var(--text);
+            transition: all 0.3s ease;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            min-height: 100vh;
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 1100px;
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 80px 24px;
             flex-grow: 1;
         }
 
         header {
             text-align: center;
-            padding: 60px 0;
+            margin-bottom: 80px;
         }
 
         h1 {
-            font-size: 3rem;
+            font-size: clamp(2.5rem, 8vw, 4rem);
             font-weight: 800;
-            margin-bottom: 16px;
-            letter-spacing: -0.02em;
+            line-height: 1.1;
+            letter-spacing: -0.04em;
+            margin: 0 0 24px;
+            background: linear-gradient(to right, #6366f1, #a855f7, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .intro {
             font-size: 1.25rem;
-            color: #64748b;
-            max-width: 700px;
-            margin: 0 auto 40px;
+            color: var(--subtext);
+            max-width: 640px;
+            margin: 0 auto;
             line-height: 1.6;
         }
 
-        .projects-grid {
+        .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 40px;
         }
 
-        .project-card {
-            background: white;
-            border-radius: 24px;
-            padding: 40px;
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 32px;
+            padding: 48px;
             text-decoration: none;
             color: inherit;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1px solid #e2e8f0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             flex-direction: column;
+            position: relative;
+            overflow: hidden;
         }
 
-        .project-card:hover {
-            transform: translateY(-8px);
+        .card:hover {
+            transform: translateY(-12px);
             box-shadow: var(--shadow);
             border-color: transparent;
         }
 
-        .project-card h2 {
-            font-size: 1.75rem;
+        .card h2 {
+            font-size: 2rem;
             font-weight: 800;
             margin: 0 0 16px;
+            letter-spacing: -0.02em;
         }
 
-        .project-card p {
-            color: #64748b;
-            margin-bottom: 24px;
+        .card-dm h2 { color: var(--accent-dm); }
+        .card-quran h2 { color: var(--accent-quran); }
+
+        .card p {
+            font-size: 1.125rem;
+            color: var(--subtext);
+            line-height: 1.6;
+            margin: 0 0 32px;
             flex-grow: 1;
         }
 
-        .btn {
-            display: inline-flex;
+        .card-action {
+            display: flex;
             align-items: center;
-            font-weight: 600;
-            gap: 8px;
+            gap: 12px;
+            font-weight: 700;
+            font-size: 1.125rem;
+            transition: gap 0.3s ease;
         }
 
-        .card-dm { border-top: 6px solid var(--accent-1); }
-        .card-dm:hover { background: linear-gradient(to bottom right, #ffffff, #f5f3ff); }
-        .card-dm h2 { color: var(--accent-1); }
+        .card:hover .card-action {
+            gap: 20px;
+        }
 
-        .card-quran { border-top: 6px solid var(--accent-2); }
-        .card-quran:hover { background: linear-gradient(to bottom right, #ffffff, #f0fdfa); }
-        .card-quran h2 { color: var(--accent-2); }
+        .card-dm .card-action { color: var(--accent-dm); }
+        .card-quran .card-action { color: var(--accent-quran); }
+
+        #themeToggle {
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            z-index: 1000;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            color: var(--text);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        #themeToggle:hover {
+            transform: scale(1.1);
+        }
 
         footer {
             text-align: center;
-            padding: 40px;
-            color: #94a3b8;
+            padding: 60px 24px;
+            color: var(--subtext);
             font-size: 0.875rem;
+            border-top: 1px solid var(--card-border);
         }
 
         @media (max-width: 640px) {
-            h1 { font-size: 2.25rem; }
-            .projects-grid { grid-template-columns: 1fr; }
+            .container { padding: 60px 20px; }
+            .grid { grid-template-columns: 1fr; }
+            .card { padding: 32px; }
+            #themeToggle { top: 16px; right: 16px; width: 40px; height: 40px; font-size: 1.1rem; }
         }
     </style>
 </head>
 <body>
+    <button id="themeToggle" aria-label="Toggle theme">🌓</button>
+
     <div class="container">
         <header>
             <h1>Bridge to Purpose</h1>
@@ -128,23 +192,62 @@
             </p>
         </header>
 
-        <main class="projects-grid">
-            <a href="digital-marketing-ai/index.html" class="project-card card-dm">
-                <h2>Digital Marketing AI</h2>
-                <p>A comprehensive 3-month roadmap designed to help you learn digital marketing from scratch using AI tools. Build a portfolio and start your freelancing journey with authentic free resources.</p>
-                <div class="btn">Explore Roadmap &rarr;</div>
+        <main class="grid">
+            <a href="digital-marketing-ai/index.html" class="card card-dm">
+                <div class="card-content">
+                    <h2>Digital Marketing AI</h2>
+                    <p>A comprehensive 3-month roadmap designed to help you learn digital marketing from scratch using AI tools. Build a portfolio and start your freelancing journey with authentic free resources.</p>
+                    <div class="card-action">Explore Roadmap <span>&rarr;</span></div>
+                </div>
             </a>
 
-            <a href="quran-education-app/index.html" class="project-card card-quran">
-                <h2>Al-Quran Education</h2>
-                <p>A modern Islamic toolkit featuring Quran recitations, translations, AI-powered Halal checking, and precision prayer tools. Faith meets future in this comprehensive daily companion.</p>
-                <div class="btn">View App Details &rarr;</div>
+            <a href="quran-education-app/index.html" class="card card-quran">
+                <div class="card-content">
+                    <h2>Al-Quran Education</h2>
+                    <p>A modern Islamic toolkit featuring Quran recitations, translations, AI-powered Halal checking, and precision prayer tools. Faith meets future in this comprehensive daily companion.</p>
+                    <div class="card-action">View App Details <span>&rarr;</span></div>
+                </div>
             </a>
         </main>
     </div>
 
     <footer>
-        &copy; 2024 Muddassir Iqbal. All rights reserved.
+        &copy; Copyright 2024-<span class="curr-year"></span> Muddassir Iqbal&trade;
     </footer>
+
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+
+        const savedTheme = localStorage.getItem('hub-theme');
+        if (savedTheme) {
+            body.classList.add(savedTheme);
+        }
+
+        themeToggle.addEventListener('click', () => {
+            if (body.classList.contains('dark-mode')) {
+                body.classList.remove('dark-mode');
+                body.classList.add('light-mode');
+                localStorage.setItem('hub-theme', 'light-mode');
+            } else if (body.classList.contains('light-mode')) {
+                body.classList.remove('light-mode');
+                body.classList.add('dark-mode');
+                localStorage.setItem('hub-theme', 'dark-mode');
+            } else {
+                const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                if (isDark) {
+                    body.classList.add('light-mode');
+                    localStorage.setItem('hub-theme', 'light-mode');
+                } else {
+                    body.classList.add('dark-mode');
+                    localStorage.setItem('hub-theme', 'dark-mode');
+                }
+            }
+        });
+
+        document.querySelectorAll('.curr-year').forEach(el => {
+            el.textContent = new Date().getFullYear();
+        });
+    </script>
 </body>
 </html>
