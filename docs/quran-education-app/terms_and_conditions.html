@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Terms & Conditions | Al-Quran Education</title>
+    <style>
+        :root {
+          --bg: #f4f7fb;
+          --surface: rgba(255, 255, 255, 0.88);
+          --surface-solid: #ffffff;
+          --text: #1f2937;
+          --muted: #6b7280;
+          --heading: #0f172a;
+          --primary: #0f766e;
+          --primary-soft: #ccfbf1;
+          --border: #e5e7eb;
+          --shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+          --radius: 18px;
+          --radius-sm: 12px;
+          --max-width: 980px;
+        }
+
+        * {
+          box-sizing: border-box;
+        }
+
+        html {
+          scroll-behavior: smooth;
+        }
+
+        body {
+          margin: 0;
+          font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+          line-height: 1.7;
+          color: var(--text);
+          background:
+            radial-gradient(circle at top left, #dff7f2 0%, transparent 30%),
+            radial-gradient(circle at top right, #e8f0ff 0%, transparent 25%),
+            var(--bg);
+        }
+
+        a {
+          color: var(--primary);
+          text-decoration: none;
+        }
+
+        a:hover {
+          text-decoration: underline;
+        }
+
+        .page {
+          max-width: var(--max-width);
+          margin: 0 auto;
+          padding: 32px 20px 60px;
+        }
+
+        .hero {
+          background: linear-gradient(135deg, #0f766e, #115e59);
+          color: #fff;
+          padding: 40px 28px;
+          border-radius: 24px;
+          box-shadow: var(--shadow);
+          margin-bottom: 28px;
+        }
+
+        .hero h1 {
+          margin: 0 0 12px;
+          font-size: clamp(2rem, 4vw, 3rem);
+          line-height: 1.15;
+          letter-spacing: -0.02em;
+        }
+
+        .hero p {
+          margin: 0;
+          max-width: 720px;
+          color: rgba(255, 255, 255, 0.9);
+          font-size: 1.02rem;
+        }
+
+        .nav {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 10px;
+          margin: 20px 0 32px;
+        }
+
+        .nav a {
+          display: inline-block;
+          padding: 10px 14px;
+          background: var(--surface-solid);
+          border: 1px solid var(--border);
+          border-radius: 999px;
+          color: var(--heading);
+          font-size: 0.95rem;
+          font-weight: 600;
+          box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
+          transition: all 0.2s ease;
+        }
+
+        .nav a:hover {
+          transform: translateY(-1px);
+          text-decoration: none;
+          border-color: #cbd5e1;
+        }
+
+        .section {
+          margin-bottom: 28px;
+          background: var(--surface);
+          backdrop-filter: blur(10px);
+          border: 1px solid rgba(229, 231, 235, 0.8);
+          border-radius: var(--radius);
+          padding: 26px;
+          box-shadow: var(--shadow);
+        }
+
+        .section h2 {
+          margin: 0 0 18px;
+          font-size: 1.45rem;
+          color: var(--heading);
+          letter-spacing: -0.02em;
+        }
+
+        .section p {
+          margin: 0 0 14px;
+          color: var(--text);
+        }
+
+        .terms-list {
+          display: grid;
+          gap: 16px;
+          margin-top: 10px;
+        }
+
+        .term-item {
+          padding: 18px;
+          border: 1px solid var(--border);
+          border-radius: var(--radius-sm);
+          background: #fcfdfd;
+        }
+
+        .term-item h3 {
+          margin: 0 0 8px;
+          font-size: 1.05rem;
+          color: var(--heading);
+        }
+
+        .term-item p {
+          margin: 0;
+          color: var(--muted);
+        }
+
+        .grid {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 16px;
+        }
+
+        .card {
+          background: var(--surface-solid);
+          border: 1px solid var(--border);
+          border-radius: var(--radius-sm);
+          padding: 18px;
+          transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 8px 22px rgba(15, 23, 42, 0.06);
+        }
+
+        .card-title {
+          display: inline-block;
+          margin-bottom: 8px;
+          font-weight: 700;
+          color: var(--primary);
+          font-size: 1rem;
+        }
+
+        .card-subtitle {
+          display: block;
+          margin-bottom: 8px;
+          color: var(--muted);
+          font-style: italic;
+          font-size: 0.95rem;
+        }
+
+        .meta {
+          color: var(--text);
+          font-size: 0.95rem;
+        }
+
+        .license-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          margin-top: 8px;
+          padding: 6px 10px;
+          border-radius: 999px;
+          background: var(--primary-soft);
+          color: #134e4a;
+          font-size: 0.86rem;
+          font-weight: 700;
+        }
+
+        pre {
+          margin: 0;
+          padding: 18px;
+          background: #0f172a;
+          color: #e5e7eb;
+          border-radius: 14px;
+          overflow-x: auto;
+          font-size: 0.85rem;
+          line-height: 1.6;
+          border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .footer-note {
+          margin-top: 18px;
+          font-size: 0.92rem;
+          color: var(--muted);
+        }
+
+        .divider {
+          height: 1px;
+          background: linear-gradient(to right, transparent, #d1d5db, transparent);
+          margin: 10px 0 0;
+          border: 0;
+        }
+
+        @media (min-width: 700px) {
+          .grid.two-col {
+            grid-template-columns: 1fr 1fr;
+          }
+        }
+    </style>
+</head>
+<body>
+<main class="page">
+    <section class="hero">
+        <h1>Terms & Conditions</h1>
+        <p>
+            Welcome to Al-Quran Education. By using this application, you agree to comply
+            with and be bound by the following terms and conditions.
+        </p>
+    </section>
+
+    <nav class="nav">
+        <a href="#terms">Terms</a>
+        <a href="#license">App License</a>
+        <a href="#sources">Data Sources</a>
+        <a href="#oss">Open Source Licenses</a>
+    </nav>
+
+    <section class="section" id="terms">
+        <h2>Terms of Use</h2>
+        <div class="terms-list">
+            <div class="term-item">
+                <h3>1. Use of Content</h3>
+                <p>
+                    The content provided in Al-Quran Education, including Quranic text, audio,
+                    and AI-generated responses, is for educational and personal use only.
+                </p>
+            </div>
+
+            <div class="term-item">
+                <h3>2. AI Disclaimer</h3>
+                <p>
+                    The E-code search and Chat features utilize Gemini AI. While we strive for
+                    accuracy, AI-generated content may contain errors. Users are encouraged to
+                    verify critical information with qualified scholars or official sources.
+                </p>
+            </div>
+
+            <div class="term-item">
+                <h3>3. Privacy</h3>
+                <p>
+                    We value your privacy. Location data is used solely for calculating prayer
+                    times and Qibla direction and is not stored or shared.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="license">
+        <h2>App License</h2>
+        <div class="card">
+            <span class="card-title">MIT License</span>
+            <p class="meta">This project is licensed under the <strong>MIT License</strong>.</p>
+            <p class="footer-note">&copy; Copyright of Muddassir Iqbal&trade;</p>
+        </div>
+    </section>
+
+    <section class="section" id="sources">
+        <h2>Data Sources</h2>
+        <p>We gratefully acknowledge the following sources of data used in this application:</p>
+
+        <div class="grid two-col">
+            <div class="card">
+                <span class="card-title">E-Code Information</span>
+                <span class="card-subtitle">Gathered from the Islamic Religious Council of Singapore (MUIS).</span>
+                <a href="https://www.muis.gov.sg/Halal/Religious-Guidelines/Food-Additives-Listing" target="_blank" rel="noopener noreferrer">
+                    https://www.muis.gov.sg/Halal/Religious-Guidelines/Food-Additives-Listing
+                </a>
+            </div>
+
+            <div class="card">
+                <span class="card-title">Quran English Translation Audio</span>
+                <span class="card-subtitle">Sourced from the Allah's Word website.</span>
+                <div class="meta">Reciter: Mishary Bin Rashid Alafasy</div>
+                <a href="https://www.allahsword.com/quran_with_english.html" target="_blank" rel="noopener noreferrer">
+                    https://www.allahsword.com/quran_with_english.html
+                </a>
+            </div>
+
+            <div class="card">
+                <span class="card-title">Quran Urdu Translation Audio</span>
+                <span class="card-subtitle">Sourced from the Quran Urdu website.</span>
+                <div class="meta">Reciter: Saad Al Ghamdi</div>
+                <div class="meta">Translator: Syed Maududi (Al Quran with Urdu Translation)</div>
+                <a href="https://www.quranurdu.com/quran_ghamdi/" target="_blank" rel="noopener noreferrer">
+                    https://www.quranurdu.com/quran_ghamdi/
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="oss">
+        <h2>Open Source Licenses</h2>
+        <p>Al-Quran Education uses the following open-source libraries:</p>
+
+        <div class="grid two-col">
+            <div class="card">
+                <span class="card-title">AndroidX Libraries</span>
+                <div class="meta">Core-ktx, Lifecycle, Fragment, Compose, Navigation, Glance</div>
+                <div class="license-badge">Apache License 2.0</div>
+            </div>
+
+            <div class="card">
+                <span class="card-title">Kotlin Standard Library & Coroutines</span>
+                <div class="license-badge">Apache License 2.0</div>
+            </div>
+
+            <div class="card">
+                <span class="card-title">OkHttp & Logging Interceptor</span>
+                <div class="license-badge">Apache License 2.0</div>
+            </div>
+
+            <div class="card">
+                <span class="card-title">Retrofit & Gson Converter</span>
+                <div class="license-badge">Apache License 2.0</div>
+            </div>
+
+            <div class="card">
+                <span class="card-title">Google Play Services & Firebase</span>
+                <div class="license-badge">Android SDK Terms of Service / Apache 2.0</div>
+            </div>
+
+            <div class="card">
+                <span class="card-title">Google Generative AI SDK</span>
+                <div class="license-badge">Google Generative AI Terms of Service</div>
+            </div>
+
+            <div class="card">
+                <span class="card-title">JUnit 5</span>
+                <div class="license-badge">Eclipse Public License 2.0</div>
+            </div>
+
+            <div class="card">
+                <span class="card-title">Mockito & Mockito-Kotlin</span>
+                <div class="license-badge">MIT License</div>
+            </div>
+
+            <div class="card">
+                <span class="card-title">Turbine</span>
+                <div class="license-badge">Apache License 2.0</div>
+            </div>
+
+            <div class="card">
+                <span class="card-title">LeakCanary</span>
+                <div class="license-badge">Apache License 2.0</div>
+            </div>
+
+            <div class="card">
+                <span class="card-title">Detekt</span>
+                <div class="license-badge">Apache License 2.0</div>
+            </div>
+        </div>
+
+        <hr class="divider" />
+
+        <div style="margin-top: 20px;">
+            <h2 style="margin-bottom: 14px;">Apache License 2.0</h2>
+            <pre>Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.</pre>
+        </div>
+    </section>
+</main>
+</body>
+</html>

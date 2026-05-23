@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muddassir Iqbal | Project Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f8fafc;
+            --text: #1e293b;
+            --primary: #0f172a;
+            --accent-1: #4f46e5;
+            --accent-2: #0f766e;
+            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            flex-grow: 1;
+        }
+
+        header {
+            text-align: center;
+            padding: 60px 0;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+
+        .intro {
+            font-size: 1.25rem;
+            color: #64748b;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 24px;
+            padding: 40px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid #e2e8f0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow);
+            border-color: transparent;
+        }
+
+        .project-card h2 {
+            font-size: 1.75rem;
+            font-weight: 800;
+            margin: 0 0 16px;
+        }
+
+        .project-card p {
+            color: #64748b;
+            margin-bottom: 24px;
+            flex-grow: 1;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            font-weight: 600;
+            gap: 8px;
+        }
+
+        .card-dm { border-top: 6px solid var(--accent-1); }
+        .card-dm:hover { background: linear-gradient(to bottom right, #ffffff, #f5f3ff); }
+        .card-dm h2 { color: var(--accent-1); }
+
+        .card-quran { border-top: 6px solid var(--accent-2); }
+        .card-quran:hover { background: linear-gradient(to bottom right, #ffffff, #f0fdfa); }
+        .card-quran h2 { color: var(--accent-2); }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: #94a3b8;
+            font-size: 0.875rem;
+        }
+
+        @media (max-width: 640px) {
+            h1 { font-size: 2.25rem; }
+            .projects-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Bridge to Purpose</h1>
+            <p class="intro">
+                Welcome! I'm Muddassir Iqbal. I build tools that empower growth—whether it's mastering the digital marketplace or deepening spiritual connections. Explore my featured projects below.
+            </p>
+        </header>
+
+        <main class="projects-grid">
+            <a href="digital-marketing-ai/index.html" class="project-card card-dm">
+                <h2>Digital Marketing AI</h2>
+                <p>A comprehensive 3-month roadmap designed to help you learn digital marketing from scratch using AI tools. Build a portfolio and start your freelancing journey with authentic free resources.</p>
+                <div class="btn">Explore Roadmap &rarr;</div>
+            </a>
+
+            <a href="quran-education-app/index.html" class="project-card card-quran">
+                <h2>Al-Quran Education</h2>
+                <p>A modern Islamic toolkit featuring Quran recitations, translations, AI-powered Halal checking, and precision prayer tools. Faith meets future in this comprehensive daily companion.</p>
+                <div class="btn">View App Details &rarr;</div>
+            </a>
+        </main>
+    </div>
+
+    <footer>
+        &copy; 2024 Muddassir Iqbal. All rights reserved.
+    </footer>
+</body>
+</html>

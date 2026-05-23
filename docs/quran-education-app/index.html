@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Al-Quran Education | Your Ultimate Spiritual Companion</title>
+    <style>
+        :root {
+          --bg: #f4f7fb;
+          --surface: rgba(255, 255, 255, 0.9);
+          --primary: #0f766e;
+          --primary-dark: #115e59;
+          --secondary: #facc15;
+          --text: #1f2937;
+          --heading: #0f172a;
+          --shadow: 0 20px 40px rgba(15, 23, 42, 0.1);
+          --radius: 24px;
+        }
+
+        body {
+          margin: 0;
+          font-family: 'Inter', -apple-system, system-ui, sans-serif;
+          color: var(--text);
+          background:
+            radial-gradient(circle at top left, #dff7f2 0%, transparent 40%),
+            radial-gradient(circle at bottom right, #e8f0ff 0%, transparent 40%),
+            var(--bg);
+          line-height: 1.6;
+        }
+
+        .container {
+          max-width: 1100px;
+          margin: 0 auto;
+          padding: 0 24px;
+        }
+
+        .hero {
+          text-align: center;
+          padding: 100px 0 60px;
+        }
+
+        .hero h1 {
+          font-size: clamp(2.5rem, 8vw, 4.5rem);
+          color: var(--heading);
+          margin: 0 0 24px;
+          letter-spacing: -0.04em;
+          line-height: 1.05;
+          font-weight: 900;
+        }
+
+        .hero p {
+          font-size: clamp(1.1rem, 3vw, 1.4rem);
+          color: #4b5563;
+          max-width: 750px;
+          margin: 0 auto 48px;
+        }
+
+        .cta-button {
+          display: inline-block;
+          background: var(--primary);
+          color: white;
+          padding: 20px 44px;
+          border-radius: 50px;
+          text-decoration: none;
+          font-weight: 800;
+          font-size: 1.2rem;
+          box-shadow: 0 12px 30px rgba(15, 118, 110, 0.35);
+          transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .cta-button:hover {
+          transform: translateY(-4px) scale(1.02);
+          box-shadow: 0 20px 40px rgba(15, 118, 110, 0.45);
+          background: var(--primary-dark);
+        }
+
+        .media-section {
+          margin: 60px 0;
+          text-align: center;
+        }
+
+        .video-wrapper {
+          max-width: 315px; /* Better for vertical shorts */
+          margin: 0 auto 40px;
+          border-radius: var(--radius);
+          overflow: hidden;
+          box-shadow: var(--shadow);
+          background: #000;
+        }
+
+        .video-container {
+          position: relative;
+          padding-bottom: 177.77%; /* 9:16 aspect ratio for shorts */
+          height: 0;
+        }
+
+        .video-container iframe {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          border: 0;
+        }
+
+        .screenshots-grid {
+          display: flex;
+          overflow-x: auto;
+          gap: 20px;
+          padding: 20px 0;
+          scrollbar-width: none;
+        }
+
+        .screenshots-grid::-webkit-scrollbar {
+          display: none;
+        }
+
+        .screenshot-item {
+          min-width: 220px;
+          max-width: 220px;
+          flex-shrink: 0;
+          overflow: hidden;
+          box-shadow: var(--shadow);
+          transition: transform 0.3s ease;
+        }
+
+        .screenshot-item:hover {
+          transform: scale(1.05);
+        }
+
+        .screenshot-item img {
+          width: 100%;
+          height: auto;
+          display: block;
+        }
+
+        .features {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+          gap: 32px;
+          margin: 80px 0;
+        }
+
+        .feature-card {
+          background: var(--surface);
+          backdrop-filter: blur(12px);
+          padding: 48px 40px;
+          border-radius: var(--radius);
+          border: 1px solid rgba(229, 231, 235, 0.6);
+          box-shadow: var(--shadow);
+          transition: all 0.4s ease;
+        }
+
+        .feature-card:hover {
+          transform: translateY(-12px);
+          border-color: var(--primary);
+        }
+
+        .icon {
+          font-size: 3.5rem;
+          margin-bottom: 24px;
+          display: block;
+        }
+
+        .feature-card h3 {
+          font-size: 1.75rem;
+          color: var(--heading);
+          margin: 0 0 16px;
+          font-weight: 800;
+        }
+
+        .feature-card p {
+          font-size: 1.05rem;
+          color: #64748b;
+          margin: 0;
+        }
+
+        .how-it-works {
+          background: white;
+          padding: 100px 40px;
+          border-radius: 48px;
+          margin: 100px 0;
+          text-align: center;
+          box-shadow: 0 40px 100px rgba(0,0,0,0.03);
+        }
+
+        .how-it-works h2 {
+          font-size: clamp(2rem, 5vw, 3rem);
+          margin-bottom: 60px;
+          font-weight: 900;
+          letter-spacing: -0.02em;
+        }
+
+        .steps {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+          gap: 48px;
+        }
+
+        .step-icon {
+          font-size: 3rem;
+          margin-bottom: 24px;
+          display: inline-block;
+        }
+
+        .step h4 {
+          color: var(--primary);
+          font-size: 1.4rem;
+          margin: 0 0 12px;
+          font-weight: 800;
+        }
+
+        .step p {
+          color: #64748b;
+          font-size: 1rem;
+        }
+
+        footer {
+          text-align: center;
+          padding: 80px 0;
+          border-top: 1px solid #e5e7eb;
+          color: #94a3b8;
+        }
+
+        .footer-links {
+          margin-top: 20px;
+        }
+
+        .footer-links a {
+          margin: 0 15px;
+          color: var(--primary);
+          text-decoration: none;
+          font-weight: 600;
+        }
+
+        .footer-links a:hover {
+          text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+          .hero { padding: 60px 0 40px; }
+          .how-it-works { padding: 60px 24px; }
+          .feature-card { padding: 32px; }
+          .video-container { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header class="hero">
+        <h1>Faith Meets Future</h1>
+        <p>A comprehensive Islamic toolkit designed for the modern lifestyle. Deepen your understanding of the Quran with authentic translations and essential daily tools.</p>
+        <a href="https://play.google.com/store/apps/details?id=com.mi.alquran" class="cta-button">Download on Google Play</a>
+    </header>
+
+    <!-- Visual Showcase Section -->
+    <section class="media-section">
+        <h2>Experience the App</h2>
+
+        <div class="video-wrapper">
+            <div class="video-container">
+                <iframe
+                    src="https://www.youtube.com/embed/rTIymJF_3EI"
+                    title="Al-Quran Education Demo"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+
+        <div class="screenshots-grid">
+            <div class="screenshot-item">
+                <img src="Home-page.png" alt="Main Dashboard">
+            </div>
+            <div class="screenshot-item">
+                <img src="Quran-player.png" alt="Quran Reader">
+            </div>
+            <div class="screenshot-item">
+                <img src="Ecode-with-Manual-and-AI.png" alt="AI assistant Halal checker">
+            </div>
+            <div class="screenshot-item">
+                <img src="Prayer-time.png" alt="Prayer Timings">
+            </div>
+            <div class="screenshot-item">
+                <img src="Qibla-direction.png" alt="Qibla Compass">
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="feature-card">
+            <span class="icon">📖</span>
+            <h3>Tilawat & Translation</h3>
+            <p>Immerse yourself in the Holy Quran with high-quality audio recitations and clear translations in English and Urdu.</p>
+        </div>
+
+        <div class="feature-card">
+            <span class="icon">✅</span>
+            <h3>AI assistant Halal checker</h3>
+            <p>Navigate food labels with ease. Search or scan E-codes and use our AI assistant to verify Halal status based on recognized MUIS standards.</p>
+        </div>
+
+        <div class="feature-card">
+            <span class="icon">🧭</span>
+            <h3>Precision Prayer Tools</h3>
+            <p>Never miss a moment. High-accuracy, location-based prayer timings and a responsive Qibla compass keep you connected wherever you are.</p>
+        </div>
+    </section>
+
+    <section class="how-it-works">
+        <h2>Your Daily Companion</h2>
+        <div class="steps">
+            <div class="step">
+                <span class="step-icon">📲</span>
+                <h4>Setup in Seconds</h4>
+                <p>Simple, intuitive onboarding that calibrates to your location for pinpoint accuracy in prayer and Qibla tracking.</p>
+            </div>
+            <div class="step">
+                <span class="step-icon">💡</span>
+                <h4>Learn & Verify</h4>
+                <p>Engage with the Quran daily or use the AI assistant Halal checker to clear doubts about food additives.</p>
+            </div>
+            <div class="step">
+                <span class="step-icon">🕊️</span>
+                <h4>Live Consciously</h4>
+                <p>Maintain your spiritual discipline with reliable tools that fit seamlessly into your busy modern life.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Al-Quran Education. Designed & Developed by Muddassir Iqbal.</p>
+        <div class="footer-links">
+            <a href="terms_and_conditions.html">Terms & Conditions</a>
+            <a href="mailto:iqbal.muddassir@gmail.com">Get Support</a>
+        </div>
+    </footer>
+</div>
+
+</body>
+</html>
