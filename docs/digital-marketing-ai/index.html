@@ -1,0 +1,1751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Digital Marketing with AI from Scratch | 3-Month Freelancer Roadmap</title>
+  <meta name="description" content="A complete step-by-step website to learn digital marketing with AI from scratch in 3 months and start freelancing using free authentic resources." />
+  <meta name="theme-color" content="#0f172a" />
+
+  <meta property="og:title" content="Digital Marketing with AI from Scratch | 3-Month Freelancer Roadmap" />
+  <meta property="og:description" content="Learn digital marketing with AI from scratch, follow a 12-week curriculum, build a portfolio, and start freelancing." />
+  <meta property="og:type" content="website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #07111f;
+      --bg-soft: #0f172a;
+      --panel: rgba(255,255,255,0.06);
+      --panel-2: rgba(255,255,255,0.08);
+      --text: #e7eefc;
+      --muted: #9eb0cc;
+      --border: rgba(255,255,255,0.10);
+      --primary: #7c9cff;
+      --primary-2: #4fd1ff;
+      --accent: #8ef0c8;
+      --warning: #ffd166;
+      --danger: #fb7185;
+      --success: #34d399;
+      --shadow: 0 20px 55px rgba(0,0,0,0.28);
+      --radius: 20px;
+      --radius-sm: 14px;
+      --max: 1280px;
+    }
+
+    body.light {
+      --bg: #f5f7fb;
+      --bg-soft: #ffffff;
+      --panel: rgba(15,23,42,0.04);
+      --panel-2: rgba(15,23,42,0.06);
+      --text: #0f172a;
+      --muted: #516079;
+      --border: rgba(15,23,42,0.10);
+      --primary: #4f46e5;
+      --primary-2: #0ea5e9;
+      --accent: #10b981;
+      --warning: #d97706;
+      --danger: #e11d48;
+      --success: #059669;
+      --shadow: 0 18px 45px rgba(15,23,42,0.08);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 0% 0%, rgba(124,156,255,0.18), transparent 24%),
+        radial-gradient(circle at 100% 0%, rgba(79,209,255,0.14), transparent 22%),
+        linear-gradient(180deg, var(--bg) 0%, var(--bg-soft) 100%);
+      line-height: 1.6;
+      transition: background 0.25s ease, color 0.25s ease;
+    }
+
+    a { color: var(--primary-2); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .container {
+      width: min(100% - 32px, var(--max));
+      margin: 0 auto;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(14px);
+      background: color-mix(in srgb, var(--bg-soft) 78%, transparent);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 14px 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--text);
+    }
+
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--accent), var(--primary-2), var(--primary));
+      box-shadow: var(--shadow);
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .nav-links a, .nav-links button {
+      color: var(--muted);
+      background: transparent;
+      border: 1px solid transparent;
+      padding: 10px 12px;
+      border-radius: 999px;
+      font: inherit;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .nav-links a:hover, .nav-links button:hover {
+      background: var(--panel);
+      border-color: var(--border);
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .hero {
+      padding: 72px 0 36px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 24px;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card {
+      padding: 34px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      right: -60px;
+      bottom: -60px;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(79,209,255,0.18), transparent 60%);
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(124,156,255,0.12);
+      border: 1px solid rgba(124,156,255,0.20);
+      font-size: 0.86rem;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      margin: 0 0 14px;
+      font-size: clamp(2.2rem, 5vw, 4.5rem);
+      line-height: 1.02;
+      letter-spacing: -0.05em;
+    }
+
+    .hero p {
+      margin: 0 0 22px;
+      color: var(--muted);
+      max-width: 68ch;
+      font-size: 1.03rem;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 13px 18px;
+      border-radius: 14px;
+      border: 1px solid transparent;
+      font-weight: 700;
+      transition: transform 0.15s ease, background 0.2s ease;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      color: #08111f;
+      background: linear-gradient(135deg, var(--accent), var(--primary-2));
+    }
+
+    .btn-secondary {
+      color: var(--text);
+      background: var(--panel-2);
+      border-color: var(--border);
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .chip {
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: var(--panel-2);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .hero-side {
+      display: grid;
+      gap: 16px;
+    }
+
+    .side-panel {
+      padding: 22px;
+    }
+
+    .side-panel h3 {
+      margin: 0 0 12px;
+      font-size: 1rem;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .stat {
+      padding: 16px;
+      border-radius: 16px;
+      background: var(--panel-2);
+      border: 1px solid var(--border);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.35rem;
+      margin-bottom: 4px;
+    }
+
+    .check-list, .mini-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .check-list li, .mini-list li {
+      position: relative;
+      padding-left: 26px;
+      margin-bottom: 10px;
+      color: var(--muted);
+    }
+
+    .check-list li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      top: 0;
+      font-weight: 800;
+      color: var(--accent);
+    }
+
+    section {
+      padding: 28px 0;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+
+    .section-head h2 {
+      margin: 0 0 8px;
+      font-size: clamp(1.6rem, 3vw, 2.3rem);
+      letter-spacing: -0.04em;
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 80ch;
+    }
+
+    .grid-2, .grid-3, .grid-4 {
+      display: grid;
+      gap: 18px;
+    }
+
+    .grid-2 { grid-template-columns: repeat(2, 1fr); }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+    .info-card, .resource-card, .tool-card, .price-card, .faq-item, .footer-card, .module-card {
+      padding: 22px;
+    }
+
+    .tag, .badge {
+      display: inline-block;
+      margin-bottom: 10px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      background: rgba(124,156,255,0.12);
+      border: 1px solid rgba(124,156,255,0.22);
+      color: var(--text);
+    }
+
+    .info-card h3, .resource-card h3, .tool-card h3, .price-card h3, .module-card h3 {
+      margin: 0 0 8px;
+      font-size: 1.06rem;
+    }
+
+    .info-card p, .resource-card p, .tool-card p, .price-card p, .faq-item p, .footer-card p, .module-card p {
+      margin: 0 0 10px;
+      color: var(--muted);
+    }
+
+    .progress-wrap {
+      padding: 22px;
+    }
+
+    .progress-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 12px;
+      border-radius: 999px;
+      background: var(--panel-2);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .progress-fill {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--primary-2), var(--primary));
+      transition: width 0.25s ease;
+    }
+
+    .note {
+      padding: 14px 16px;
+      border-radius: 14px;
+      background: rgba(255, 209, 102, 0.10);
+      border: 1px solid rgba(255, 209, 102, 0.18);
+      color: var(--text);
+      margin-top: 12px;
+    }
+
+    .roadmap {
+      display: grid;
+      gap: 16px;
+    }
+
+    .week-card {
+      overflow: hidden;
+    }
+
+    .week-header {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      text-align: left;
+      padding: 20px 22px;
+      background: transparent;
+      color: var(--text);
+      border: 0;
+      cursor: pointer;
+      font: inherit;
+    }
+
+    .week-left {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .week-badge {
+      min-width: 88px;
+      text-align: center;
+      padding: 12px 10px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(124,156,255,0.25), rgba(79,209,255,0.16));
+      border: 1px solid var(--border);
+      font-weight: 800;
+    }
+
+    .week-title h3 {
+      margin: 0 0 6px;
+      font-size: 1.12rem;
+    }
+
+    .week-title p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .week-arrow {
+      font-size: 1.2rem;
+      color: var(--muted);
+      transition: transform 0.2s ease;
+    }
+
+    .week-card.open .week-arrow {
+      transform: rotate(180deg);
+    }
+
+    .week-body {
+      display: none;
+      padding: 0 22px 22px;
+    }
+
+    .week-card.open .week-body {
+      display: block;
+    }
+
+    .subcard, .template-box {
+      padding: 18px;
+      border-radius: 16px;
+      background: var(--panel-2);
+      border: 1px solid var(--border);
+    }
+
+    .subcard h4, .template-box h4 {
+      margin: 0 0 8px;
+      font-size: 1rem;
+    }
+
+    .subcard p, .template-box p {
+      margin: 0 0 10px;
+      color: var(--muted);
+    }
+
+    .week-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+      align-items: center;
+    }
+
+    .week-check {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: var(--panel-2);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .week-check input {
+      accent-color: var(--success);
+      width: 18px;
+      height: 18px;
+    }
+
+    .module-grid, .resource-grid, .toolkit-grid, .pricing-grid, .faq {
+      display: grid;
+      gap: 18px;
+    }
+
+    .module-grid, .resource-grid, .toolkit-grid, .pricing-grid { grid-template-columns: repeat(3, 1fr); }
+
+    .template-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .template-content {
+      white-space: pre-wrap;
+      color: var(--text);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      background: rgba(0,0,0,0.08);
+      border: 1px solid var(--border);
+      padding: 14px;
+      border-radius: 12px;
+    }
+
+    .copy-btn {
+      margin-top: 12px;
+    }
+
+    .small {
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+
+    .highlight {
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    .success-note {
+      color: var(--success);
+      font-weight: 700;
+      font-size: 0.92rem;
+      min-height: 20px;
+      margin-top: 8px;
+    }
+
+    .faq {
+      grid-template-columns: 1fr;
+    }
+
+    @media (max-width: 1100px) {
+      .hero-grid,
+      .grid-4,
+      .grid-3,
+      .grid-2,
+      .module-grid,
+      .resource-grid,
+      .toolkit-grid,
+      .pricing-grid,
+      .template-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .nav-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .week-left {
+        flex-direction: column;
+      }
+
+      .week-header {
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <div class="brand">
+        <div class="brand-mark"></div>
+        <div>Digital Marketing with AI • 3-Month Freelancer Roadmap</div>
+      </div>
+
+      <div class="nav-links">
+        <a href="#overview">Overview</a>
+        <a href="#modules">Modules</a>
+        <a href="#curriculum">12 Weeks</a>
+        <a href="#resources">Courses</a>
+        <a href="#income">Income</a>
+        <a href="#toolkit">Toolkit</a>
+        <a href="#faq">FAQ</a>
+        <button id="themeToggle" type="button">Toggle Theme</button>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="container hero-grid">
+      <div class="card hero-card">
+        <div class="eyebrow">Beginner friendly • No budget • Non-technical • Income-focused</div>
+        <h1>Learn Digital Marketing with AI from Scratch and Start Freelancing in 3 Months</h1>
+        <p>
+          This roadmap is designed for someone starting from zero, with no budget, who wants to build practical digital marketing skills
+          using AI and turn them into beginner freelance services. It focuses on <span class="highlight">what to learn</span>,
+          <span class="highlight">what to practice</span>, <span class="highlight">what to build</span>, and
+          <span class="highlight">how to start earning</span>.
+        </p>
+
+        <div class="chip-row">
+          <span class="chip">Digital Marketing Basics</span>
+          <span class="chip">AI Workflows</span>
+          <span class="chip">Content Marketing</span>
+          <span class="chip">SEO Writing</span>
+          <span class="chip">Email Marketing</span>
+          <span class="chip">Freelancing</span>
+        </div>
+
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#curriculum">Start the 12-Week Plan</a>
+          <a class="btn btn-secondary" href="#toolkit">Open Freelancer Toolkit</a>
+        </div>
+      </div>
+
+      <div class="hero-side">
+        <div class="card side-panel">
+          <h3>Who this roadmap is for</h3>
+          <ul class="check-list">
+            <li>Beginners with no technical background</li>
+            <li>Job seekers who need a low-cost skill path</li>
+            <li>People who want to freelance instead of waiting for employment</li>
+            <li>Learners who want practical, sellable marketing skills</li>
+          </ul>
+        </div>
+
+        <div class="card side-panel">
+          <h3>What you can offer after this</h3>
+          <ul class="check-list">
+            <li>Social media content packages</li>
+            <li>SEO-friendly blog writing</li>
+            <li>Email welcome sequences</li>
+            <li>Simple content audits</li>
+            <li>AI-assisted content repurposing</li>
+          </ul>
+        </div>
+
+        <div class="card progress-wrap">
+          <div class="progress-top">
+            <strong>Your progress</strong>
+            <span id="progressText" class="small">0 of 12 weeks completed</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+          <div class="note">Progress is saved locally in your browser.</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="overview">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>How to Use This Website</h2>
+            <p>
+              This website is not just a reading resource. It is an action roadmap. Each module shows what to learn, why it matters,
+              which free courses to use, what tools to use, what practice work to do, and how that skill can become an income-generating service.
+            </p>
+          </div>
+        </div>
+
+        <div class="grid-4">
+          <article class="card info-card">
+            <div class="tag">Step 1</div>
+            <h3>Learn</h3>
+            <p>Use the free authentic resources linked in each module.</p>
+          </article>
+          <article class="card info-card">
+            <div class="tag">Step 2</div>
+            <h3>Practice</h3>
+            <p>Do the exercises and sample work every week.</p>
+          </article>
+          <article class="card info-card">
+            <div class="tag">Step 3</div>
+            <h3>Build</h3>
+            <p>Turn your work into a beginner portfolio.</p>
+          </article>
+          <article class="card info-card">
+            <div class="tag">Step 4</div>
+            <h3>Earn</h3>
+            <p>Package your skills and start outreach for freelance work.</p>
+          </article>
+        </div>
+
+        <div class="grid-3" style="margin-top:18px;">
+          <article class="card info-card">
+            <div class="tag">Daily Routine</div>
+            <h3>Suggested daily structure</h3>
+            <ul class="check-list">
+              <li>60–90 min learning</li>
+              <li>60 min practical work</li>
+              <li>30 min portfolio improvement</li>
+              <li>30 min outreach after week 8</li>
+            </ul>
+          </article>
+
+          <article class="card info-card">
+            <div class="tag">Weekly Goal</div>
+            <h3>What success looks like</h3>
+            <ul class="check-list">
+              <li>Finish the week’s learning topic</li>
+              <li>Create one usable sample</li>
+              <li>Document what you learned</li>
+              <li>Move one step closer to a client-ready offer</li>
+            </ul>
+          </article>
+
+          <article class="card info-card">
+            <div class="tag">Mindset</div>
+            <h3>Important principle</h3>
+            <p>
+              Do not try to master everything. Learn enough to solve simple business problems and deliver helpful beginner services.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="modules">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Module-Wise Learning Path</h2>
+            <p>
+              Each module below includes: what to learn, why it matters, free authentic resources, recommended tools, practice work,
+              portfolio output, and how it connects to income.
+            </p>
+          </div>
+        </div>
+
+        <div class="module-grid">
+          <article class="card module-card">
+            <div class="tag">Module 1</div>
+            <h3>Digital Marketing Fundamentals</h3>
+            <p><strong>What to learn:</strong> channels, customer journey, funnels, business goals, audience basics.</p>
+            <p><strong>Why it matters:</strong> you need to understand what businesses are trying to achieve before offering help.</p>
+            <p><strong>Free courses:</strong></p>
+            <ul class="check-list">
+              <li><a href="https://skillshop.withgoogle.com/" target="_blank" rel="noopener noreferrer">Google Skillshop</a></li>
+              <li><a href="https://academy.hubspot.com/" target="_blank" rel="noopener noreferrer">HubSpot Academy</a></li>
+            </ul>
+            <p><strong>Free tools:</strong> Google Docs, Notion, Google Sheets</p>
+            <p><strong>Practice:</strong> review 3 businesses and identify their marketing strengths and gaps.</p>
+            <p><strong>Portfolio output:</strong> 1 basic marketing observation document.</p>
+            <p><strong>Income link:</strong> helps you speak to clients in business terms, not just task terms.</p>
+          </article>
+
+          <article class="card module-card">
+            <div class="tag">Module 2</div>
+            <h3>AI for Marketing Workflows</h3>
+            <p><strong>What to learn:</strong> prompting, drafting, rewriting, ideation, repurposing, editing AI output.</p>
+            <p><strong>Why it matters:</strong> AI helps you work faster and deliver more output as a beginner freelancer.</p>
+            <p><strong>Free courses/resources:</strong></p>
+            <ul class="check-list">
+              <li><a href="https://platform.openai.com/docs" target="_blank" rel="noopener noreferrer">OpenAI Docs</a></li>
+              <li><a href="https://academy.hubspot.com/" target="_blank" rel="noopener noreferrer">HubSpot Academy</a></li>
+            </ul>
+            <p><strong>Free tools:</strong> ChatGPT/free AI tools, Google Docs</p>
+            <p><strong>Practice:</strong> create prompt templates for captions, blogs, emails, and audits.</p>
+            <p><strong>Portfolio output:</strong> your own reusable AI prompt library.</p>
+            <p><strong>Income link:</strong> lets you deliver faster and handle more small projects.</p>
+          </article>
+
+          <article class="card module-card">
+            <div class="tag">Module 3</div>
+            <h3>Content Marketing & Social Media</h3>
+            <p><strong>What to learn:</strong> content pillars, hooks, captions, CTAs, content calendars, platform basics.</p>
+            <p><strong>Why it matters:</strong> this is one of the easiest beginner services to sell.</p>
+            <p><strong>Free courses/resources:</strong></p>
+            <ul class="check-list">
+              <li><a href="https://academy.hubspot.com/" target="_blank" rel="noopener noreferrer">HubSpot Academy</a></li>
+              <li><a href="https://www.facebook.com/business/learn" target="_blank" rel="noopener noreferrer">Meta Blueprint</a></li>
+              <li><a href="https://business.linkedin.com/marketing-solutions/blog" target="_blank" rel="noopener noreferrer">LinkedIn Marketing Blog</a></li>
+            </ul>
+            <p><strong>Free tools:</strong> Canva free, Google Sheets, Notion</p>
+            <p><strong>Practice:</strong> create captions, post ideas, and a 2-week content calendar.</p>
+            <p><strong>Portfolio output:</strong> content calendar + sample captions + profile audit.</p>
+            <p><strong>Income link:</strong> can become a social media content starter package.</p>
+          </article>
+
+          <article class="card module-card">
+            <div class="tag">Module 4</div>
+            <h3>SEO & Blog Writing</h3>
+            <p><strong>What to learn:</strong> keywords, search intent, on-page SEO, article structure, readability.</p>
+            <p><strong>Why it matters:</strong> many businesses need blog content but cannot write it consistently.</p>
+            <p><strong>Free courses/resources:</strong></p>
+            <ul class="check-list">
+              <li><a href="https://ahrefs.com/academy" target="_blank" rel="noopener noreferrer">Ahrefs Academy</a></li>
+              <li><a href="https://www.semrush.com/academy/" target="_blank" rel="noopener noreferrer">Semrush Academy</a></li>
+            </ul>
+            <p><strong>Free tools:</strong> Google Search, Google Docs, free AI tools</p>
+            <p><strong>Practice:</strong> keyword lists, outlines, and 2 SEO blog samples.</p>
+            <p><strong>Portfolio output:</strong> 2 blog articles with titles and meta descriptions.</p>
+            <p><strong>Income link:</strong> can become a blog writing or SEO content package.</p>
+          </article>
+
+          <article class="card module-card">
+            <div class="tag">Module 5</div>
+            <h3>Email Marketing</h3>
+            <p><strong>What to learn:</strong> subject lines, welcome emails, nurture flow basics, CTA writing.</p>
+            <p><strong>Why it matters:</strong> simple email sequences are valuable and easy to package.</p>
+            <p><strong>Free courses/resources:</strong></p>
+            <ul class="check-list">
+              <li><a href="https://academy.hubspot.com/" target="_blank" rel="noopener noreferrer">HubSpot Academy</a></li>
+              <li><a href="https://mailchimp.com/resources/" target="_blank" rel="noopener noreferrer">Mailchimp Resources</a></li>
+            </ul>
+            <p><strong>Free tools:</strong> Google Docs, Mailchimp resources</p>
+            <p><strong>Practice:</strong> write 10 subject lines and a 3-email welcome sequence.</p>
+            <p><strong>Portfolio output:</strong> one welcome email sequence sample.</p>
+            <p><strong>Income link:</strong> can become a welcome email package for small businesses and creators.</p>
+          </article>
+
+          <article class="card module-card">
+            <div class="tag">Module 6</div>
+            <h3>Freelancing, Portfolio & Outreach</h3>
+            <p><strong>What to learn:</strong> service packaging, positioning, proposals, outreach, follow-ups.</p>
+            <p><strong>Why it matters:</strong> skills only become income when you know how to present and sell them.</p>
+            <p><strong>Free courses/resources:</strong></p>
+            <ul class="check-list">
+              <li><a href="https://www.upwork.com/resources" target="_blank" rel="noopener noreferrer">Upwork Resources</a></li>
+              <li><a href="https://www.coursera.org/" target="_blank" rel="noopener noreferrer">Coursera</a> (audit free where available)</li>
+            </ul>
+            <p><strong>Free tools:</strong> Notion, Google Drive, Google Sheets</p>
+            <p><strong>Practice:</strong> create offers, portfolio, outreach list, and proposal drafts.</p>
+            <p><strong>Portfolio output:</strong> service page or folder + templates + sample work.</p>
+            <p><strong>Income link:</strong> this is the conversion step from learner to freelancer.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="curriculum">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>12-Week Step-by-Step Curriculum</h2>
+            <p>
+              Follow these weeks in order. Every week is designed to move you from learning to doing to building a portfolio and preparing for paid work.
+            </p>
+          </div>
+          <div class="cta-row">
+            <button class="btn btn-secondary" id="expandAll" type="button">Expand All</button>
+            <button class="btn btn-secondary" id="collapseAll" type="button">Collapse All</button>
+          </div>
+        </div>
+
+        <div class="roadmap">
+          <article class="card week-card open">
+            <button class="week-header" type="button">
+              <div class="week-left">
+                <div class="week-badge">Week 1</div>
+                <div class="week-title">
+                  <h3>Understand Digital Marketing Basics</h3>
+                  <p>Build the foundation: channels, customer journey, and small business needs.</p>
+                </div>
+              </div>
+              <div class="week-arrow">⌄</div>
+            </button>
+            <div class="week-body">
+              <div class="grid-2">
+                <div class="subcard">
+                  <h4>Learn</h4>
+                  <ul class="check-list">
+                    <li>What digital marketing includes</li>
+                    <li>Customer journey basics</li>
+                    <li>Business goals behind marketing</li>
+                  </ul>
+                </div>
+                <div class="subcard">
+                  <h4>Do</h4>
+                  <ul class="check-list">
+                    <li>Study 3 businesses</li>
+                    <li>List their strengths and weaknesses</li>
+                    <li>Write one-page marketing notes</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="subcard" style="margin-top:16px;">
+                <h4>Milestone</h4>
+                <p>You should be able to explain how digital marketing helps a business get leads and sales.</p>
+              </div>
+              <div class="week-actions"><label class="week-check"><input type="checkbox" class="week-complete"> Mark week complete</label></div>
+            </div>
+          </article>
+
+          <article class="card week-card">
+            <button class="week-header" type="button">
+              <div class="week-left">
+                <div class="week-badge">Week 2</div>
+                <div class="week-title">
+                  <h3>Learn AI Basics for Marketing</h3>
+                  <p>Use AI for ideation, drafting, and editing support.</p>
+                </div>
+              </div>
+              <div class="week-arrow">⌄</div>
+            </button>
+            <div class="week-body">
+              <div class="grid-2">
+                <div class="subcard">
+                  <h4>Learn</h4>
+                  <ul class="check-list">
+                    <li>Prompt structure</li>
+                    <li>How to improve AI output</li>
+                    <li>How to use AI responsibly</li>
+                  </ul>
+                </div>
+                <div class="subcard">
+                  <h4>Do</h4>
+                  <ul class="check-list">
+                    <li>Create 20 prompts</li>
+                    <li>Generate social and blog ideas</li>
+                    <li>Rewrite weak AI content</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="subcard" style="margin-top:16px;">
+                <h4>Milestone</h4>
+                <p>Build your first AI workflow: prompt → draft → edit → final version.</p>
+              </div>
+              <div class="week-actions"><label class="week-check"><input type="checkbox" class="week-complete"> Mark week complete</label></div>
+            </div>
+          </article>
+
+          <article class="card week-card">
+            <button class="week-header" type="button">
+              <div class="week-left">
+                <div class="week-badge">Week 3</div>
+                <div class="week-title">
+                  <h3>Content Marketing Foundations</h3>
+                  <p>Learn content pillars and planning basics.</p>
+                </div>
+              </div>
+              <div class="week-arrow">⌄</div>
+            </button>
+            <div class="week-body">
+              <div class="grid-2">
+                <div class="subcard">
+                  <h4>Learn</h4>
+                  <ul class="check-list">
+                    <li>Audience pain points</li>
+                    <li>Content pillars</li>
+                    <li>Content calendar structure</li>
+                  </ul>
+                </div>
+                <div class="subcard">
+                  <h4>Do</h4>
+                  <ul class="check-list">
+                    <li>Create 4 pillars for one niche</li>
+                    <li>Build a 2-week content calendar</li>
+                    <li>Save it as a sample</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="subcard" style="margin-top:16px;">
+                <h4>Portfolio output</h4>
+                <p>1 content calendar sample.</p>
+              </div>
+              <div class="week-actions"><label class="week-check"><input type="checkbox" class="week-complete"> Mark week complete</label></div>
+            </div>
+          </article>
+
+          <article class="card week-card">
+            <button class="week-header" type="button">
+              <div class="week-left">
+                <div class="week-badge">Week 4</div>
+                <div class="week-title">
+                  <h3>Social Media Content Creation</h3>
+                  <p>Create practical social media deliverables.</p>
+                </div>
+              </div>
+              <div class="week-arrow">⌄</div>
+            </button>
+            <div class="week-body">
+              <div class="grid-2">
+                <div class="subcard">
+                  <h4>Learn</h4>
+                  <ul class="check-list">
+                    <li>Hooks, captions, CTAs</li>
+                    <li>Platform basics</li>
+                    <li>Profile optimization</li>
+                  </ul>
+                </div>
+                <div class="subcard">
+                  <h4>Do</h4>
+                  <ul class="check-list">
+                    <li>Write 15 captions</li>
+                    <li>Create 10 short-form ideas</li>
+                    <li>Audit one profile</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="subcard" style="margin-top:16px;">
+                <h4>Income application</h4>
+                <p>Create your first possible offer: 12 post ideas + captions + 2-week content plan.</p>
+              </div>
+              <div class="week-actions"><label class="week-check"><input type="checkbox" class="week-complete"> Mark week complete</label></div>
+            </div>
+          </article>
+
+          <article class="card week-card">
+            <button class="week-header" type="button">
+              <div class="week-left">
+                <div class="week-badge">Week 5</div>
+                <div class="week-title">
+                  <h3>SEO Basics and Keyword Research</h3>
+                  <p>Understand search intent and simple keyword planning.</p>
+                </div>
+              </div>
+              <div class="week-arrow">⌄</div>
+            </button>
+            <div class="week-body">
+              <div class="grid-2">
+                <div class="subcard">
+                  <h4>Learn</h4>
+                  <ul class="check-list">
+                    <li>Keywords and intent</li>
+                    <li>On-page basics</li>
+                    <li>How to choose topics</li>
+                  </ul>
+                </div>
+                <div class="subcard">
+                  <h4>Do</h4>
+                  <ul class="check-list">
+                    <li>List 20 keyword ideas</li>
+                    <li>Group them into themes</li>
+                    <li>Create 3 article outlines</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="week-actions"><label class="week-check"><input type="checkbox" class="week-complete"> Mark week complete</label></div>
+            </div>
+          </article>
+
+          <article class="card week-card">
+            <button class="week-header" type="button">
+              <div class="week-left">
+                <div class="week-badge">Week 6</div>
+                <div class="week-title">
+                  <h3>Write SEO Blog Posts</h3>
+                  <p>Produce useful blog content with AI assistance.</p>
+                </div>
+              </div>
+              <div class="week-arrow">⌄</div>
+            </button>
+            <div class="week-body">
+              <div class="grid-2">
+                <div class="subcard">
+                  <h4>Learn</h4>
+                  <ul class="check-list">
+                    <li>Article structure</li>
+                    <li>Readability and formatting</li>
+                    <li>Editing AI content</li>
+                  </ul>
+                </div>
+                <div class="subcard">
+                  <h4>Do</h4>
+                  <ul class="check-list">
+                    <li>Write 2 sample blog posts</li>
+                    <li>Add title and meta description</li>
+                    <li>Repurpose one article into 3 posts</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="subcard" style="margin-top:16px;">
+                <h4>Portfolio output</h4>
+                <p>2 SEO blog samples.</p>
+              </div>
+              <div class="week-actions"><label class="week-check"><input type="checkbox" class="week-complete"> Mark week complete</label></div>
+            </div>
+          </article>
+
+          <article class="card week-card">
+            <button class="week-header" type="button">
+              <div class="week-left">
+                <div class="week-badge">Week 7</div>
+                <div class="week-title">
+                  <h3>Email Marketing Basics</h3>
+                  <p>Learn to write welcome emails and simple sequences.</p>
+                </div>
+              </div>
+              <div class="week-arrow">⌄</div>
+            </button>
+            <div class="week-body">
+              <div class="grid-2">
+                <div class="subcard">
+                  <h4>Learn</h4>
+                  <ul class="check-list">
+                    <li>Subject lines</li>
+                    <li>Welcome sequence logic</li>
+                    <li>CTA writing</li>
+                  </ul>
+                </div>
+                <div class="subcard">
+                  <h4>Do</h4>
+                  <ul class="check-list">
+                    <li>Write 10 subject lines</li>
+                    <li>Create 3 welcome emails</li>
+                    <li>Save them in your portfolio</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="subcard" style="margin-top:16px;">
+                <h4>Income application</h4>
+                <p>Possible offer: 3-email welcome sequence for creators or small businesses.</p>
+              </div>
+              <div class="week-actions"><label class="week-check"><input type="checkbox" class="week-complete"> Mark week complete</label></div>
+            </div>
+          </article>
+
+          <article class="card week-card">
+            <button class="week-header" type="button">
+              <div class="week-left">
+                <div class="week-badge">Week 8</div>
+                <div class="week-title">
+                  <h3>Niche Selection and Service Packaging</h3>
+                  <p>Choose who you help and what exactly you offer.</p>
+                </div>
+              </div>
+              <div class="week-arrow">⌄</div>
+            </button>
+            <div class="week-body">
+              <div class="grid-2">
+                <div class="subcard">
+                  <h4>Choose a niche</h4>
+                  <ul class="check-list">
+                    <li>Coaches and consultants</li>
+                    <li>Local businesses</li>
+                    <li>Tutors and educators</li>
+                    <li>Clinics or service businesses</li>
+                  </ul>
+                </div>
+                <div class="subcard">
+                  <h4>Create offers</h4>
+                  <ul class="check-list">
+                    <li>Social media starter pack</li>
+                    <li>SEO blog writing pack</li>
+                    <li>Email welcome pack</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="week-actions"><label class="week-check"><input type="checkbox" class="week-complete"> Mark week complete</label></div>
+            </div>
+          </article>
+
+          <article class="card week-card">
+            <button class="week-header" type="button">
+              <div class="week-left">
+                <div class="week-badge">Week 9</div>
+                <div class="week-title">
+                  <h3>Build Your Portfolio</h3>
+                  <p>Organize your sample work into a clean portfolio.</p>
+                </div>
+              </div>
+              <div class="week-arrow">⌄</div>
+            </button>
+            <div class="week-body">
+              <div class="grid-2">
+                <div class="subcard">
+                  <h4>Include</h4>
+                  <ul class="check-list">
+                    <li>Content calendar</li>
+                    <li>15 captions</li>
+                    <li>2 blog posts</li>
+                    <li>1 email sequence</li>
+                    <li>1 mini audit</li>
+                  </ul>
+                </div>
+                <div class="subcard">
+                  <h4>Build</h4>
+                  <ul class="check-list">
+                    <li>Use Notion or Google Drive</li>
+                    <li>Organize by service</li>
+                    <li>Explain the goal of each sample</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="week-actions"><label class="week-check"><input type="checkbox" class="week-complete"> Mark week complete</label></div>
+            </div>
+          </article>
+
+          <article class="card week-card">
+            <button class="week-header" type="button">
+              <div class="week-left">
+                <div class="week-badge">Week 10</div>
+                <div class="week-title">
+                  <h3>Client Outreach</h3>
+                  <p>Start contacting real businesses with personalized messages.</p>
+                </div>
+              </div>
+              <div class="week-arrow">⌄</div>
+            </button>
+            <div class="week-body">
+              <div class="grid-2">
+                <div class="subcard">
+                  <h4>Prepare</h4>
+                  <ul class="check-list">
+                    <li>Build a list of 50 prospects</li>
+                    <li>Write 3 outreach messages</li>
+                    <li>Create a tracking sheet</li>
+                  </ul>
+                </div>
+                <div class="subcard">
+                  <h4>Do daily</h4>
+                  <ul class="check-list">
+                    <li>Send 5–10 personalized messages</li>
+                    <li>Follow up politely</li>
+                    <li>Track replies and outcomes</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="week-actions"><label class="week-check"><input type="checkbox" class="week-complete"> Mark week complete</label></div>
+            </div>
+          </article>
+
+          <article class="card week-card">
+            <button class="week-header" type="button">
+              <div class="week-left">
+                <div class="week-badge">Week 11</div>
+                <div class="week-title">
+                  <h3>Trial Projects and Testimonials</h3>
+                  <p>Use small projects to build trust and proof.</p>
+                </div>
+              </div>
+              <div class="week-arrow">⌄</div>
+            </button>
+            <div class="week-body">
+              <div class="grid-2">
+                <div class="subcard">
+                  <h4>Offer</h4>
+                  <ul class="check-list">
+                    <li>3 free captions</li>
+                    <li>1 mini audit</li>
+                    <li>1 sample email or outline</li>
+                  </ul>
+                </div>
+                <div class="subcard">
+                  <h4>Do</h4>
+                  <ul class="check-list">
+                    <li>Deliver fast and clearly</li>
+                    <li>Ask for feedback</li>
+                    <li>Request a short testimonial</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="week-actions"><label class="week-check"><input type="checkbox" class="week-complete"> Mark week complete</label></div>
+            </div>
+          </article>
+
+          <article class="card week-card">
+            <button class="week-header" type="button">
+              <div class="week-left">
+                <div class="week-badge">Week 12</div>
+                <div class="week-title">
+                  <h3>Launch Your Freelance Services</h3>
+                  <p>Finalize your offers, keep outreach going, and aim for your first paid work.</p>
+                </div>
+              </div>
+              <div class="week-arrow">⌄</div>
+            </button>
+            <div class="week-body">
+              <div class="grid-2">
+                <div class="subcard">
+                  <h4>Finalize</h4>
+                  <ul class="check-list">
+                    <li>Portfolio link</li>
+                    <li>3 clear offers</li>
+                    <li>Proposal template</li>
+                    <li>Lead tracking sheet</li>
+                  </ul>
+                </div>
+                <div class="subcard">
+                  <h4>Do daily</h4>
+                  <ul class="check-list">
+                    <li>Reach out to leads</li>
+                    <li>Apply to freelance jobs</li>
+                    <li>Improve samples weekly</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="subcard" style="margin-top:16px;">
+                <h4>Final goal</h4>
+                <p>Get your first client, trial project, or testimonial-backed opportunity.</p>
+              </div>
+              <div class="week-actions"><label class="week-check"><input type="checkbox" class="week-complete"> Mark week complete</label></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="resources">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Free Authentic Courses and Resources</h2>
+            <p>
+              These are credible learning sources from recognized companies and platforms. Use them by topic rather than trying to consume everything.
+            </p>
+          </div>
+        </div>
+
+        <div class="resource-grid">
+          <article class="card resource-card">
+            <div class="badge">Digital Marketing Basics</div>
+            <h3>Google Skillshop</h3>
+            <p>Trusted official Google learning resource.</p>
+            <p><a href="https://skillshop.withgoogle.com/" target="_blank" rel="noopener noreferrer">https://skillshop.withgoogle.com/</a></p>
+          </article>
+
+          <article class="card resource-card">
+            <div class="badge">Content & Inbound</div>
+            <h3>HubSpot Academy</h3>
+            <p>Excellent for content marketing, inbound marketing, and email basics.</p>
+            <p><a href="https://academy.hubspot.com/" target="_blank" rel="noopener noreferrer">https://academy.hubspot.com/</a></p>
+          </article>
+
+          <article class="card resource-card">
+            <div class="badge">SEO</div>
+            <h3>Ahrefs Academy</h3>
+            <p>Respected beginner-friendly SEO lessons.</p>
+            <p><a href="https://ahrefs.com/academy" target="_blank" rel="noopener noreferrer">https://ahrefs.com/academy</a></p>
+          </article>
+
+          <article class="card resource-card">
+            <div class="badge">SEO & Content</div>
+            <h3>Semrush Academy</h3>
+            <p>Useful for keyword research and SEO content strategy.</p>
+            <p><a href="https://www.semrush.com/academy/" target="_blank" rel="noopener noreferrer">https://www.semrush.com/academy/</a></p>
+          </article>
+
+          <article class="card resource-card">
+            <div class="badge">Social Media</div>
+            <h3>Meta Blueprint</h3>
+            <p>Official Meta learning resource for social media basics.</p>
+            <p><a href="https://www.facebook.com/business/learn" target="_blank" rel="noopener noreferrer">https://www.facebook.com/business/learn</a></p>
+          </article>
+
+          <article class="card resource-card">
+            <div class="badge">Email Marketing</div>
+            <h3>Mailchimp Resources</h3>
+            <p>Free learning materials for email strategy and campaigns.</p>
+            <p><a href="https://mailchimp.com/resources/" target="_blank" rel="noopener noreferrer">https://mailchimp.com/resources/</a></p>
+          </article>
+
+          <article class="card resource-card">
+            <div class="badge">Analytics</div>
+            <h3>Google Analytics Academy</h3>
+            <p>Helpful for understanding traffic and reporting later.</p>
+            <p><a href="https://analytics.google.com/analytics/academy/" target="_blank" rel="noopener noreferrer">https://analytics.google.com/analytics/academy/</a></p>
+          </article>
+
+          <article class="card resource-card">
+            <div class="badge">AI</div>
+            <h3>OpenAI Docs</h3>
+            <p>Use for prompting and workflow understanding.</p>
+            <p><a href="https://platform.openai.com/docs" target="_blank" rel="noopener noreferrer">https://platform.openai.com/docs</a></p>
+          </article>
+
+          <article class="card resource-card">
+            <div class="badge">Freelancing</div>
+            <h3>Upwork Resources</h3>
+            <p>Useful for proposals, profiles, and client communication.</p>
+            <p><a href="https://www.upwork.com/resources" target="_blank" rel="noopener noreferrer">https://www.upwork.com/resources</a></p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="income">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>How This Learning Turns into Income</h2>
+            <p>
+              The fastest path to income is to offer simple, fixed-scope services that solve small business content and communication problems.
+            </p>
+          </div>
+        </div>
+
+        <div class="pricing-grid">
+          <article class="card price-card">
+            <div class="tag">Offer 1</div>
+            <h3>Social Media Starter Pack</h3>
+            <p>12 post ideas, captions, hashtags, and a 2-week content calendar.</p>
+            <ul class="check-list">
+              <li>Easy for clients to understand</li>
+              <li>Fast to deliver</li>
+              <li>Good first offer</li>
+            </ul>
+          </article>
+
+          <article class="card price-card">
+            <div class="tag">Offer 2</div>
+            <h3>SEO Blog Writing Pack</h3>
+            <p>1–2 SEO blog posts with headings and meta descriptions.</p>
+            <ul class="check-list">
+              <li>Portfolio-friendly</li>
+              <li>Useful to many businesses</li>
+              <li>Can lead to recurring work</li>
+            </ul>
+          </article>
+
+          <article class="card price-card">
+            <div class="tag">Offer 3</div>
+            <h3>Email Welcome Pack</h3>
+            <p>3-email welcome sequence for new subscribers or leads.</p>
+            <ul class="check-list">
+              <li>Clear business value</li>
+              <li>Simple scope</li>
+              <li>Good for service businesses and creators</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="grid-3" style="margin-top:18px;">
+          <article class="card info-card">
+            <div class="tag">Best Niches</div>
+            <ul class="check-list">
+              <li>Coaches and consultants</li>
+              <li>Local businesses</li>
+              <li>Tutors and educators</li>
+              <li>Clinics and service providers</li>
+            </ul>
+          </article>
+
+          <article class="card info-card">
+            <div class="tag">Starter Pricing Logic</div>
+            <ul class="check-list">
+              <li>Use fixed-price packages</li>
+              <li>Keep scope small</li>
+              <li>Limit revisions</li>
+              <li>Raise rates after testimonials</li>
+            </ul>
+          </article>
+
+          <article class="card info-card">
+            <div class="tag">First Milestone</div>
+            <p>
+              Aim for <span class="highlight">1 paying client</span> or <span class="highlight">2 testimonial projects</span>
+              within 30 days after completing the roadmap.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="toolkit">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Freelancer Toolkit</h2>
+            <p>
+              Use these templates and checklists to move from learning into action.
+            </p>
+          </div>
+        </div>
+
+        <div class="toolkit-grid">
+          <article class="card tool-card">
+            <div class="tag">Checklist</div>
+            <h3>Portfolio Checklist</h3>
+            <ul class="check-list">
+              <li>Short intro: who you help</li>
+              <li>1 content calendar sample</li>
+              <li>15 caption samples</li>
+              <li>2 SEO blog samples</li>
+              <li>1 email sequence</li>
+              <li>1 mini audit</li>
+            </ul>
+          </article>
+
+          <article class="card tool-card">
+            <div class="tag">Checklist</div>
+            <h3>Client Onboarding Checklist</h3>
+            <ul class="check-list">
+              <li>Ask for website and social links</li>
+              <li>Ask for target audience</li>
+              <li>Clarify business goals</li>
+              <li>Confirm deliverables and timeline</li>
+              <li>Agree on revisions</li>
+              <li>Request testimonial after delivery</li>
+            </ul>
+          </article>
+
+          <article class="card tool-card">
+            <div class="tag">Habit</div>
+            <h3>Daily Action Rule</h3>
+            <ul class="check-list">
+              <li>Learn 1–2 hours</li>
+              <li>Create or improve 1 sample</li>
+              <li>Send 5 outreach messages</li>
+              <li>Track all responses</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="template-grid" style="margin-top:18px;">
+          <div class="card template-box">
+            <h4>Cold Outreach Template</h4>
+            <p>Use this for first contact with a business.</p>
+            <div class="template-content" id="template1">Hi [Name],
+
+I came across [Business Name] and checked your [website/social page]. I liked [something specific].
+
+I also noticed one opportunity that may help: [short useful observation].
+
+I help small businesses with beginner-friendly digital marketing support such as social media content, SEO blog writing, and email copy using AI-assisted workflows to save time.
+
+If useful, I can send one quick sample idea for your business at no cost.
+
+Best,
+[Your Name]</div>
+            <button class="btn btn-secondary copy-btn" data-copy="template1" type="button">Copy Template</button>
+            <div class="success-note" id="note-template1"></div>
+          </div>
+
+          <div class="card template-box">
+            <h4>Follow-Up Message</h4>
+            <p>Use this if there is no reply after a few days.</p>
+            <div class="template-content" id="template2">Hi [Name],
+
+Just following up on my previous message.
+
+Here is one quick idea that could help [Business Name]:
+[insert one useful suggestion]
+
+If you want, I can also share a short sample for your content or email marketing so you can see my style.
+
+Best,
+[Your Name]</div>
+            <button class="btn btn-secondary copy-btn" data-copy="template2" type="button">Copy Template</button>
+            <div class="success-note" id="note-template2"></div>
+          </div>
+
+          <div class="card template-box">
+            <h4>Simple Proposal Template</h4>
+            <p>Use this after a prospect shows interest.</p>
+            <div class="template-content" id="template3">Proposal for [Client Name]
+
+Objective:
+Help [business name] improve [content consistency / blog visibility / email engagement].
+
+Scope of Work:
+- [Deliverable 1]
+- [Deliverable 2]
+- [Deliverable 3]
+
+Timeline:
+- Start date: [date]
+- Delivery date: [date]
+
+Expected Outcome:
+- More consistent content
+- Better audience engagement
+- Clearer marketing communication
+
+Price:
+[Insert your fixed price]
+
+Revisions:
+[Example: 1 round of revisions included]
+
+Thank you,
+[Your Name]</div>
+            <button class="btn btn-secondary copy-btn" data-copy="template3" type="button">Copy Template</button>
+            <div class="success-note" id="note-template3"></div>
+          </div>
+
+          <div class="card template-box">
+            <h4>Testimonial Request Template</h4>
+            <p>Use this after delivering work.</p>
+            <div class="template-content" id="template4">Hi [Name],
+
+Thank you for the opportunity to work on this.
+
+If you found the work helpful, would you be open to sharing a short testimonial about your experience? Even 2–3 lines would help me a lot as I grow my freelance work.
+
+You could mention:
+- what I helped you with
+- what you liked about the process
+- whether you would recommend me
+
+Thank you again,
+[Your Name]</div>
+            <button class="btn btn-secondary copy-btn" data-copy="template4" type="button">Copy Template</button>
+            <div class="success-note" id="note-template4"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Frequently Asked Questions</h2>
+            <p>Common beginner concerns answered clearly.</p>
+          </div>
+        </div>
+
+        <div class="faq">
+          <article class="card faq-item">
+            <h3>Do I need coding skills?</h3>
+            <p>No. This roadmap is designed for non-technical learners. Writing, thinking clearly, and consistency matter more.</p>
+          </article>
+
+          <article class="card faq-item">
+            <h3>Do I need paid tools?</h3>
+            <p>No. You can start with free tools like Google Docs, Notion, Canva free, Sheets, and free AI tools.</p>
+          </article>
+
+          <article class="card faq-item">
+            <h3>Can I really get freelance work in 3 months?</h3>
+            <p>Yes, for beginner-level services. The goal is not expert-level mastery. The goal is practical usefulness plus outreach.</p>
+          </article>
+
+          <article class="card faq-item">
+            <h3>What if I have no experience?</h3>
+            <p>Use sample work, mini audits, and trial projects to create proof. Many beginners start this way.</p>
+          </article>
+
+          <article class="card faq-item">
+            <h3>What should I sell first?</h3>
+            <p>Start with content-related services: captions, content calendars, blog writing, and email sequences.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer style="padding: 30px 0 60px;">
+    <div class="container">
+      <div class="card footer-card">
+        <h3>Deploy-ready website</h3>
+        <p>Save this file as <strong>index.html</strong> and upload it to your server.</p>
+        <p class="small">Theme preference, progress tracking, and copy buttons work in the browser without a backend.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme
+    const body = document.body;
+    const themeToggle = document.getElementById('themeToggle');
+    const savedTheme = localStorage.getItem('dm_ai_theme_final');
+    if (savedTheme === 'light') body.classList.add('light');
+
+    themeToggle.addEventListener('click', () => {
+      body.classList.toggle('light');
+      localStorage.setItem('dm_ai_theme_final', body.classList.contains('light') ? 'light' : 'dark');
+    });
+
+    // Expand/collapse weeks
+    const weekCards = document.querySelectorAll('.week-card');
+    weekCards.forEach(card => {
+      const header = card.querySelector('.week-header');
+      header.addEventListener('click', () => card.classList.toggle('open'));
+    });
+
+    document.getElementById('expandAll').addEventListener('click', () => {
+      weekCards.forEach(card => card.classList.add('open'));
+    });
+
+    document.getElementById('collapseAll').addEventListener('click', () => {
+      weekCards.forEach(card => card.classList.remove('open'));
+    });
+
+    // Progress
+    const progressFill = document.getElementById('progressFill');
+    const progressText = document.getElementById('progressText');
+    const checkboxes = document.querySelectorAll('.week-complete');
+
+    function loadProgress() {
+      checkboxes.forEach((checkbox, index) => {
+        const saved = localStorage.getItem('dm_ai_week_final_' + (index + 1));
+        checkbox.checked = saved === 'true';
+      });
+      updateProgress();
+    }
+
+    function updateProgress() {
+      let completed = 0;
+      checkboxes.forEach((checkbox, index) => {
+        if (checkbox.checked) completed++;
+        localStorage.setItem('dm_ai_week_final_' + (index + 1), checkbox.checked);
+      });
+      const total = checkboxes.length;
+      const percent = (completed / total) * 100;
+      progressFill.style.width = percent + '%';
+      progressText.textContent = completed + ' of ' + total + ' weeks completed';
+    }
+
+    checkboxes.forEach(cb => cb.addEventListener('change', updateProgress));
+    loadProgress();
+
+    // Copy templates
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const targetId = btn.getAttribute('data-copy');
+        const text = document.getElementById(targetId).innerText;
+        const note = document.getElementById('note-' + targetId);
+
+        try {
+          await navigator.clipboard.writeText(text);
+          note.textContent = 'Copied to clipboard.';
+          setTimeout(() => note.textContent = '', 2000);
+        } catch (e) {
+          note.textContent = 'Copy failed. Please copy manually.';
+          setTimeout(() => note.textContent = '', 2500);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
