@@ -1641,6 +1641,11 @@
     </div>
 
   </div><!-- /page-body -->
+
+  <footer style="text-align:center; padding:32px 56px; border-top:1px solid var(--border); font-size:0.8rem; color:var(--text-faint);">
+    &copy; Copyright 2024-<span class="curr-year"></span> Muddassir Iqbal&trade;
+  </footer>
+
 </div><!-- /main -->
 
 <script>
@@ -1710,6 +1715,10 @@
   }, { rootMargin: '-15% 0px -75% 0px' });
 
   sections.forEach(s => io.observe(s));
+
+  document.querySelectorAll('.curr-year').forEach(el => {
+    el.textContent = new Date().getFullYear();
+  });
 </script>
 </body>
 </html>
