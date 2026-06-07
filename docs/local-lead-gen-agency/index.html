@@ -1,0 +1,1715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Local Lead Gen Agency — Full Course</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* ─── TOKENS: DARK (default) ─── */
+  :root {
+    --bg:        #111318;
+    --surface:   #1a1d24;
+    --card:      #22262f;
+    --card-hover:#272b35;
+    --border:    #2e3340;
+    --border-hi: #3d4356;
+
+    --accent:    #e6b800;
+    --accent-dim:rgba(230,184,0,0.14);
+    --accent2:   #ff7a45;
+    --accent2-dim:rgba(255,122,69,0.12);
+    --success:   #2dba7e;
+    --success-dim:rgba(45,186,126,0.12);
+    --info:      #4f8ef0;
+    --info-dim:  rgba(79,142,240,0.12);
+
+    --text-hi:   #f2f0eb;
+    --text:      #c8c4bb;
+    --text-lo:   #888480;
+    --text-faint:#4e4b47;
+
+    --sidebar-w: 272px;
+    --radius:    6px;
+    --font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  }
+
+  /* ─── TOKENS: LIGHT ─── */
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg:        #f5f4f0;
+      --surface:   #ffffff;
+      --card:      #f0eeea;
+      --card-hover:#e8e6e1;
+      --border:    #d8d5ce;
+      --border-hi: #b8b4ac;
+
+      --accent:    #b38600;
+      --accent-dim:rgba(179,134,0,0.1);
+      --accent2:   #c94d1a;
+      --accent2-dim:rgba(201,77,26,0.09);
+      --success:   #1a8f5c;
+      --success-dim:rgba(26,143,92,0.1);
+      --info:      #2563c9;
+      --info-dim:  rgba(37,99,201,0.09);
+
+      --text-hi:   #111111;
+      --text:      #333230;
+      --text-lo:   #6b6865;
+      --text-faint:#9e9b97;
+    }
+  }
+
+  /* Manual toggle class overrides */
+  html.light {
+    --bg:        #f5f4f0;
+    --surface:   #ffffff;
+    --card:      #f0eeea;
+    --card-hover:#e8e6e1;
+    --border:    #d8d5ce;
+    --border-hi: #b8b4ac;
+
+    --accent:    #b38600;
+    --accent-dim:rgba(179,134,0,0.1);
+    --accent2:   #c94d1a;
+    --accent2-dim:rgba(201,77,26,0.09);
+    --success:   #1a8f5c;
+    --success-dim:rgba(26,143,92,0.1);
+    --info:      #2563c9;
+    --info-dim:  rgba(37,99,201,0.09);
+
+    --text-hi:   #111111;
+    --text:      #333230;
+    --text-lo:   #6b6865;
+    --text-faint:#9e9b97;
+  }
+
+  html.dark {
+    --bg:        #111318;
+    --surface:   #1a1d24;
+    --card:      #22262f;
+    --card-hover:#272b35;
+    --border:    #2e3340;
+    --border-hi: #3d4356;
+
+    --accent:    #e6b800;
+    --accent-dim:rgba(230,184,0,0.14);
+    --accent2:   #ff7a45;
+    --accent2-dim:rgba(255,122,69,0.12);
+    --success:   #2dba7e;
+    --success-dim:rgba(45,186,126,0.12);
+    --info:      #4f8ef0;
+    --info-dim:  rgba(79,142,240,0.12);
+
+    --text-hi:   #f2f0eb;
+    --text:      #c8c4bb;
+    --text-lo:   #888480;
+    --text-faint:#4e4b47;
+  }
+
+  /* ─── RESET ─── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; font-size: 16px; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.75;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* ─── LAYOUT ─── */
+  .layout { display: flex; min-height: 100vh; }
+
+  /* ─── SIDEBAR ─── */
+  .sidebar {
+    position: fixed;
+    top: 0; left: 0;
+    width: var(--sidebar-w);
+    height: 100vh;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    overflow-y: auto;
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+  }
+
+  .sidebar::-webkit-scrollbar { width: 4px; }
+  .sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+  .sidebar-head {
+    padding: 22px 20px 18px;
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+
+  .brand-name {
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: var(--text-hi);
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+  }
+
+  .brand-name span { color: var(--accent); }
+
+  .brand-sub {
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: var(--text-lo);
+    margin-top: 3px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .sidebar-nav { flex: 1; padding: 8px 0 24px; }
+
+  .nav-group-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    padding: 16px 20px 5px;
+  }
+
+  .sidebar-nav a {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 8px 20px;
+    color: var(--text-lo);
+    font-size: 0.84rem;
+    font-weight: 500;
+    line-height: 1.35;
+    border-left: 2px solid transparent;
+    transition: all 0.15s;
+    text-decoration: none;
+  }
+
+  .sidebar-nav a .n {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-faint);
+    margin-top: 1px;
+    flex-shrink: 0;
+    font-weight: 400;
+    transition: color 0.15s;
+    min-width: 22px;
+  }
+
+  .sidebar-nav a:hover {
+    color: var(--text-hi);
+    background: rgba(255,255,255,0.04);
+    border-left-color: var(--border-hi);
+  }
+
+  .sidebar-nav a.active {
+    color: var(--accent);
+    background: var(--accent-dim);
+    border-left-color: var(--accent);
+  }
+
+  .sidebar-nav a.active .n { color: var(--accent); }
+
+  .sidebar-foot {
+    padding: 16px 20px;
+    border-top: 1px solid var(--border);
+    font-size: 0.73rem;
+    color: var(--text-faint);
+    line-height: 1.5;
+    flex-shrink: 0;
+  }
+
+  /* ─── TOPBAR (mobile) ─── */
+  .topbar {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 56px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    z-index: 300;
+    align-items: center;
+    padding: 0 16px;
+    gap: 14px;
+  }
+
+  .menu-btn {
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--text);
+    cursor: pointer;
+    padding: 6px 9px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex-shrink: 0;
+  }
+
+  .menu-btn span {
+    display: block;
+    width: 18px;
+    height: 2px;
+    background: var(--text);
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+
+  .menu-btn.open span:nth-child(1) { transform: rotate(45deg) translate(4px,4px); }
+  .menu-btn.open span:nth-child(2) { opacity: 0; }
+  .menu-btn.open span:nth-child(3) { transform: rotate(-45deg) translate(4px,-4px); }
+
+  .topbar-title {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--text-hi);
+  }
+
+  .overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 150;
+  }
+
+  .overlay.show { display: block; }
+
+  /* ─── MAIN ─── */
+  .main {
+    margin-left: var(--sidebar-w);
+    flex: 1;
+    min-width: 0;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 64px 56px 56px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -60px;
+    width: 380px; height: 380px;
+    background: radial-gradient(circle, rgba(245,200,66,0.07) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--accent-dim);
+    border: 1px solid rgba(245,200,66,0.3);
+    color: var(--accent);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 100px;
+    margin-bottom: 20px;
+  }
+
+  .hero h1 {
+    font-size: clamp(1.8rem, 4vw, 2.9rem);
+    font-weight: 800;
+    color: var(--text-hi);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    max-width: 640px;
+    margin-bottom: 16px;
+  }
+
+  .hero h1 em { color: var(--accent); font-style: normal; }
+
+  .hero-desc {
+    font-size: 1.02rem;
+    color: var(--text);
+    max-width: 540px;
+    margin-bottom: 36px;
+    font-weight: 400;
+    line-height: 1.7;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 28px;
+    flex-wrap: wrap;
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .stat-val {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--accent);
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 0.74rem;
+    font-weight: 500;
+    color: var(--text-lo);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* ─── PAGE BODY ─── */
+  .page-body {
+    padding: 0 56px 80px;
+    max-width: 820px;
+  }
+
+  /* ─── MODULE HEADER ─── */
+  .mod-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 52px 0 20px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 36px;
+    scroll-margin-top: 28px;
+  }
+
+  .mod-num {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-faint);
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 3px 9px;
+    flex-shrink: 0;
+    margin-top: 4px;
+  }
+
+  .mod-title-block {}
+
+  .mod-tag {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent2);
+    margin-bottom: 5px;
+  }
+
+  .mod-header h2 {
+    font-size: 1.45rem;
+    font-weight: 800;
+    color: var(--text-hi);
+    letter-spacing: -0.02em;
+    line-height: 1.25;
+  }
+
+  /* ─── LESSON ─── */
+  .lesson { margin-bottom: 32px; }
+
+  .lesson h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-hi);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .lesson h3::before {
+    content: '';
+    display: inline-block;
+    width: 5px; height: 5px;
+    background: var(--accent);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .lesson p {
+    color: var(--text);
+    font-size: 0.95rem;
+    line-height: 1.8;
+    margin-bottom: 10px;
+  }
+
+  .lesson ul, .lesson ol {
+    padding-left: 22px;
+    margin-top: 8px;
+  }
+
+  .lesson ul li, .lesson ol li {
+    color: var(--text);
+    font-size: 0.95rem;
+    line-height: 1.75;
+    margin-bottom: 7px;
+  }
+
+  .lesson ul li strong, .lesson ol li strong,
+  .lesson p strong {
+    color: var(--text-hi);
+    font-weight: 600;
+  }
+
+  /* ─── CALLOUTS ─── */
+  .callout {
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    margin: 20px 0;
+    font-size: 0.92rem;
+    line-height: 1.7;
+  }
+
+  .callout strong {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .callout.tip {
+    background: var(--success-dim);
+    border: 1px solid rgba(62,207,142,0.25);
+    color: #7edbb0;
+  }
+  .callout.tip strong { color: var(--success); }
+
+  .callout.warn {
+    background: var(--accent2-dim);
+    border: 1px solid rgba(255,122,69,0.25);
+    color: #d49a80;
+  }
+  .callout.warn strong { color: var(--accent2); }
+
+  .callout.note {
+    background: var(--accent-dim);
+    border: 1px solid rgba(245,200,66,0.25);
+    color: #c9a640;
+  }
+  .callout.note strong { color: var(--accent); }
+
+  .callout.info {
+    background: var(--info-dim);
+    border: 1px solid rgba(91,156,246,0.25);
+    color: #90b4f8;
+  }
+  .callout.info strong { color: var(--info); }
+
+  /* ─── TABLES ─── */
+  .tbl-wrap { overflow-x: auto; margin: 16px 0; border-radius: var(--radius); border: 1px solid var(--border); }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+  }
+
+  thead th {
+    background: var(--card);
+    color: var(--text-hi);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 11px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+
+  tbody td {
+    padding: 10px 16px;
+    color: var(--text);
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    line-height: 1.55;
+  }
+
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover td { background: rgba(255,255,255,0.02); }
+
+  td.c-accent { color: var(--accent); font-weight: 700; }
+  td.c-success { color: var(--success); font-weight: 700; }
+  td.c-muted { color: var(--text-lo); }
+
+  /* ─── SCRIPT BLOCKS ─── */
+  .script {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px 22px;
+    margin: 16px 0;
+    font-family: var(--font-mono);
+    font-size: 0.84rem;
+    line-height: 2;
+    color: var(--text);
+  }
+
+  .script-label {
+    font-family: var(--font-body);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .sl { display: block; margin-bottom: 2px; color: var(--text-hi); }
+  .sl.pause { color: var(--text-lo); font-style: italic; font-size: 0.8rem; }
+
+  /* ─── CHECKLIST ─── */
+  .checklist {
+    list-style: none;
+    padding: 0;
+    margin: 12px 0;
+  }
+
+  .checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 9px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.92rem;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  .checklist li:last-child { border-bottom: none; }
+
+  .checklist li::before {
+    content: '✓';
+    color: var(--success);
+    font-weight: 800;
+    font-size: 0.78rem;
+    margin-top: 3px;
+    flex-shrink: 0;
+  }
+
+  /* ─── OBJECTION CARDS ─── */
+  .obj-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 12px;
+    overflow: hidden;
+  }
+
+  .obj-q {
+    background: rgba(255,122,69,0.1);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 18px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #f09070;
+  }
+
+  .obj-a {
+    padding: 14px 18px;
+    font-size: 0.9rem;
+    color: var(--text);
+    line-height: 1.75;
+  }
+
+  .obj-a em { color: var(--text-lo); font-style: italic; font-size: 0.87rem; }
+
+  /* ─── RESOURCE GRID ─── */
+  .res-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    gap: 10px;
+    margin: 16px 0;
+  }
+
+  .res-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    transition: border-color 0.15s, background 0.15s;
+  }
+
+  .res-card:hover {
+    border-color: var(--accent);
+    background: var(--card-hover);
+    text-decoration: none;
+  }
+
+  .res-title { font-size: 0.88rem; font-weight: 700; color: var(--text-hi); }
+  .res-desc  { font-size: 0.78rem; color: var(--text-lo); line-height: 1.45; }
+  .res-url   { font-size: 0.72rem; color: var(--accent); margin-top: 4px; font-family: var(--font-mono); }
+
+  /* ─── DAILY STAT CARDS ─── */
+  .daily-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin: 16px 0;
+  }
+
+  .daily-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px 12px;
+    text-align: center;
+  }
+
+  .d-num {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--accent);
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+
+  .d-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--text-lo);
+    margin-top: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    line-height: 1.35;
+  }
+
+  /* ─── THEME TOGGLE ─── */
+  .theme-btn {
+    margin-left: auto;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--text);
+    cursor: pointer;
+    padding: 5px 10px;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .theme-btn:hover { border-color: var(--border-hi); background: var(--card-hover); }
+
+  .theme-btn-sidebar {
+    display: block;
+    margin-top: 12px;
+    width: 100%;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--text-lo);
+    cursor: pointer;
+    padding: 7px 12px;
+    font-size: 0.78rem;
+    font-family: var(--font-body);
+    text-align: left;
+    transition: background 0.15s, border-color 0.15s, color 0.15s;
+  }
+  .theme-btn-sidebar:hover { border-color: var(--border-hi); color: var(--text-hi); }
+  hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
+
+  /* ─── FINAL CTA ─── */
+  .final-cta {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: var(--radius);
+    padding: 24px 26px;
+    margin-top: 16px;
+  }
+
+  .final-cta h3 {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--accent);
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+  }
+
+  .final-cta p { color: var(--text); font-size: 0.95rem; line-height: 1.7; margin: 0; }
+
+  /* ────────────────────────────────────
+     RESPONSIVE
+  ──────────────────────────────────── */
+  @media (max-width: 860px) {
+    .topbar { display: flex; }
+    .main { margin-left: 0; padding-top: 56px; }
+    .hero { padding: 36px 20px 32px; }
+    .page-body { padding: 0 20px 60px; }
+    .sidebar {
+      transform: translateX(-100%);
+      box-shadow: 4px 0 24px rgba(0,0,0,0.5);
+    }
+    .sidebar.open { transform: translateX(0); }
+    .daily-grid { grid-template-columns: repeat(2, 1fr); }
+    .res-grid { grid-template-columns: 1fr; }
+    .mod-header { flex-direction: column; gap: 10px; padding: 36px 0 16px; }
+    .hero h1 { font-size: 1.65rem; }
+    .hero-stats { gap: 20px; }
+    .hero-desc { font-size: 0.95rem; }
+  }
+
+  @media (max-width: 480px) {
+    .daily-grid { grid-template-columns: repeat(2, 1fr); }
+    .script { font-size: 0.8rem; }
+    thead th, tbody td { padding: 9px 12px; }
+    .mod-header h2 { font-size: 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- OVERLAY (mobile) -->
+<div class="overlay" id="overlay" onclick="closeMenu()"></div>
+
+<!-- TOPBAR (mobile) -->
+<header class="topbar">
+  <button class="menu-btn" id="menuBtn" onclick="toggleMenu()" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+  <span class="topbar-title">Lead Gen Agency Course</span>
+  <button class="theme-btn" id="themeToggleMobile" onclick="toggleTheme()" aria-label="Toggle theme">☀</button>
+</header>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-head">
+    <div class="brand-name">Local Lead Gen<br><span>Agency Course</span></div>
+    <div class="brand-sub">Zero → ₹50k/month</div>
+  </div>
+
+  <nav class="sidebar-nav">
+    <div class="nav-group-label">Start Here</div>
+    <a href="#m0"><span class="n">00</span> Course Overview</a>
+    <a href="#m1"><span class="n">01</span> Mindset & Reality Check</a>
+    <a href="#m2"><span class="n">02</span> Understanding Clients</a>
+
+    <div class="nav-group-label">Core Skills</div>
+    <a href="#m3"><span class="n">03</span> Google Business Profile</a>
+    <a href="#m4"><span class="n">04</span> Meta Lead Ads</a>
+    <a href="#m5"><span class="n">05</span> AI & Automation</a>
+    <a href="#m6"><span class="n">06</span> Building Your Offer</a>
+
+    <div class="nav-group-label">Sales</div>
+    <a href="#m7"><span class="n">07</span> Prospecting System</a>
+    <a href="#m8"><span class="n">08</span> Cold Call Scripts</a>
+    <a href="#m9"><span class="n">09</span> Handling Objections</a>
+    <a href="#m10"><span class="n">10</span> Closing & Onboarding</a>
+
+    <div class="nav-group-label">Operations</div>
+    <a href="#m11"><span class="n">11</span> Delivering Results</a>
+    <a href="#m12"><span class="n">12</span> Revenue Roadmap</a>
+    <a href="#m13"><span class="n">13</span> Tools & Budget</a>
+    <a href="#m14"><span class="n">14</span> Daily Action Plan</a>
+  </nav>
+
+  <div class="sidebar-foot">
+    Built for Indian freelancers &amp; agency founders. All prices in INR.
+    <button class="theme-btn-sidebar" id="themeToggleSidebar" onclick="toggleTheme()">
+      <span id="themeLabel">☀ Light mode</span>
+    </button>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-badge">✦ Complete Self-Study Course</div>
+    <h1>Local Lead Gen Agency<br><em>From Zero to ₹50k/month</em></h1>
+    <p class="hero-desc">A practical course to build a service business helping local Indian businesses get more customers — using Google, Meta Ads, and automation. No degree. No office. Just skills and a system.</p>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-val">14</div><div class="stat-label">Modules</div></div>
+      <div class="stat"><div class="stat-val">6–8</div><div class="stat-label">Months to ₹50k</div></div>
+      <div class="stat"><div class="stat-val">9+</div><div class="stat-label">Client Industries</div></div>
+      <div class="stat"><div class="stat-val">₹0</div><div class="stat-label">Ad Budget Needed</div></div>
+    </div>
+  </div>
+
+  <!-- PAGE BODY -->
+  <div class="page-body">
+
+    <!-- ══ M0 ══ -->
+    <div class="mod-header" id="m0">
+      <div class="mod-num">00</div>
+      <div class="mod-title-block">
+        <div class="mod-tag">Start Here</div>
+        <h2>Course Overview & How to Use This</h2>
+      </div>
+    </div>
+
+    <div class="lesson">
+      <h3>What This Course Is</h3>
+      <p>This is a practical, no-fluff course to help you build a local lead generation agency in India. You will learn to help small businesses — dentists, coaching institutes, gyms, lawyers — get more customers online. In return, they pay you a monthly retainer.</p>
+      <p>This is a real business model. It takes work. It is not passive income. But the economics are clear: land 5 clients paying ₹10,000/month each and you earn ₹50,000/month from your laptop.</p>
+    </div>
+
+    <div class="lesson">
+      <h3>How to Work Through This</h3>
+      <ul>
+        <li>Read modules 0–2 in 2–3 days. Think hard about the concepts before moving on.</li>
+        <li>Modules 3–5 take 1–2 weeks. Do the actual hands-on work — don't just read.</li>
+        <li>Module 6 onwards: start outreach immediately. Don't wait until you feel "ready." You never will.</li>
+        <li>The 80/20 rule: 20% time learning, 80% time prospecting and talking to potential clients.</li>
+      </ul>
+    </div>
+
+    <div class="callout note">
+      <strong>The Core Truth</strong>
+      You are not selling "digital marketing." You are selling more customers for local businesses. Keep that framing always — it changes how you pitch, price, and deliver.
+    </div>
+
+    <!-- ══ M1 ══ -->
+    <div class="mod-header" id="m1">
+      <div class="mod-num">01</div>
+      <div class="mod-title-block">
+        <div class="mod-tag">Foundations</div>
+        <h2>Mindset & The Reality Check</h2>
+      </div>
+    </div>
+
+    <div class="lesson">
+      <h3>What Will Actually Happen</h3>
+      <p>Month 1 will feel like nothing is working. You'll send messages, make calls, and hear mostly silence or "not interested." This is normal — it is part of the process, not a sign the model is broken.</p>
+      <ul>
+        <li>Most people quit in Month 1 or 2. This is exactly when you must push hardest.</li>
+        <li>Your first client will likely come from your 30th–60th outreach attempt, not your first.</li>
+        <li>One paying client changes everything: proof, confidence, and a case study to show the next prospect.</li>
+      </ul>
+    </div>
+
+    <div class="lesson">
+      <h3>Skills Beat Credentials</h3>
+      <p>You do not need a marketing degree. Local business owners will judge you on two things: do you understand their problem, and can you show results? That's it. Demonstrable competence beats a certificate every time.</p>
+    </div>
+
+    <div class="lesson">
+      <h3>Getting Your First Client for Free</h3>
+      <p>Offer your first 1–2 clients a discounted or free first month in exchange for a testimonial and the right to use their results as a case study. This is not desperation — it's smart strategy. A single case study with real numbers ("18 new patient inquiries in 30 days") is worth more than any portfolio.</p>
+      <div class="callout warn">
+        <strong>Common Mistake</strong>
+        Don't work for free for longer than 30 days. You will undervalue yourself and they will undervalue you. Set a clear deadline upfront and transition to a paid plan.
+      </div>
+    </div>
+
+    <div class="lesson">
+      <h3>The Honest Income Timeline</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Month</th><th>What to Expect</th><th>Income</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>Learning tools, building portfolio, zero clients</td><td class="c-muted">₹0</td></tr>
+            <tr><td>2</td><td>First 1–2 clients, possibly at a discount</td><td class="c-accent">₹5k–10k</td></tr>
+            <tr><td>3</td><td>Referrals starting, 2–4 paying clients</td><td class="c-accent">₹15k–30k</td></tr>
+            <tr><td>4</td><td>System working, 3–5 clients</td><td class="c-accent">₹30k–50k</td></tr>
+            <tr><td>5–6</td><td>Scaling, niche focus emerging</td><td class="c-success">₹50k–80k</td></tr>
+            <tr><td>7–12</td><td>Strong reputation, referral pipeline</td><td class="c-success">₹80k–1.5L+</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ══ M2 ══ -->
+    <div class="mod-header" id="m2">
+      <div class="mod-num">02</div>
+      <div class="mod-title-block">
+        <div class="mod-tag">Foundations</div>
+        <h2>Understanding Your Clients</h2>
+      </div>
+    </div>
+
+    <div class="lesson">
+      <h3>Who to Target and Why</h3>
+      <p>The best beginner clients need more customers badly, have money to pay you, and are easy to reach. Here's a breakdown:</p>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Industry</th><th>Avg. Customer Value</th><th>Lead Hunger</th><th>Best Channel</th></tr></thead>
+          <tbody>
+            <tr><td>Dentists / Clinics</td><td>₹3k–15k per patient</td><td class="c-success">High</td><td>Cold call / Maps</td></tr>
+            <tr><td>Coaching Institutes</td><td>₹15k–80k per student</td><td class="c-success">Very High</td><td>Maps / WhatsApp</td></tr>
+            <tr><td>Gyms</td><td>₹1.5k–5k/month</td><td>Medium</td><td>Maps / Instagram</td></tr>
+            <tr><td>Real Estate Agents</td><td>₹50k–5L per deal</td><td class="c-success">Very High</td><td>99acres / LinkedIn</td></tr>
+            <tr><td>Interior Designers</td><td>₹1L–10L per project</td><td>Medium</td><td>Instagram / Houzz</td></tr>
+            <tr><td>Lawyers / CA Firms</td><td>₹5k–50k per client</td><td>Medium</td><td>LinkedIn / Maps</td></tr>
+            <tr><td>Solar Installers</td><td>₹2L–15L per deal</td><td class="c-success">High</td><td>Maps / Meta Ads</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="lesson">
+      <h3>What Keeps Them Up at Night</h3>
+      <p>Most local business owners are not thinking about "digital marketing." They are thinking:</p>
+      <ul>
+        <li>"My appointments are half-empty this month."</li>
+        <li>"I spent money on a website and got nothing from it."</li>
+        <li>"My competitor is always showing up first on Google."</li>
+        <li>"I don't have time to manage all this online stuff."</li>
+      </ul>
+      <p>Your job in every sales conversation is to connect your service to their specific pain — not to explain Meta Ads or GBP optimization.</p>
+    </div>
+
+    <div class="lesson">
+      <h3>Picking a Niche (Recommended)</h3>
+      <p>Rather than targeting every industry, pick one or two and go deep. If you become "the agency for dental clinics in Pune," referrals come automatically and you can charge 30–50% more. Specialization beats generalism when starting out.</p>
+      <div class="callout tip">
+        <strong>How to Choose Your Niche</strong>
+        Pick the industry where you have some prior knowledge, a contact who can get you one intro, or where you see the most unfilled Google Business Profiles in your city. That's your starting point.
+      </div>
+    </div>
+
+    <!-- ══ M3 ══ -->
+    <div class="mod-header" id="m3">
+      <div class="mod-num">03</div>
+      <div class="mod-title-block">
+        <div class="mod-tag">Core Skill</div>
+        <h2>Google Business Profile (GBP) Optimization</h2>
+      </div>
+    </div>
+
+    <div class="lesson">
+      <h3>Why GBP Is Your Entry-Point Service</h3>
+      <p>GBP is free for businesses, results appear in 4–8 weeks, and most local listings are badly set up. It's the easiest service to sell and deliver — the perfect foot in the door with a new client.</p>
+    </div>
+
+    <div class="lesson">
+      <h3>What GBP Optimization Involves</h3>
+      <ul>
+        <li><strong>Claim & verify</strong> — If unclaimed, do so via postcard or phone verification.</li>
+        <li><strong>Business categories</strong> — Primary + secondary. Most businesses pick the wrong one.</li>
+        <li><strong>NAP consistency</strong> — Name, Address, Phone must match exactly everywhere online.</li>
+        <li><strong>Photos</strong> — Upload 15–25 high-quality images: interior, exterior, team, work samples.</li>
+        <li><strong>Business description</strong> — Keyword-rich, locally-focused, 250–750 characters.</li>
+        <li><strong>Services/Products section</strong> — Fill completely with pricing where relevant.</li>
+        <li><strong>Review strategy</strong> — Build a simple system for the owner to ask happy customers for reviews. 20+ reviews with responses = dramatically better ranking.</li>
+        <li><strong>Weekly Google Posts</strong> — Offers, updates, news. Keeps the listing active.</li>
+        <li><strong>Q&A section</strong> — Add your own Q&As with keywords embedded.</li>
+        <li><strong>Attributes</strong> — "Wheelchair accessible," "Accepts cards," etc. Fill everything applicable.</li>
+      </ul>
+    </div>
+
+    <div class="lesson">
+      <h3>Pricing</h3>
+      <p>Charge <strong>₹5,000–₹15,000</strong> as a one-time setup fee. Offer an optional <strong>₹2,000–₹5,000/month</strong> retainer for ongoing management (weekly posts, review responses, monthly reporting).</p>
+    </div>
+
+    <div class="lesson">
+      <h3>Learning Resources</h3>
+      <div class="res-grid">
+        <a class="res-card" href="https://support.google.com/business/" target="_blank">
+          <div class="res-title">GBP Help Center</div>
+          <div class="res-desc">Official Google docs. Start with "Optimize your listing."</div>
+          <div class="res-url">support.google.com/business</div>
+        </a>
+        <a class="res-card" href="https://www.brightlocal.com/learn/" target="_blank">
+          <div class="res-title">BrightLocal Academy</div>
+          <div class="res-desc">Free practitioner guides on local SEO and GBP.</div>
+          <div class="res-url">brightlocal.com/learn</div>
+        </a>
+      </div>
+    </div>
+
+    <!-- ══ M4 ══ -->
+    <div class="mod-header" id="m4">
+      <div class="mod-num">04</div>
+      <div class="mod-title-block">
+        <div class="mod-tag">Core Skill</div>
+        <h2>Meta Lead Generation Ads</h2>
+      </div>
+    </div>
+
+    <div class="lesson">
+      <h3>How Meta Lead Ads Work</h3>
+      <p>Meta (Facebook + Instagram) Lead Ads show your client's ad to a targeted local audience. When someone clicks, a form pre-fills with their contact details. The lead is captured without leaving the app — fast, low friction, measurable.</p>
+    </div>
+
+    <div class="lesson">
+      <h3>Campaign Setup — Step by Step</h3>
+      <ol>
+        <li>Access client's <strong>Meta Business Suite</strong> and their ad account.</li>
+        <li>Install <strong>Meta Pixel</strong> on their website if applicable.</li>
+        <li>Ads Manager → Create → Objective: <strong>Leads</strong>.</li>
+        <li>Ad Set: Location (city or 5–10km radius), age range, relevant interests.</li>
+        <li>Daily budget: <strong>₹200–₹500/day</strong> to start and test.</li>
+        <li>Ad Creative: clear headline, benefit-led body copy, strong CTA ("Book a Free Consultation").</li>
+        <li>Lead Form: ask for Name, Phone, and one qualifying question only.</li>
+        <li>Connect leads to Google Sheet via Zapier — or download manually from Meta daily.</li>
+        <li>Run 2 ad versions simultaneously. Let each spend ₹500 before judging performance.</li>
+      </ol>
+    </div>
+
+    <div class="lesson">
+      <h3>Realistic Lead Costs by Industry</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Industry</th><th>Cost per Lead</th><th>Close Rate</th></tr></thead>
+          <tbody>
+            <tr><td>Dental / Clinic</td><td>₹80–₹250</td><td>15–30%</td></tr>
+            <tr><td>Coaching Institutes</td><td>₹50–₹150</td><td>10–25%</td></tr>
+            <tr><td>Real Estate</td><td>₹200–₹600</td><td>2–8%</td></tr>
+            <tr><td>Gym / Fitness</td><td>₹40–₹120</td><td>20–40%</td></tr>
+            <tr><td>Interior Design</td><td>₹150–₹400</td><td>5–15%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout warn">
+        <strong>Important: Ad Spend is the Client's Money</strong>
+        Always quote your management fee separately from the ad budget. The client pays ad spend directly to Meta. Never mix the two — it will cause trust issues.
+      </div>
+    </div>
+
+    <div class="lesson">
+      <h3>Pricing</h3>
+      <p>Charge <strong>₹10,000–₹25,000/month</strong> management fee + client pays their ad spend (typically ₹5k–15k/month). Your fee covers strategy, setup, creative, and monthly optimization.</p>
+    </div>
+
+    <div class="lesson">
+      <h3>Learning Resources</h3>
+      <div class="res-grid">
+        <a class="res-card" href="https://www.facebook.com/business/learn" target="_blank">
+          <div class="res-title">Meta Blueprint</div>
+          <div class="res-desc">Free official courses. Complete "Facebook Ads" and "Lead Generation" tracks.</div>
+          <div class="res-url">facebook.com/business/learn</div>
+        </a>
+        <a class="res-card" href="https://www.canva.com/designschool/" target="_blank">
+          <div class="res-title">Canva Design School</div>
+          <div class="res-desc">Free lessons to design ad creatives that stand out.</div>
+          <div class="res-url">canva.com/designschool</div>
+        </a>
+      </div>
+    </div>
+
+    <!-- ══ M5 ══ -->
+    <div class="mod-header" id="m5">
+      <div class="mod-num">05</div>
+      <div class="mod-title-block">
+        <div class="mod-tag">Core Skill</div>
+        <h2>AI-Powered Lead Follow-up & Automation</h2>
+      </div>
+    </div>
+
+    <div class="lesson">
+      <h3>Why Follow-up Is Your Biggest Opportunity</h3>
+      <p>Most local businesses generate leads and then do nothing. The owner is busy, there's no system, and a hot lead goes cold within hours. Building an automated follow-up system makes you indispensable — and dramatically improves the results you can show clients.</p>
+    </div>
+
+    <div class="lesson">
+      <h3>The Follow-up Tool Stack</h3>
+      <ul>
+        <li><strong>WhatsApp Business API</strong> — Send automated welcome messages the moment a lead comes in.</li>
+        <li><strong>GoHighLevel (GHL)</strong> — All-in-one CRM: manage leads, send SMS/email/WhatsApp sequences, book appointments. Start with their 14-day free trial.</li>
+        <li><strong>Zapier or Make</strong> — Connect Meta Lead Ads → Google Sheets → WhatsApp/GHL. No code needed. The essential glue for your workflow.</li>
+        <li><strong>ChatGPT</strong> — Write all your automation message sequences, email copy, and follow-up scripts in minutes.</li>
+      </ul>
+    </div>
+
+    <div class="lesson">
+      <h3>A Simple Automation Flow (Start Here)</h3>
+      <ol>
+        <li>Lead fills Meta Lead Form</li>
+        <li>Zapier sends details to Google Sheet + triggers WhatsApp message instantly</li>
+        <li>WhatsApp: welcome message + what to expect + "Reply YES to confirm your interest"</li>
+        <li>No reply in 24 hrs → automated follow-up WhatsApp #2</li>
+        <li>No reply in 48 hrs → SMS or email follow-up</li>
+        <li>All leads visible in GHL pipeline for the client to track</li>
+      </ol>
+      <div class="callout tip">
+        <strong>Bundle This as a Package</strong>
+        Position it as: "I don't just get you leads — I build the system to convert them." This justifies higher fees and is the #1 reason clients stay long-term.
+      </div>
+    </div>
+
+    <div class="lesson">
+      <h3>Pricing</h3>
+      <p>Charge <strong>₹3,000–₹10,000/month</strong> for maintaining the automation and CRM. One-time setup fee of <strong>₹5,000–₹15,000</strong> for the initial build.</p>
+    </div>
+
+    <div class="lesson">
+      <h3>Learning Resources</h3>
+      <div class="res-grid">
+        <a class="res-card" href="https://www.gohighlevel.com/" target="_blank">
+          <div class="res-title">GoHighLevel</div>
+          <div class="res-desc">14-day free trial. Focus on Pipelines, Automations, and Conversations tabs.</div>
+          <div class="res-url">gohighlevel.com</div>
+        </a>
+        <a class="res-card" href="https://zapier.com/learn" target="_blank">
+          <div class="res-title">Zapier Learn Center</div>
+          <div class="res-desc">Free tutorials to connect apps without code. Start with "Intro to Zapier."</div>
+          <div class="res-url">zapier.com/learn</div>
+        </a>
+        <a class="res-card" href="https://www.make.com/" target="_blank">
+          <div class="res-title">Make (Integromat)</div>
+          <div class="res-desc">More powerful than Zapier for complex flows. Free plan: 1,000 ops/month.</div>
+          <div class="res-url">make.com</div>
+        </a>
+        <a class="res-card" href="https://academy.hubspot.com/" target="_blank">
+          <div class="res-title">HubSpot Academy</div>
+          <div class="res-desc">Free CRM and inbound marketing certifications. Great for funnel concepts.</div>
+          <div class="res-url">academy.hubspot.com</div>
+        </a>
+      </div>
+    </div>
+
+    <!-- ══ M6 ══ -->
+    <div class="mod-header" id="m6">
+      <div class="mod-num">06</div>
+      <div class="mod-title-block">
+        <div class="mod-tag">Business</div>
+        <h2>Building Your Offer & Pricing</h2>
+      </div>
+    </div>
+
+    <div class="lesson">
+      <h3>The Three-Package Structure</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Package</th><th>What's Included</th><th>Monthly Fee</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Starter</strong></td><td>GBP optimization + monthly management</td><td class="c-accent">₹5,000–₹8,000</td></tr>
+            <tr><td><strong>Growth</strong></td><td>GBP + Meta Lead Ads management (client pays ad spend separately)</td><td class="c-accent">₹12,000–₹18,000</td></tr>
+            <tr><td><strong>Full System</strong></td><td>GBP + Meta Ads + CRM + WhatsApp Automation + Monthly Report</td><td class="c-accent">₹20,000–₹35,000</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="lesson">
+      <h3>How to Present Pricing</h3>
+      <p>Never lead with price. Lead with the result. <em>"I help dental clinics generate 15–30 new patient inquiries per month."</em> When asked the price, frame it as ROI: <em>"At your conversion rate, if even 3 of those leads become patients at ₹5,000 each, that's ₹15,000 from a ₹12,000 investment."</em></p>
+    </div>
+
+    <div class="lesson">
+      <h3>Contracts & Payments</h3>
+      <ul>
+        <li>Use a simple <strong>3-month service agreement</strong> — protects both sides and signals professionalism.</li>
+        <li><strong>Collect first month upfront</strong> before starting any work. Non-negotiable.</li>
+        <li>Use Razorpay or UPI for payments.</li>
+        <li>Issue proper invoices using <strong>Zoho Invoice</strong> (free plan).</li>
+      </ul>
+    </div>
+
+    <div class="lesson">
+      <h3>Creating Your Agency Identity</h3>
+      <ul>
+        <li>Pick a simple name. Avoid "Digital," "Solutions," or "Tech" — all overused.</li>
+        <li>Buy a domain (~₹999/year on Namecheap or GoDaddy).</li>
+        <li>Build a one-page website or Notion portfolio — just enough to show you're real.</li>
+        <li>Professional WhatsApp Business account with your agency name and photo.</li>
+        <li>A clean 4-slide PDF proposal on Canva — you'll use this on every call.</li>
+      </ul>
+    </div>
+
+    <!-- ══ M7 ══ -->
+    <div class="mod-header" id="m7">
+      <div class="mod-num">07</div>
+      <div class="mod-title-block">
+        <div class="mod-tag">Sales</div>
+        <h2>Prospecting System</h2>
+      </div>
+    </div>
+
+    <div class="lesson">
+      <h3>Your Daily Outreach Targets</h3>
+    </div>
+
+    <div class="daily-grid">
+      <div class="daily-card"><div class="d-num">20</div><div class="d-label">Cold Calls</div></div>
+      <div class="daily-card"><div class="d-num">20</div><div class="d-label">WhatsApp</div></div>
+      <div class="daily-card"><div class="d-num">10</div><div class="d-label">Emails</div></div>
+      <div class="daily-card"><div class="d-num">5</div><div class="d-label">LinkedIn</div></div>
+    </div>
+
+    <div class="lesson" style="margin-top:24px;">
+      <h3>Google Maps Prospecting (Best Starting Point)</h3>
+      <ol>
+        <li>Search "dentists in [your city]" on Google Maps.</li>
+        <li>Open each listing: less than 10 reviews? No photos? Empty description? That's your prospect.</li>
+        <li>Note their phone, WhatsApp, and website.</li>
+        <li>Track in a Google Sheet: Business Name | Phone | Email | Channel | Status | Follow-up Date.</li>
+        <li>Aim for 50 prospects in your sheet before you start outreach — then work through them daily.</li>
+      </ol>
+    </div>
+
+    <div class="lesson">
+      <h3>WhatsApp Outreach Message</h3>
+      <div class="script">
+        <div class="script-label">WhatsApp — First Contact</div>
+        <span class="sl">Hi, is this [Business Name]?</span>
+        <span class="sl pause">[Wait for reply before continuing]</span>
+        <span class="sl">I was looking up [industry] in [city] on Google and came across your listing.</span>
+        <span class="sl">I noticed a few things that may be causing you to miss inquiries online.</span>
+        <span class="sl">Would you be open to a 10-minute call? I can show you exactly what I found.</span>
+      </div>
+    </div>
+
+    <div class="lesson">
+      <h3>Cold Email Template</h3>
+      <div class="script">
+        <div class="script-label">Email — Subject: Quick question about [Business Name]</div>
+        <span class="sl">Hi [First Name],</span>
+        <span class="sl"> </span>
+        <span class="sl">I was searching for [dentists / coaching centers / gyms] in [city]</span>
+        <span class="sl">and came across [Business Name].</span>
+        <span class="sl"> </span>
+        <span class="sl">I noticed [specific thing — e.g., "your Google listing has no photos"</span>
+        <span class="sl">or "you have 4 reviews while nearby competitors have 40+"].</span>
+        <span class="sl"> </span>
+        <span class="sl">I work with local [industry] businesses to fix these gaps and generate</span>
+        <span class="sl">more inquiries. Would a short call this week make sense?</span>
+        <span class="sl"> </span>
+        <span class="sl">— [Your Name]</span>
+      </div>
+    </div>
+
+    <!-- ══ M8 ══ -->
+    <div class="mod-header" id="m8">
+      <div class="mod-num">08</div>
+      <div class="mod-title-block">
+        <div class="mod-tag">Sales</div>
+        <h2>Cold Call Scripts by Industry</h2>
+      </div>
+    </div>
+
+    <div class="lesson">
+      <h3>The 5-Part Call Framework</h3>
+      <ol>
+        <li><strong>Permission</strong> — "Did I catch you at a bad time?"</li>
+        <li><strong>Relevance</strong> — Show you've specifically researched their business.</li>
+        <li><strong>Pain question</strong> — Ask about their current lead or customer situation.</li>
+        <li><strong>Implication</strong> — Make the gap feel real and costly.</li>
+        <li><strong>Next step</strong> — Book a 15-minute call. You are not selling on this call.</li>
+      </ol>
+    </div>
+
+    <div class="lesson">
+      <h3>Dental Clinic</h3>
+      <div class="script">
+        <div class="script-label">Cold Call — Dental Clinic</div>
+        <span class="sl">Hi Dr. [Name], this is [Your Name].</span>
+        <span class="sl">Did I catch you at a bad time?</span>
+        <span class="sl pause">[Wait for response]</span>
+        <span class="sl">I was looking at dental clinics in [area] and came across your listing on Google.</span>
+        <span class="sl">I noticed [e.g., "you only have 6 reviews — a few competitors near you have 80+"].</span>
+        <span class="sl">Where do most of your new patients come from right now?</span>
+        <span class="sl pause">[Listen. Then:]</span>
+        <span class="sl">Are you getting as many new patient inquiries as you'd like?</span>
+        <span class="sl pause">[Listen. Then:]</span>
+        <span class="sl">I help clinics fix exactly that. Would you be open to a 15-minute call</span>
+        <span class="sl">later this week so I can walk you through what I found?</span>
+      </div>
+    </div>
+
+    <div class="lesson">
+      <h3>Coaching Institute</h3>
+      <div class="script">
+        <div class="script-label">Cold Call — Coaching Institute</div>
+        <span class="sl">Hi, is this the owner or director of [Institute Name]?</span>
+        <span class="sl pause">[Confirm]</span>
+        <span class="sl">I noticed your coaching center online — looks like a strong program.</span>
+        <span class="sl">Quick question: how are you currently generating most of your student admissions?</span>
+        <span class="sl pause">[Listen. Then:]</span>
+        <span class="sl">Are you satisfied with the inquiry volume you're getting each month?</span>
+        <span class="sl pause">[If not satisfied:]</span>
+        <span class="sl">That's what I help institutes with — generating consistent inquiry flow online</span>
+        <span class="sl">without depending on word of mouth alone.</span>
+        <span class="sl">Would a short strategy conversation be worthwhile this week?</span>
+      </div>
+    </div>
+
+    <div class="lesson">
+      <h3>Interior Designer</h3>
+      <div class="script">
+        <div class="script-label">Cold Call — Interior Designer</div>
+        <span class="sl">Hi, am I speaking with the owner?</span>
+        <span class="sl pause">[Confirm]</span>
+        <span class="sl">I came across your work online — the portfolio looks really strong.</span>
+        <span class="sl">Quick question: how are you currently finding most of your clients?</span>
+        <span class="sl pause">[Listen. Then:]</span>
+        <span class="sl">I noticed a couple of things online that could generate you more project</span>
+        <span class="sl">inquiries consistently. Would you be open to a short strategy call?</span>
+        <span class="sl">No obligation — I'll share what I found either way.</span>
+      </div>
+    </div>
+
+    <div class="lesson">
+      <h3>Gym / Fitness Center</h3>
+      <div class="script">
+        <div class="script-label">Cold Call — Gym</div>
+        <span class="sl">Hi, is this [Gym Name]?</span>
+        <span class="sl">Great, this is [Your Name]. Quick question —</span>
+        <span class="sl">Are you currently running any ads or online campaigns to get new members?</span>
+        <span class="sl pause">[Listen. Then:]</span>
+        <span class="sl">I help gyms in [city] run Facebook and Instagram ads that bring in</span>
+        <span class="sl">new membership inquiries directly on WhatsApp.</span>
+        <span class="sl">Would a 15-minute chat to see if it could work for you be worthwhile?</span>
+      </div>
+    </div>
+
+    <!-- ══ M9 ══ -->
+    <div class="mod-header" id="m9">
+      <div class="mod-num">09</div>
+      <div class="mod-title-block">
+        <div class="mod-tag">Sales</div>
+        <h2>Handling Objections</h2>
+      </div>
+    </div>
+
+    <div class="lesson">
+      <h3>Objections Are a Good Sign</h3>
+      <p>An objection means they're engaged. A hang-up means they're not. When someone objects, respond with calm curiosity — not a rehearsed rebuttal. The goal is to understand their real concern, not to "win" the argument.</p>
+    </div>
+
+    <div class="obj-card">
+      <div class="obj-q">"Not interested."</div>
+      <div class="obj-a">That's fair. Before I let you go — can I ask one quick question? Are you already getting enough new inquiries each month, or is that something you'd like more of?<br><br>
+      <em>If they say "enough": Great, sounds like things are going well. If that ever changes, I'd love to reconnect.</em><br>
+      <em>If they hesitate: That's actually the problem I help with. Would 10 minutes this week be worthwhile?</em></div>
+    </div>
+
+    <div class="obj-card">
+      <div class="obj-q">"Send me some information first."</div>
+      <div class="obj-a">Happy to. To make sure I send something relevant — what's the biggest challenge you're facing right now with getting new customers?<br><br>
+      <em>After they answer: Got it. I'll put together something specific to that. What's the best email? And would a quick 10-minute call next week make sense once you've had a look?</em></div>
+    </div>
+
+    <div class="obj-card">
+      <div class="obj-q">"We already have someone handling this."</div>
+      <div class="obj-a">That's great. I'm not trying to replace anyone. Quick question though — are the results you're getting now meeting your expectations? Are you getting the inquiry volume you hoped for?<br><br>
+      <em>If fully satisfied: No worries at all. If not: That's actually why I reached out. Happy to share a second opinion — no commitment.</em></div>
+    </div>
+
+    <div class="obj-card">
+      <div class="obj-q">"I don't have budget for this right now."</div>
+      <div class="obj-a">Totally understand. Can I ask — if you knew that every ₹10,000 spent would return ₹30,000–₹50,000 in new business, would budget still be the concern?<br><br>
+      That's the math I try to show before anyone commits. Would a 10-minute call just to see if the numbers would work for you be fair?</div>
+    </div>
+
+    <div class="obj-card">
+      <div class="obj-q">"I've tried Facebook ads before and they didn't work."</div>
+      <div class="obj-a">I hear that a lot — and honestly, most local business ad campaigns are set up incorrectly. Wrong audience, weak creative, or no follow-up system for the leads that do come in.<br><br>
+      I'd love to show you what the difference looks like. Would you be willing to give it 30 days with the right setup?</div>
+    </div>
+
+    <!-- ══ M10 ══ -->
+    <div class="mod-header" id="m10">
+      <div class="mod-num">10</div>
+      <div class="mod-title-block">
+        <div class="mod-tag">Sales</div>
+        <h2>Closing the Deal & Client Onboarding</h2>
+      </div>
+    </div>
+
+    <div class="lesson">
+      <h3>The Discovery Call Structure (30 min)</h3>
+      <ol>
+        <li><strong>2 min</strong> — Set the agenda: "I'll ask you a few questions, share what I found, and if there's a fit, we can talk next steps."</li>
+        <li><strong>10 min</strong> — Ask: current marketing, inquiry volume, biggest challenge, what's been tried, what hasn't worked.</li>
+        <li><strong>8 min</strong> — Present: the specific opportunities you found for their business (GBP gaps, competitor comparison, screenshots).</li>
+        <li><strong>5 min</strong> — Recommend: one specific package. Don't overwhelm with options.</li>
+        <li><strong>Close</strong> — "Does this seem worth trying for 3 months?"</li>
+      </ol>
+    </div>
+
+    <div class="lesson">
+      <h3>The Proposal (Keep It Short)</h3>
+      <p>A 4-slide Canva PDF works better than a 20-page document. Include:</p>
+      <ul>
+        <li>Page 1: Their specific problem — what you found, with screenshots</li>
+        <li>Page 2: Your recommended solution and how it works</li>
+        <li>Page 3: What results to expect and the timeline</li>
+        <li>Page 4: Pricing and how to get started</li>
+      </ul>
+    </div>
+
+    <div class="lesson">
+      <h3>Client Onboarding Checklist</h3>
+      <ul class="checklist">
+        <li>Collect access: GBP login, Meta Business Manager, website login if needed</li>
+        <li>Sign service agreement before starting any work</li>
+        <li>Collect first month's payment upfront</li>
+        <li>Send a welcome message outlining what to expect in Weeks 1–4</li>
+        <li>Schedule kickoff call to align on goals, audience, and messaging tone</li>
+        <li>Set up shared WhatsApp group for quick communication</li>
+        <li>Create shared Google Sheet for lead tracking</li>
+        <li>Set up monthly report reminder in your own calendar</li>
+      </ul>
+    </div>
+
+    <!-- ══ M11 ══ -->
+    <div class="mod-header" id="m11">
+      <div class="mod-num">11</div>
+      <div class="mod-title-block">
+        <div class="mod-tag">Delivery</div>
+        <h2>Delivering Results for Clients</h2>
+      </div>
+    </div>
+
+    <div class="lesson">
+      <h3>Week-by-Week Delivery Plan</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Week</th><th>Focus</th></tr></thead>
+          <tbody>
+            <tr><td>Week 1</td><td>Full audit: GBP, social, website, competitors. Deliver audit summary to client.</td></tr>
+            <tr><td>Week 2</td><td>Complete GBP optimization. Begin ad creative design and copy. Set up lead capture form.</td></tr>
+            <tr><td>Week 3</td><td>Launch Meta Lead Ads. Set up automation (Zapier/Make + WhatsApp). Monitor daily.</td></tr>
+            <tr><td>Week 4</td><td>First optimization pass on ads. Which creative and audience is winning? Send preliminary results to client.</td></tr>
+            <tr><td>End of Month</td><td>Full monthly report. Call to review results. Plan next month together.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="lesson">
+      <h3>When Results Are Poor</h3>
+      <p>Results will be poor sometimes. The right response is proactive honesty: reach out before the client does, explain what you think happened, and what you're changing. Clients don't leave because of a bad month — they leave when they feel ignored or blindsided. Communication is your #1 retention tool.</p>
+    </div>
+
+    <!-- ══ M12 ══ -->
+    <div class="mod-header" id="m12">
+      <div class="mod-num">12</div>
+      <div class="mod-title-block">
+        <div class="mod-tag">Growth</div>
+        <h2>Revenue Roadmap</h2>
+      </div>
+    </div>
+
+    <div class="lesson">
+      <h3>Monthly Revenue Model</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Month</th><th>Clients</th><th>Avg. Retainer</th><th>Revenue</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>0</td><td>—</td><td class="c-muted">₹0 (learning)</td></tr>
+            <tr><td>2</td><td>1–2</td><td>₹5k–8k</td><td class="c-accent">₹5k–10k</td></tr>
+            <tr><td>3</td><td>2–4</td><td>₹7k–10k</td><td class="c-accent">₹15k–30k</td></tr>
+            <tr><td>4</td><td>3–5</td><td>₹10k–12k</td><td class="c-accent">₹30k–50k</td></tr>
+            <tr><td>5–6</td><td>5–7</td><td>₹10k–15k</td><td class="c-success">₹50k–80k</td></tr>
+            <tr><td>7–12</td><td>8–12+</td><td>₹12k–18k</td><td class="c-success">₹80k–1.5L+</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="lesson">
+      <h3>How to Scale Past ₹50k/Month</h3>
+      <ul>
+        <li><strong>Hire a part-time VA</strong> (₹5k–10k/month) to handle GBP management and reporting so you focus only on sales.</li>
+        <li><strong>Niche deeper</strong> — "dental clinic agency" lets you charge 30–50% more and referrals come automatically.</li>
+        <li><strong>Referral program</strong> — Offer existing clients ₹3,000–₹5,000 for every introduction that becomes a paying client.</li>
+        <li><strong>Upsell</strong> — Once trust is built, introduce Google Ads, SEO blog content, or video content creation.</li>
+        <li><strong>Case study marketing</strong> — One strong LinkedIn post with real results can generate 3–5 inbound inquiries.</li>
+      </ul>
+    </div>
+
+    <!-- ══ M13 ══ -->
+    <div class="mod-header" id="m13">
+      <div class="mod-num">13</div>
+      <div class="mod-title-block">
+        <div class="mod-tag">Operations</div>
+        <h2>Tools & Starting Budget</h2>
+      </div>
+    </div>
+
+    <div class="lesson">
+      <h3>Essential Tool Stack</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Tool</th><th>Purpose</th><th>Cost</th></tr></thead>
+          <tbody>
+            <tr><td>Canva</td><td>Ad creatives, proposals, reports</td><td>Free (Pro: ₹499/month)</td></tr>
+            <tr><td>GoHighLevel</td><td>CRM, automation, pipeline</td><td>$97/month after free trial</td></tr>
+            <tr><td>Zapier</td><td>App integrations</td><td>Free (100 tasks/month)</td></tr>
+            <tr><td>Make</td><td>Advanced automations</td><td>Free (1,000 ops/month)</td></tr>
+            <tr><td>ChatGPT</td><td>Copy, scripts, proposals</td><td>Free tier to start</td></tr>
+            <tr><td>Zoho Invoice</td><td>Professional invoicing</td><td>Free</td></tr>
+            <tr><td>Loom</td><td>Screen-record monthly reports</td><td>Free (5 min videos)</td></tr>
+            <tr><td>Google Workspace</td><td>Professional email + Docs</td><td>₹125/month (Gmail works too)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="lesson">
+      <h3>Starting Budget Breakdown</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Item</th><th>Type</th><th>Cost</th></tr></thead>
+          <tbody>
+            <tr><td>Laptop</td><td>One-time</td><td>₹25,000–₹40,000</td></tr>
+            <tr><td>Internet</td><td>Monthly</td><td>~₹1,000</td></tr>
+            <tr><td>Domain name</td><td>Annual</td><td>~₹999</td></tr>
+            <tr><td>SIM with good data</td><td>Monthly</td><td>~₹300</td></tr>
+            <tr><td>Tools (Year 1 lean)</td><td>Monthly</td><td>₹500–₹2,000</td></tr>
+            <tr><td colspan="2"><strong>Total to Start</strong></td><td class="c-accent"><strong>~₹28,000–₹45,000</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout info">
+        <strong>No Laptop Yet?</strong>
+        A second-hand laptop from OLX or Cashify in the ₹15k–20k range works fine. Chrome browser + Google's free tools is everything you need to start delivering results.
+      </div>
+    </div>
+
+    <!-- ══ M14 ══ -->
+    <div class="mod-header" id="m14">
+      <div class="mod-num">14</div>
+      <div class="mod-title-block">
+        <div class="mod-tag">Action Plan</div>
+        <h2>Your Daily Action Plan</h2>
+      </div>
+    </div>
+
+    <div class="lesson">
+      <h3>Your First 30 Days</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Days</th><th>Focus</th></tr></thead>
+          <tbody>
+            <tr><td>Days 1–5</td><td>Complete Modules 3–5 with hands-on practice. Set up a practice GBP. Run a mock Meta ad in a test account.</td></tr>
+            <tr><td>Days 6–10</td><td>Build your offer PDF, pricing, and portfolio page. Set up your outreach tracking sheet with 50 prospects.</td></tr>
+            <tr><td>Days 11–30</td><td>Daily outreach: 20 calls + 20 WhatsApp + 10 emails + 5 LinkedIn. Goal: 1 discovery call every 2 days.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="lesson">
+      <h3>Daily Schedule</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Time</th><th>Activity</th></tr></thead>
+          <tbody>
+            <tr><td>9:00–10:30</td><td>Cold outreach — calls + WhatsApp. Peak business hours, use them.</td></tr>
+            <tr><td>10:30–12:00</td><td>Email + LinkedIn outreach. Follow up with previous contacts.</td></tr>
+            <tr><td>12:00–13:00</td><td>Break</td></tr>
+            <tr><td>13:00–15:00</td><td>Client delivery work (if you have clients) or skill-building.</td></tr>
+            <tr><td>15:00–16:00</td><td>Discovery calls or follow-up calls.</td></tr>
+            <tr><td>16:00–17:00</td><td>CRM updates, track outreach, review what worked today.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="lesson">
+      <h3>Weekly Review (Every Friday)</h3>
+      <ul class="checklist">
+        <li>How many outreach contacts did I make this week?</li>
+        <li>How many discovery calls did I have?</li>
+        <li>What objections came up most — and how can I respond better?</li>
+        <li>Did I deliver everything promised to current clients?</li>
+        <li>What's one thing I'll do differently next week?</li>
+      </ul>
+    </div>
+
+    <hr>
+
+    <div class="final-cta">
+      <h3>You're Ready to Start.</h3>
+      <p>Close this tab. Open Google Maps. Find 20 local businesses in your city with weak Google listings. Start outreach today — not tomorrow. The first step is the only one that matters right now. Everything else follows from action.</p>
+    </div>
+
+  </div><!-- /page-body -->
+</div><!-- /main -->
+
+<script>
+  /* ─── THEME ─── */
+  const html = document.documentElement;
+
+  function getSystemTheme() {
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+
+  function applyTheme(theme) {
+    html.classList.remove('light', 'dark');
+    html.classList.add(theme);
+    const isLight = theme === 'light';
+    const label = document.getElementById('themeLabel');
+    const mobileBtn = document.getElementById('themeToggleMobile');
+    if (label) label.textContent = isLight ? '☽ Dark mode' : '☀ Light mode';
+    if (mobileBtn) mobileBtn.textContent = isLight ? '☽' : '☀';
+    localStorage.setItem('theme', theme);
+  }
+
+  function toggleTheme() {
+    const current = html.classList.contains('light') ? 'light' : 'dark';
+    applyTheme(current === 'light' ? 'dark' : 'light');
+  }
+
+  const saved = localStorage.getItem('theme') || getSystemTheme();
+  applyTheme(saved);
+
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+    if (!localStorage.getItem('theme')) applyTheme(e.matches ? 'dark' : 'light');
+  });
+
+  /* ─── MOBILE SIDEBAR ─── */
+  function toggleMenu() {
+    const s = document.getElementById('sidebar');
+    const o = document.getElementById('overlay');
+    const b = document.getElementById('menuBtn');
+    const open = s.classList.toggle('open');
+    o.classList.toggle('show', open);
+    b.classList.toggle('open', open);
+  }
+  function closeMenu() {
+    document.getElementById('sidebar').classList.remove('open');
+    document.getElementById('overlay').classList.remove('show');
+    document.getElementById('menuBtn').classList.remove('open');
+  }
+
+  document.querySelectorAll('.sidebar-nav a').forEach(a => {
+    a.addEventListener('click', () => {
+      if (window.innerWidth <= 860) closeMenu();
+    });
+  });
+
+  /* ─── ACTIVE NAV ON SCROLL ─── */
+  const navLinks = document.querySelectorAll('.sidebar-nav a');
+  const sections = document.querySelectorAll('.mod-header');
+
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(l => l.classList.remove('active'));
+        const match = document.querySelector(`.sidebar-nav a[href="#${entry.target.id}"]`);
+        if (match) match.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-15% 0px -75% 0px' });
+
+  sections.forEach(s => io.observe(s));
+</script>
+</body>
+</html>

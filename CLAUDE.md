@@ -14,10 +14,11 @@ Pushes to `main` automatically trigger the GitHub Actions workflow (`.github/wor
 
 All deliverables live under `docs/`:
 
-- `docs/index.html` — Portfolio landing page (hub linking to both projects)
+- `docs/index.html` — Portfolio landing page (hub linking to all projects)
 - `docs/digital-marketing-ai/index.html` — 3-month freelancer roadmap for AI-assisted digital marketing
 - `docs/quran-education-app/index.html` — Al-Quran Education app documentation (Quran recitations, translations, AI Halal checking, prayer tools)
 - `docs/quran-education-app/terms_and_conditions.html` — Legal terms for the Quran app
+- `docs/local-lead-gen-agency/index.html` — 14-module self-study course: building a local lead gen agency in India (GBP, Meta Ads, automation, sales scripts)
 
 ## Architecture & Conventions
 
