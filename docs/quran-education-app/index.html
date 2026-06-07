@@ -60,6 +60,36 @@
           padding: 0 24px;
         }
 
+        #backBtn {
+            position: fixed;
+            top: 24px;
+            left: 24px;
+            z-index: 1001;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            border-radius: 100px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--text);
+            text-decoration: none;
+            font-family: 'Inter', -apple-system, system-ui, sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: all 0.25s ease;
+        }
+        #backBtn:hover {
+            color: var(--primary);
+            border-color: var(--primary);
+            transform: translateX(-3px);
+        }
+        #backBtn svg { flex-shrink: 0; transition: transform 0.25s ease; }
+        #backBtn:hover svg { transform: translateX(-3px); }
+
         #themeToggle {
             position: fixed;
             top: 24px;
@@ -301,6 +331,12 @@
     </style>
 </head>
 <body>
+<a href="../index.html" id="backBtn" aria-label="Back to portfolio">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M10 12.5L5.5 8L10 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <span>Portfolio</span>
+</a>
 <button id="themeToggle" aria-label="Toggle theme">🌓</button>
 
 <div class="container">

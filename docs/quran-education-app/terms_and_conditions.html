@@ -70,14 +70,24 @@
             text-decoration: none;
             color: var(--subtext);
             font-weight: 600;
-            display: flex;
+            font-size: 0.875rem;
+            display: inline-flex;
             align-items: center;
             gap: 8px;
+            padding: 10px 20px;
+            border-radius: 100px;
+            background: var(--primary-soft);
+            border: 1px solid var(--border);
             margin-bottom: 32px;
-            transition: color 0.2s;
+            transition: all 0.25s ease;
         }
-
-        .back-link:hover { color: var(--primary); }
+        .back-link:hover {
+            color: var(--primary);
+            border-color: var(--primary);
+            transform: translateX(-3px);
+        }
+        .back-link svg { flex-shrink: 0; transition: transform 0.25s ease; }
+        .back-link:hover svg { transform: translateX(-3px); }
 
         h1 {
           font-size: clamp(2.5rem, 5vw, 3.5rem);
@@ -213,7 +223,12 @@
 
 <div class="container">
     <header>
-        <a href="index.html" class="back-link">&larr; Back to App Details</a>
+        <a href="index.html" class="back-link">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10 12.5L5.5 8L10 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Back to App Details
+        </a>
         <h1>Terms & Conditions</h1>
         <p class="lead">By using Al-Quran Education, you agree to these terms. We've updated our design and supported your device's preferred theme for a better reading experience.</p>
     </header>

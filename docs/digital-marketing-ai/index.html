@@ -154,6 +154,29 @@
       text-decoration: none;
     }
 
+    .nav-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--muted);
+      text-decoration: none;
+      font: 600 0.8rem/1 inherit;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--panel);
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    }
+    .nav-back:hover {
+      color: var(--primary);
+      border-color: var(--primary);
+      transform: translateX(-3px);
+    }
+    .nav-back svg { flex-shrink: 0; transition: transform 0.2s ease; }
+    .nav-back:hover svg { transform: translateX(-3px); }
+
     #themeToggle {
       position: fixed;
       bottom: 20px;
@@ -654,6 +677,12 @@
 
   <nav class="nav">
     <div class="container nav-inner">
+      <a href="../index.html" class="nav-back" aria-label="Back to portfolio">
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M9 11L5 7.5L9 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Portfolio
+      </a>
       <div class="brand">
         <div class="brand-mark"></div>
         <div>Digital Marketing with AI • 3-Month Freelancer Roadmap</div>

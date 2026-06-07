@@ -173,6 +173,51 @@
     text-transform: uppercase;
   }
 
+  .sidebar-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 12px;
+    padding: 7px 13px;
+    border-radius: 6px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    color: var(--text-lo);
+    font-size: 0.76rem;
+    font-weight: 600;
+    text-decoration: none;
+    letter-spacing: 0.01em;
+    transition: all 0.15s ease;
+  }
+  html.light .sidebar-back { background: rgba(0,0,0,0.03); }
+  @media (prefers-color-scheme: light) {
+    html:not(.dark) .sidebar-back { background: rgba(0,0,0,0.03); }
+  }
+  .sidebar-back:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+    background: var(--accent-dim);
+    transform: translateX(-2px);
+  }
+  .sidebar-back svg { flex-shrink: 0; transition: transform 0.15s ease; }
+  .sidebar-back:hover svg { transform: translateX(-3px); }
+
+  .topbar-back {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--text);
+    text-decoration: none;
+    flex-shrink: 0;
+    transition: all 0.15s ease;
+  }
+  .topbar-back:hover { color: var(--accent); border-color: var(--accent); background: var(--accent-dim); }
+
   .sidebar-nav { flex: 1; padding: 8px 0 24px; }
 
   .nav-group-label {
@@ -799,6 +844,11 @@
   </button>
   <span class="topbar-title">Lead Gen Agency Course</span>
   <button class="theme-btn" id="themeToggleMobile" onclick="toggleTheme()" aria-label="Toggle theme">☀</button>
+  <a href="../index.html" class="topbar-back" aria-label="Back to portfolio">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M10 12.5L5.5 8L10 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </a>
 </header>
 
 <!-- SIDEBAR -->
@@ -806,6 +856,12 @@
   <div class="sidebar-head">
     <div class="brand-name">Local Lead Gen<br><span>Agency Course</span></div>
     <div class="brand-sub">Zero → ₹50k/month</div>
+    <a href="../index.html" class="sidebar-back" aria-label="Back to portfolio">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8.5 11L5 7L8.5 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Back to Portfolio
+    </a>
   </div>
 
   <nav class="sidebar-nav">
