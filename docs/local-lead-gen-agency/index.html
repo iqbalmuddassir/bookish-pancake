@@ -769,6 +769,7 @@
     .sidebar {
       transform: translateX(-100%);
       box-shadow: 4px 0 24px rgba(0,0,0,0.5);
+      padding-top: 56px;
     }
     .sidebar.open { transform: translateX(0); }
     .daily-grid { grid-template-columns: repeat(2, 1fr); }
@@ -1687,6 +1688,7 @@
     const open = s.classList.toggle('open');
     o.classList.toggle('show', open);
     b.classList.toggle('open', open);
+    if (open) s.scrollTop = 0;
   }
   function closeMenu() {
     document.getElementById('sidebar').classList.remove('open');
