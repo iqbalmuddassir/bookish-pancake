@@ -1,0 +1,1938 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Amanah India v1.7 — Internal project summary (not published).">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#4C2B08">
+<title>Amanah India — Project Summary (Internal)</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:wght@400;500;600;700&family=Nunito:wght@400;500;600;700;800&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #4C2B08;
+    --black2: #5A3512;
+    --gold: #AB7743;
+    --gold2: #C49463;
+    --gold3: #D7BDA6;
+    --cream: #F4EDE6;
+    --text: #4C2B08;
+    --muted: #84593D;
+    --card: #fff;
+    --border: #E8DDD4;
+    --green: #2d6a4f;
+    --shadow: 0 16px 48px -12px rgba(76, 43, 8, 0.18);
+    --shadow-lg: 0 24px 64px -16px rgba(76, 43, 8, 0.28);
+    --radius: 14px;
+    --radius-sm: 8px;
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --font-body: 'Nunito', system-ui, sans-serif;
+    --font-accent: 'Amiri', Georgia, serif;
+    --font-ui: 'Outfit', system-ui, sans-serif;
+    --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--cream);
+    color: var(--text);
+    line-height: 1.65;
+    min-height: 100vh;
+  }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(135deg, #1a0f04 0%, var(--black) 40%, var(--black2) 100%);
+    color: #fff;
+    padding: 48px 24px 56px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0L37.5 22.5L60 30L37.5 37.5L30 60L22.5 37.5L0 30L22.5 22.5z' fill='%23AB7743' fill-opacity='0.12'/%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+  .hero-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(171, 119, 67, 0.2);
+    border: 1px solid rgba(196, 148, 99, 0.35);
+    border-radius: 999px;
+    padding: 6px 16px;
+    font-family: var(--font-ui);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold2);
+    margin-bottom: 20px;
+  }
+  .hero-badge .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #4ade80;
+    box-shadow: 0 0 8px #4ade80;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.2rem, 5vw, 3.4rem);
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 12px;
+  }
+  .hero h1 em {
+    font-family: var(--font-accent);
+    font-style: italic;
+    color: var(--gold2);
+  }
+  .hero-sub {
+    font-size: 1.05rem;
+    color: rgba(255,255,255,0.72);
+    max-width: 640px;
+    margin-bottom: 28px;
+  }
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 24px;
+    font-family: var(--font-ui);
+    font-size: 13px;
+    color: rgba(255,255,255,0.55);
+  }
+  .hero-meta a {
+    color: var(--gold2);
+    text-decoration: none;
+    transition: color var(--transition);
+  }
+  .hero-meta a:hover { color: #fff; text-decoration: underline; }
+  .hero-meta strong { color: rgba(255,255,255,0.85); font-weight: 600; }
+
+  /* Top stack — hero + actions + metrics (no overlap) */
+  .page-top { background: var(--cream); padding-bottom: 8px; }
+
+  .internal-notice {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 10px 16px 0;
+    font-family: var(--font-ui);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--muted);
+    text-align: center;
+  }
+  .internal-notice span {
+    display: inline-block;
+    background: rgba(171, 119, 67, 0.12);
+    border: 1px dashed var(--gold2);
+    border-radius: 999px;
+    padding: 6px 14px;
+  }
+
+  .top-panel {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 16px 16px 0;
+    position: relative;
+    z-index: 5;
+  }
+
+  /* Metrics strip */
+  .metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    margin-top: 16px;
+    position: relative;
+    z-index: 1;
+  }
+  .metric-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px 16px;
+    text-align: center;
+    box-shadow: var(--shadow);
+    transition: transform var(--transition), box-shadow var(--transition);
+  }
+  .metric-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+  }
+  .metric-value {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1.2;
+  }
+  .metric-label {
+    font-family: var(--font-ui);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  /* Main layout */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  /* Primary tabs */
+  .tab-nav-wrap {
+    margin-bottom: 28px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--cream);
+    padding: 8px 0 4px;
+    margin-left: -16px;
+    margin-right: -16px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .tab-nav {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 6px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 6px;
+    box-shadow: var(--shadow);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .tab-nav::-webkit-scrollbar { display: none; }
+  .tab-btn {
+    flex: 0 0 auto;
+    min-height: 44px;
+    min-width: 44px;
+    padding: 10px 16px;
+    border: none;
+    background: transparent;
+    border-radius: var(--radius-sm);
+    font-family: var(--font-ui);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all var(--transition);
+    white-space: nowrap;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .tab-btn:hover { background: var(--cream); color: var(--text); }
+  .tab-btn.active {
+    background: var(--black);
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(76, 43, 8, 0.25);
+  }
+  .tab-btn .icon { margin-right: 4px; }
+
+  .tab-panel { display: none; animation: fadeIn 0.35s ease; }
+  .tab-panel.active { display: block; }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Cards & sections */
+  .section-title {
+    font-family: var(--font-display);
+    font-size: 1.65rem;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--gold3);
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow);
+  }
+  .card p { margin-bottom: 12px; color: var(--text); }
+  .card p:last-child { margin-bottom: 0; }
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+  .info-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    transition: border-color var(--transition);
+  }
+  .info-card:hover { border-color: var(--gold2); }
+  .info-card h3 {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    margin-bottom: 8px;
+    color: var(--black);
+  }
+  .info-card p { font-size: 0.92rem; color: var(--muted); }
+
+  /* Sub-tabs (features) */
+  .sub-tab-nav {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .sub-tab-nav::-webkit-scrollbar { display: none; }
+  .sub-tab-btn {
+    flex: 0 0 auto;
+    min-height: 44px;
+    padding: 10px 18px;
+    border: none;
+    background: none;
+    font-family: var(--font-ui);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    transition: all var(--transition);
+    white-space: nowrap;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .sub-tab-btn:hover { color: var(--text); }
+  .sub-tab-btn.active {
+    color: var(--gold);
+    border-bottom-color: var(--gold);
+  }
+  .sub-tab-panel { display: none; }
+  .sub-tab-panel.active { display: block; animation: fadeIn 0.3s ease; }
+
+  /* Tables */
+  .table-wrap {
+    overflow-x: auto;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    margin-bottom: 16px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+  }
+  th, td {
+    padding: 11px 14px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  th {
+    background: var(--cream);
+    font-family: var(--font-ui);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(244, 237, 230, 0.5); }
+  .status-complete {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--green);
+  }
+
+  /* Timeline */
+  .timeline {
+    position: relative;
+    padding-left: 28px;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 8px;
+    bottom: 8px;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--gold), var(--gold3));
+    border-radius: 2px;
+  }
+  .timeline-item {
+    position: relative;
+    margin-bottom: 12px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--card);
+    overflow: hidden;
+    transition: box-shadow var(--transition);
+  }
+  .timeline-item:hover { box-shadow: var(--shadow); }
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -24px;
+    top: 18px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--gold);
+    border: 2px solid var(--cream);
+    box-shadow: 0 0 0 2px var(--gold3);
+    z-index: 1;
+  }
+  .timeline-item.latest::before {
+    background: var(--green);
+    box-shadow: 0 0 0 2px rgba(45, 106, 79, 0.3), 0 0 12px rgba(45, 106, 79, 0.4);
+  }
+  .timeline-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 16px 20px;
+    cursor: pointer;
+    user-select: none;
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+    font-family: inherit;
+    min-height: 52px;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .timeline-header:hover { background: rgba(244, 237, 230, 0.4); }
+  .timeline-version {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--black);
+  }
+  .timeline-date {
+    font-family: var(--font-ui);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .timeline-chevron {
+    font-size: 14px;
+    color: var(--gold);
+    transition: transform var(--transition);
+    flex-shrink: 0;
+  }
+  .timeline-item.open .timeline-chevron { transform: rotate(180deg); }
+  .timeline-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.3s ease;
+    padding: 0 20px;
+  }
+  .timeline-item.open .timeline-body {
+    max-height: 600px;
+    padding: 0 20px 18px;
+  }
+  .timeline-body ul {
+    list-style: none;
+    padding: 0;
+  }
+  .timeline-body li {
+    position: relative;
+    padding: 6px 0 6px 20px;
+    font-size: 0.9rem;
+    color: var(--text);
+    border-top: 1px solid var(--border);
+  }
+  .timeline-body li:first-child { border-top: none; }
+  .timeline-body li::before {
+    content: '◆';
+    position: absolute;
+    left: 0;
+    color: var(--gold2);
+    font-size: 8px;
+    top: 11px;
+  }
+  .timeline-body li strong { color: var(--black); }
+
+  /* Pipeline visual */
+  .pipeline {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px;
+    margin: 16px 0;
+    padding: 16px;
+    background: var(--cream);
+    border-radius: var(--radius-sm);
+    overflow-x: auto;
+  }
+  .pipeline-step {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-family: var(--font-ui);
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .pipeline-dot {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--gold);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    flex-shrink: 0;
+  }
+  .pipeline-arrow { color: var(--gold2); font-size: 14px; }
+  .pipeline-label { color: var(--muted); }
+
+  /* Code block */
+  .code-block {
+    position: relative;
+    background: #1a0f04;
+    color: #e8ddd4;
+    border-radius: var(--radius-sm);
+    padding: 18px 20px;
+    font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
+    font-size: 0.82rem;
+    line-height: 1.6;
+    overflow-x: auto;
+    margin: 12px 0;
+  }
+  .code-block .kw { color: #c49463; }
+  .code-block .str { color: #a8d5ba; }
+  .code-block .cmt { color: #84593d; }
+  .copy-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 5px 12px;
+    background: rgba(171, 119, 67, 0.25);
+    border: 1px solid rgba(196, 148, 99, 0.4);
+    border-radius: 6px;
+    color: var(--gold2);
+    font-family: var(--font-ui);
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition);
+  }
+  .copy-btn:hover { background: rgba(171, 119, 67, 0.45); }
+  .copy-btn.copied { background: rgba(45, 106, 79, 0.4); color: #a8d5ba; }
+
+  /* Tree structure */
+  .tree {
+    background: #1a0f04;
+    color: #d7bda6;
+    border-radius: var(--radius-sm);
+    padding: 20px;
+    font-family: 'SF Mono', Consolas, monospace;
+    font-size: 0.78rem;
+    line-height: 1.7;
+    overflow-x: auto;
+    white-space: pre;
+  }
+
+  /* Tag pills */
+  .tag {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-family: var(--font-ui);
+    font-size: 11px;
+    font-weight: 600;
+    background: rgba(171, 119, 67, 0.15);
+    color: var(--gold);
+    margin: 2px 4px 2px 0;
+  }
+  .tag-role { background: rgba(76, 43, 8, 0.1); color: var(--black2); }
+
+  /* Summary footer */
+  .summary-footer {
+    background: linear-gradient(135deg, var(--black) 0%, var(--black2) 100%);
+    color: #fff;
+    border-radius: var(--radius);
+    padding: 32px;
+    text-align: center;
+    margin-top: 8px;
+  }
+  .summary-footer h2 {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    margin-bottom: 12px;
+  }
+  .summary-footer p { color: rgba(255,255,255,0.75); margin-bottom: 8px; }
+  .summary-footer .status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 16px;
+    padding: 8px 20px;
+    background: rgba(45, 106, 79, 0.3);
+    border: 1px solid rgba(74, 222, 128, 0.4);
+    border-radius: 999px;
+    font-weight: 700;
+    color: #4ade80;
+  }
+
+  /* Search filter */
+  .search-box {
+    width: 100%;
+    padding: 12px 16px 12px 40px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-body);
+    font-size: 14px;
+    background: var(--card) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%2384593D' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85zm-5.242 1.156a5 5 0 1 1 0-10 5 5 0 0 1 0 10z'/%3E%3C/svg%3E") 14px center no-repeat;
+    margin-bottom: 16px;
+    transition: border-color var(--transition), box-shadow var(--transition);
+  }
+  .search-box:focus {
+    outline: none;
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(171, 119, 67, 0.15);
+  }
+
+  .hidden-row { display: none; }
+
+  @media (max-width: 640px) {
+    .hero { padding: 28px 16px 32px; }
+    .hero h1 { font-size: 1.85rem; }
+    .hero-meta { flex-direction: column; gap: 6px; font-size: 12px; }
+    .container { padding: 20px 16px 72px; }
+    .tab-nav-wrap { top: 0; }
+    .tab-btn { font-size: 12px; padding: 10px 14px; }
+    .metrics { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .metric-value { font-size: 1.45rem; }
+    .section-title { font-size: 1.35rem; }
+    .card { padding: 18px; }
+    .timeline-version { font-size: 0.95rem; }
+    .timeline-date { font-size: 11px; }
+    .pipeline { padding: 12px; }
+    .pipeline-step { font-size: 10px; }
+    .pipeline-dot { width: 24px; height: 24px; font-size: 9px; }
+    .download-bar { flex-direction: column; }
+    .download-btn { width: 100%; justify-content: center; min-height: 48px; }
+    .summary-footer { padding: 24px 16px; }
+    th, td { padding: 9px 10px; font-size: 0.82rem; }
+  }
+
+  /* Download toolbar */
+  .download-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: stretch;
+    position: relative;
+    z-index: 10;
+    pointer-events: auto;
+  }
+  .download-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 18px;
+    min-height: 48px;
+    border: 1px solid rgba(196, 148, 99, 0.45);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.98);
+    color: var(--black);
+    font-family: var(--font-ui);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    box-shadow: var(--shadow);
+    transition: all var(--transition);
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    pointer-events: auto;
+  }
+  .download-btn:hover {
+    background: var(--black);
+    color: #fff;
+    border-color: var(--black);
+    transform: translateY(-1px);
+  }
+  .download-btn.primary {
+    background: var(--gold);
+    color: #fff;
+    border-color: var(--gold);
+  }
+  .download-btn.primary:hover {
+    background: var(--black);
+    border-color: var(--black);
+  }
+
+  @media print {
+    .download-bar, .tab-nav, .search-box, .sub-tab-nav, .copy-btn { display: none !important; }
+    .tab-panel { display: block !important; page-break-inside: avoid; }
+    .timeline-body { max-height: none !important; padding: 0 20px 18px !important; }
+    .timeline-item.open .timeline-body,
+    .timeline-item .timeline-body { max-height: none !important; }
+    .hero { padding: 24px; }
+    body { background: #fff; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge"><span class="dot"></span> v1.7 — Live &amp; Operational</div>
+    <h1>Amanah India — <em>Project Summary</em></h1>
+    <p class="hero-sub">Production-ready serverless e-commerce marketplace for Indian Muslim brands — Islamic books, ethnic wear, attar, and Umrah services.</p>
+    <div class="hero-meta">
+      <span><strong>Live:</strong> <a href="https://shopamanah.in" target="_blank" rel="noopener">shopamanah.in</a></span>
+      <span><strong>Repo:</strong> <a href="https://github.com/iqbalmuddassir/al-amanah-store-india" target="_blank" rel="noopener">iqbalmuddassir/al-amanah-store-india</a></span>
+      <span><strong>Created:</strong> June 2026</span>
+      <span><strong>Updated:</strong> July 1, 2026</span>
+    </div>
+  </div>
+</header>
+
+<div class="page-top">
+  <p class="internal-notice"><span>🔒 Standalone offline document — open in any browser</span></p>
+  <div class="top-panel">
+    <div class="download-bar">
+      <button class="download-btn primary" type="button" id="downloadMdBtn">⬇ Download Summary (.md)</button>
+      <button class="download-btn" type="button" id="printBtn">🖨 Save as PDF</button>
+      <button class="download-btn" type="button" id="expandAllBtn">📂 Expand All Releases</button>
+    </div>
+    <div class="metrics" role="list">
+      <div class="metric-card" role="listitem"><div class="metric-value">1,161+</div><div class="metric-label">Unit Tests</div></div>
+      <div class="metric-card" role="listitem"><div class="metric-value">150+</div><div class="metric-label">Products</div></div>
+      <div class="metric-card" role="listitem"><div class="metric-value">7</div><div class="metric-label">Releases</div></div>
+      <div class="metric-card" role="listitem"><div class="metric-value">4</div><div class="metric-label">Sellers</div></div>
+      <div class="metric-card" role="listitem"><div class="metric-value">3</div><div class="metric-label">Admin Roles</div></div>
+      <div class="metric-card" role="listitem"><div class="metric-value">99.9%</div><div class="metric-label">Uptime SLA</div></div>
+    </div>
+  </div>
+</div>
+
+<main class="container">
+
+  <div class="tab-nav-wrap">
+  <nav class="tab-nav" role="tablist" aria-label="Main sections">
+    <button class="tab-btn active" role="tab" aria-selected="true" data-tab="overview"><span class="icon">📋</span> Overview</button>
+    <button class="tab-btn" role="tab" aria-selected="false" data-tab="timeline"><span class="icon">🗓</span> Timeline</button>
+    <button class="tab-btn" role="tab" aria-selected="false" data-tab="features"><span class="icon">✨</span> Features</button>
+    <button class="tab-btn" role="tab" aria-selected="false" data-tab="architecture"><span class="icon">🏗</span> Architecture</button>
+    <button class="tab-btn" role="tab" aria-selected="false" data-tab="data"><span class="icon">🗄</span> Data</button>
+    <button class="tab-btn" role="tab" aria-selected="false" data-tab="operations"><span class="icon">🚀</span> Operations</button>
+  </nav>
+  </div>
+
+  <!-- OVERVIEW -->
+  <section id="panel-overview" class="tab-panel active" role="tabpanel">
+    <h2 class="section-title">Executive Summary</h2>
+    <div class="card">
+      <p><strong>Amanah India</strong> is a fully-built, production-ready serverless e-commerce marketplace for Indian Muslim brands. The platform serves a multi-seller Islamic bookstore, ethnic wear, attar, and Umrah services — all promoted by Manshurat Publishers.</p>
+      <p>The storefront is <strong>100% static</strong> (no backend server required), hosted on Firebase Hosting with GitHub Actions CI/CD. Orders are managed through a role-based admin portal. All core functionality works entirely client-side via localStorage + Firebase (best-effort).</p>
+      <p><strong>Current Status:</strong> v1.7 — Live and operational with 1,161+ unit tests, complete admin/seller portals, dispatch tracking, business settings runtime configuration, and storefront polish.</p>
+    </div>
+
+    <div class="card-grid">
+      <div class="info-card">
+        <h3>🛒 Customer Storefront</h3>
+        <p>Catalog, checkout, UPI payments, order tracking, profile management, and guest checkout — all client-side.</p>
+      </div>
+      <div class="info-card">
+        <h3>⚙️ Admin Portal</h3>
+        <p>Role-gated dashboard for orders, products, sellers, customers, reports, and runtime settings.</p>
+      </div>
+      <div class="info-card">
+        <h3>🏪 Seller Central</h3>
+        <p>Self-service dashboard with CSV upload, per-seller fulfilment, and dispatch tracking.</p>
+      </div>
+      <div class="info-card">
+        <h3>🔒 Security &amp; Quality</h3>
+        <p>CSP headers, Firestore rules, 1,161 unit tests gating every deploy, audit logging.</p>
+      </div>
+    </div>
+
+    <h2 class="section-title">Order Pipeline</h2>
+    <div class="card">
+      <p><strong>Customer view:</strong></p>
+      <div class="pipeline" aria-label="Customer order pipeline">
+        <div class="pipeline-step"><span class="pipeline-dot">1</span><span class="pipeline-label">Processing</span></div>
+        <span class="pipeline-arrow">→</span>
+        <div class="pipeline-step"><span class="pipeline-dot">2</span><span class="pipeline-label">Dispatched</span></div>
+        <span class="pipeline-arrow">→</span>
+        <div class="pipeline-step"><span class="pipeline-dot">3</span><span class="pipeline-label">In Transit</span></div>
+        <span class="pipeline-arrow">→</span>
+        <div class="pipeline-step"><span class="pipeline-dot">4</span><span class="pipeline-label">Out for Delivery</span></div>
+        <span class="pipeline-arrow">→</span>
+        <div class="pipeline-step"><span class="pipeline-dot">5</span><span class="pipeline-label">Delivered</span></div>
+      </div>
+      <p style="margin-top:12px"><strong>Admin/Seller view:</strong></p>
+      <div class="pipeline" aria-label="Admin order pipeline">
+        <div class="pipeline-step"><span class="pipeline-dot">1</span><span class="pipeline-label">pending_verification</span></div>
+        <span class="pipeline-arrow">→</span>
+        <div class="pipeline-step"><span class="pipeline-dot">2</span><span class="pipeline-label">confirmed</span></div>
+        <span class="pipeline-arrow">→</span>
+        <div class="pipeline-step"><span class="pipeline-dot">3</span><span class="pipeline-label">shipped</span></div>
+        <span class="pipeline-arrow">→</span>
+        <div class="pipeline-step"><span class="pipeline-dot">4</span><span class="pipeline-label">in_transit</span></div>
+        <span class="pipeline-arrow">→</span>
+        <div class="pipeline-step"><span class="pipeline-dot">5</span><span class="pipeline-label">out_for_delivery</span></div>
+        <span class="pipeline-arrow">→</span>
+        <div class="pipeline-step"><span class="pipeline-dot">6</span><span class="pipeline-label">delivered</span></div>
+      </div>
+    </div>
+
+    <h2 class="section-title">Documentation Files</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>File</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr><td><code>README.md</code></td><td>Development setup, deployment, custom-domain auth checklist</td></tr>
+          <tr><td><code>CLAUDE.md</code></td><td>Full codebase inventory, architecture, key files, Firestore schema</td></tr>
+          <tr><td><code>AGENTS.md</code></td><td>AI assistant guide, conventions, code patterns, CI/CD</td></tr>
+          <tr><td><code>docs/PRD.md</code></td><td>Product Requirements Document (v1.0 comprehensive spec)</td></tr>
+          <tr><td><code>docs/amanah-work-summary.md</code></td><td>Downloadable work summary (Markdown)</td></tr>
+          <tr><td><code>docs/project-summary.html</code></td><td>Interactive HTML summary with tabs (this page)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section id="panel-timeline" class="tab-panel" role="tabpanel">
+    <h2 class="section-title">Release Timeline</h2>
+    <p style="margin-bottom:20px;color:var(--muted)">Click any release to expand details. Seven releases from June 15 – July 1, 2026.</p>
+
+    <div class="timeline" id="timeline">
+      <article class="timeline-item" data-version="1.7">
+        <button class="timeline-header" aria-expanded="false">
+          <span class="timeline-version">v1.7 — Dispatch Tracking &amp; Storefront Polish</span>
+          <span class="timeline-date">July 1, 2026</span>
+          <span class="timeline-chevron">▼</span>
+        </button>
+        <div class="timeline-body">
+          <ul>
+            <li><strong>Dispatch tracking MVP:</strong> Admin/seller mark orders shipped with delivery partner, tracking number, dispatch date</li>
+            <li><strong>Delivery partners settings:</strong> Super-admin manages partner list (Firestore-driven, never hardcoded)</li>
+            <li><strong>Storefront UI:</strong> Coffee palette color update, alignment polish, favicon, checkout layout, marquee gating</li>
+            <li><strong>Seller &amp; Admin fixes:</strong> Unified Add/Edit product UI, permission-denied errors resolved</li>
+            <li><strong>Single-order refresh:</strong> Order detail sheet re-fetches tracking data on open</li>
+            <li><strong>CI/CD polish:</strong> Split workflows (PR-preview vs main-deploy), Firebase deploy auth restored</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="timeline-item" data-version="1.6">
+        <button class="timeline-header" aria-expanded="false">
+          <span class="timeline-version">v1.6 — Storefront Revamp &amp; Custom-Domain Auth</span>
+          <span class="timeline-date">June 24, 2026</span>
+          <span class="timeline-chevron">▼</span>
+        </button>
+        <div class="timeline-body">
+          <ul>
+            <li><strong>Storefront redesign:</strong> New navigation, homepage revamp, filterable shop catalog, light-first theme</li>
+            <li><strong>Auth fixes:</strong> Google sign-in restored on custom domain via authDomain + CSP frame-src fixes</li>
+            <li><strong>Super-admin CMS:</strong> About/Contact pages togglable without redeploy</li>
+            <li><strong>Seller portal stabilization:</strong> Gate no longer hides live dashboard when enabled</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="timeline-item" data-version="1.5">
+        <button class="timeline-header" aria-expanded="false">
+          <span class="timeline-version">v1.5 — Unit Test Suite &amp; Agent Docs</span>
+          <span class="timeline-date">June 22, 2026</span>
+          <span class="timeline-chevron">▼</span>
+        </button>
+        <div class="timeline-body">
+          <ul>
+            <li><strong>Comprehensive testing:</strong> 1,161 tests across 20+ modules (Jest)</li>
+            <li><strong>Tests in CI:</strong> Jest runs on every pull request and gates all deploys</li>
+            <li><strong>Documentation:</strong> CLAUDE.md refreshed; AGENTS.md guide for AI assistants</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="timeline-item" data-version="1.4">
+        <button class="timeline-header" aria-expanded="false">
+          <span class="timeline-version">v1.4 — Multi-App Refactor &amp; Business Settings</span>
+          <span class="timeline-date">June 21, 2026</span>
+          <span class="timeline-chevron">▼</span>
+        </button>
+        <div class="timeline-body">
+          <ul>
+            <li><strong>Per-app auth isolation:</strong> Separate Firebase instances for admin, seller, storefront</li>
+            <li><strong>Business settings panel:</strong> Runtime-editable config via Firestore — no deploy required</li>
+            <li><strong>Admin improvements:</strong> View/edit mode toggle, cancelled-order filters, site launch gate</li>
+            <li><strong>Storefront polish:</strong> Cart qty stepper restored, New/Sale tags, checkout parity</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="timeline-item" data-version="1.3">
+        <button class="timeline-header" aria-expanded="false">
+          <span class="timeline-version">v1.3 — Clean Architecture Refactor</span>
+          <span class="timeline-date">June 19, 2026</span>
+          <span class="timeline-chevron">▼</span>
+        </button>
+        <div class="timeline-body">
+          <ul>
+            <li><strong>SOLID redesign:</strong> Layered architecture (domain → infrastructure → components → apps → pages)</li>
+            <li><strong>URL renames:</strong> shop → catalog, product → product-detail, sell → become-a-seller</li>
+            <li><strong>Bug fixes:</strong> WhatsApp FAB restoration, seller login unblock</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="timeline-item" data-version="1.2">
+        <button class="timeline-header" aria-expanded="false">
+          <span class="timeline-version">v1.2 — Seller Fulfillment &amp; Asset Protection</span>
+          <span class="timeline-date">June 19, 2026</span>
+          <span class="timeline-chevron">▼</span>
+        </button>
+        <div class="timeline-body">
+          <ul>
+            <li><strong>Seller orders:</strong> Per-seller order breakdown and fulfilment stages</li>
+            <li><strong>Asset security:</strong> CSS/canvas watermarks on book covers, interaction blockers</li>
+            <li><strong>Developer experience:</strong> bump-versions.mjs cache-busting, pre-commit auto-versioning</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="timeline-item" data-version="1.1">
+        <button class="timeline-header" aria-expanded="false">
+          <span class="timeline-version">v1.1 — Admin &amp; Seller Portals</span>
+          <span class="timeline-date">June 18, 2026</span>
+          <span class="timeline-chevron">▼</span>
+        </button>
+        <div class="timeline-body">
+          <ul>
+            <li><strong>Admin portal MVP:</strong> Dashboard, orders, products, sellers, customers, admins, reports</li>
+            <li><strong>Access control:</strong> Google Sign-In gated by Firestore admins/{uid} roles</li>
+            <li><strong>Seller portal:</strong> Registration with admin approval, CSV upload, live order management</li>
+            <li><strong>Notifications:</strong> Telegram bot alerts, order receipts, CSV export</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="timeline-item latest" data-version="1.0">
+        <button class="timeline-header" aria-expanded="false">
+          <span class="timeline-version">v1.0 — Customer Portal</span>
+          <span class="timeline-date">June 15, 2026</span>
+          <span class="timeline-chevron">▼</span>
+        </button>
+        <div class="timeline-body">
+          <ul>
+            <li><strong>Customer features:</strong> Profile page, order history, 5-stage status tracking, cross-device sync</li>
+            <li><strong>Theme:</strong> Minimalist Islamic literature design (luxe black &amp; gold, dark/light mode)</li>
+            <li><strong>Payments:</strong> UPI push payment (mobile deep links, desktop QR code)</li>
+            <li><strong>Security:</strong> Content Security Policy, asset watermarks, interaction blockers</li>
+          </ul>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section id="panel-features" class="tab-panel" role="tabpanel">
+    <h2 class="section-title">Current Features</h2>
+
+    <input type="search" class="search-box" id="featureSearch" placeholder="Search features…" aria-label="Search features">
+
+    <nav class="sub-tab-nav" role="tablist" aria-label="Feature categories">
+      <button class="sub-tab-btn active" role="tab" data-subtab="storefront">Customer Storefront</button>
+      <button class="sub-tab-btn" role="tab" data-subtab="admin">Admin Portal</button>
+      <button class="sub-tab-btn" role="tab" data-subtab="admin-settings">Admin Settings</button>
+      <button class="sub-tab-btn" role="tab" data-subtab="seller">Seller Portal</button>
+    </nav>
+
+    <div id="sub-storefront" class="sub-tab-panel active">
+      <div class="table-wrap">
+        <table class="feature-table">
+          <thead><tr><th>Feature</th><th>Status</th><th>Details</th></tr></thead>
+          <tbody>
+            <tr><td>Homepage</td><td><span class="status-complete">✅ Complete</span></td><td>Hero banner, editor picks, newly launched preview, social reels carousel</td></tr>
+            <tr><td>Catalog (/catalog)</td><td><span class="status-complete">✅ Complete</span></td><td>150+ products, multi-parameter filters, search</td></tr>
+            <tr><td>Product Detail</td><td><span class="status-complete">✅ Complete</span></td><td>Full specs, add-to-cart, qty controls, related products</td></tr>
+            <tr><td>Shopping Cart</td><td><span class="status-complete">✅ Complete</span></td><td>localStorage primary, Firestore optional sync, pricing breakdown</td></tr>
+            <tr><td>Checkout</td><td><span class="status-complete">✅ Complete</span></td><td>4-step flow, guest checkout supported</td></tr>
+            <tr><td>UPI Payment</td><td><span class="status-complete">✅ Complete</span></td><td>Mobile deep links; Desktop QR code, UPI ID copy</td></tr>
+            <tr><td>Order History</td><td><span class="status-complete">✅ Complete</span></td><td>5-stage status tracker, cross-device sync</td></tr>
+            <tr><td>Payment Proof</td><td><span class="status-complete">✅ Complete</span></td><td>One-time UPI transaction ID submission</td></tr>
+            <tr><td>Order Cancellation</td><td><span class="status-complete">✅ Complete</span></td><td>Customers can cancel pre-shipment</td></tr>
+            <tr><td>Authentication</td><td><span class="status-complete">✅ Complete</span></td><td>Google Sign-In + Phone OTP, optional</td></tr>
+            <tr><td>About &amp; Contact</td><td><span class="status-complete">✅ Complete</span></td><td>CMS-editable visibility toggle without deploy</td></tr>
+            <tr><td>Theme &amp; UI</td><td><span class="status-complete">✅ Complete</span></td><td>Coffee palette, Amiri/Cormorant Garamond fonts, mobile-first</td></tr>
+            <tr><td>SEO</td><td><span class="status-complete">✅ Complete</span></td><td>robots.txt, sitemap.xml, OpenGraph tags, branded 404</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="sub-admin" class="sub-tab-panel">
+      <div class="table-wrap">
+        <table class="feature-table">
+          <thead><tr><th>Feature</th><th>Status</th><th>Role Access</th><th>Details</th></tr></thead>
+          <tbody>
+            <tr><td>Dashboard</td><td><span class="status-complete">✅</span></td><td><span class="tag tag-role">super_admin</span> <span class="tag tag-role">ops_admin</span></td><td>Revenue, recent orders/sellers, key metrics</td></tr>
+            <tr><td>Orders</td><td><span class="status-complete">✅</span></td><td><span class="tag tag-role">super_admin</span> <span class="tag tag-role">ops_admin</span></td><td>Live feed, 6-stage pipeline, payment verification</td></tr>
+            <tr><td>Dispatch Tracking</td><td><span class="status-complete">✅</span></td><td><span class="tag tag-role">super_admin</span> <span class="tag tag-role">ops_admin</span></td><td>Mark shipped with delivery partner, tracking #, customer links</td></tr>
+            <tr><td>Products</td><td><span class="status-complete">✅</span></td><td><span class="tag tag-role">super_admin</span> <span class="tag tag-role">catalog_admin</span></td><td>CRUD, image upload, CSV bulk import, soft delete</td></tr>
+            <tr><td>Sellers</td><td><span class="status-complete">✅</span></td><td><span class="tag tag-role">super_admin</span> <span class="tag tag-role">catalog_admin</span></td><td>CRUD, logo upload, product count tracking</td></tr>
+            <tr><td>Customers</td><td><span class="status-complete">✅</span></td><td><span class="tag tag-role">super_admin</span> <span class="tag tag-role">ops_admin</span></td><td>User profiles, order history, read-only</td></tr>
+            <tr><td>Admins</td><td><span class="status-complete">✅</span></td><td><span class="tag tag-role">super_admin</span></td><td>Add/remove admins, assign roles</td></tr>
+            <tr><td>Reports</td><td><span class="status-complete">✅</span></td><td><span class="tag tag-role">super_admin</span> <span class="tag tag-role">ops_admin</span> <span class="tag tag-role">catalog_admin</span></td><td>Sales insights, inventory reports, CSV export</td></tr>
+            <tr><td>Audit Logging</td><td><span class="status-complete">✅</span></td><td>All admin writes</td><td>Firestore audit_logs collection</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="sub-admin-settings" class="sub-tab-panel">
+      <div class="table-wrap">
+        <table class="feature-table">
+          <thead><tr><th>Setting</th><th>Scope</th><th>Firestore Doc</th><th>Effect</th></tr></thead>
+          <tbody>
+            <tr><td>Site Launch</td><td>super_admin</td><td>settings/site_launch</td><td>Toggle storefront online/offline (coming-soon gate)</td></tr>
+            <tr><td>Seller Portal</td><td>super_admin</td><td>settings/seller_portal</td><td>Toggle /seller between live portal and coming-soon</td></tr>
+            <tr><td>Business Settings</td><td>super_admin</td><td>settings/business</td><td>UPI VPA, WhatsApp, discount tiers, GST — no deploy needed</td></tr>
+            <tr><td>Marketplace Verticals</td><td>super_admin</td><td>settings/verticals</td><td>Show/hide clothing, perfume, umrah categories</td></tr>
+            <tr><td>Best Sellers</td><td>super_admin</td><td>settings/bestsellers</td><td>Recompute ranking from orders</td></tr>
+            <tr><td>Homepage Social</td><td>super_admin</td><td>settings/social</td><td>Instagram reel IDs for homepage carousel</td></tr>
+            <tr><td>Delivery Partners</td><td>super_admin</td><td>settings/delivery_partners</td><td>Courier list with tracking URL patterns</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="sub-seller" class="sub-tab-panel">
+      <div class="table-wrap">
+        <table class="feature-table">
+          <thead><tr><th>Feature</th><th>Status</th><th>Details</th></tr></thead>
+          <tbody>
+            <tr><td>Registration</td><td><span class="status-complete">✅ Complete</span></td><td>Google Sign-In with admin approval gate</td></tr>
+            <tr><td>Dashboard</td><td><span class="status-complete">✅ Complete</span></td><td>Revenue, order count, bestseller products, mobile-friendly</td></tr>
+            <tr><td>Products</td><td><span class="status-complete">✅ Complete</span></td><td>CSV upload, CRUD, image upload, seller-wise bulk delete</td></tr>
+            <tr><td>Orders</td><td><span class="status-complete">✅ Complete</span></td><td>Live feed, per-seller fulfilment, dispatch modal</td></tr>
+            <tr><td>Order Export</td><td><span class="status-complete">✅ Complete</span></td><td>CSV download with date filter</td></tr>
+            <tr><td>Portal Gate</td><td><span class="status-complete">✅ Complete</span></td><td>Super-admin toggle; coming-soon when disabled</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ARCHITECTURE -->
+  <section id="panel-architecture" class="tab-panel" role="tabpanel">
+    <h2 class="section-title">Technical Stack</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Layer</th><th>Technology</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td>Hosting</td><td>Firebase Hosting</td><td>GitHub Actions CI/CD, push to main auto-deploys</td></tr>
+          <tr><td>Frontend</td><td>Vanilla JS, HTML, CSS</td><td>No bundler, no framework — every file served as-is</td></tr>
+          <tr><td>Auth</td><td>Firebase Authentication</td><td>Google Sign-In + Phone OTP, optional</td></tr>
+          <tr><td>Database</td><td>Cloud Firestore</td><td>Orders, users, products, sellers, settings, audit logs</td></tr>
+          <tr><td>Storage</td><td>Firebase Storage</td><td>Product covers, seller logos</td></tr>
+          <tr><td>Notifications</td><td>Telegram Bot + WhatsApp</td><td>Client-side HTTP POST (best-effort)</td></tr>
+          <tr><td>Email</td><td>FormSubmit.co</td><td>Order receipts (best-effort)</td></tr>
+          <tr><td>Payments</td><td>UPI push</td><td>Mobile deep links; Desktop QR code</td></tr>
+          <tr><td>Testing</td><td>Jest 29 (Node)</td><td>1,161 tests, gates all CI deploys</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 class="section-title">Project Structure</h2>
+    <div class="tree">al-amanah-store-india/
+├── __tests__/                    # 1,161+ unit tests (20+ suites)
+├── admin/                        # Admin portal SPA
+├── seller/                       # Seller Central SPA
+├── js/
+│   ├── core/                    # Singletons: auth, config, business settings
+│   ├── domain/                  # Pure business logic (no DOM, no Firebase)
+│   ├── infrastructure/          # Firebase, localStorage adapters
+│   ├── components/              # UI widgets (auth modal, cart, checkout)
+│   ├── apps/                    # App-level bootstraps
+│   └── pages/                   # Per-page boot scripts
+├── css/                         # base/ · components/ · pages/
+├── data/                        # catalog.js, product-descriptions.js
+├── config/site-config.js        # Business constants
+├── firestore.rules              # Deployed on every push to main
+└── scripts/                     # bump-versions.mjs, bootstrap-firestore.mjs</div>
+
+    <h2 class="section-title">Key Globals</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Global</th><th>Source</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr><td><code>window.SITE_CONFIG</code></td><td>config/site-config.js</td><td>Business constants</td></tr>
+          <tr><td><code>window.AmanahConfig</code></td><td>js/core/config.js</td><td>Runtime config wrapper</td></tr>
+          <tr><td><code>window.AmanahFirebase</code></td><td>js/firebase-service.js</td><td>Auth + Firestore wrapper</td></tr>
+          <tr><td><code>window.AmanahOrderStatusPipeline</code></td><td>js/domain/order-status-pipeline.js</td><td>Order status definitions</td></tr>
+          <tr><td><code>window._storefrontPage</code></td><td>Page boot script</td><td>Per-page orchestration</td></tr>
+          <tr><td><code>BOOKS</code></td><td>data/catalog.js</td><td>Product catalog (no window prefix)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 class="section-title">Business Constants</h2>
+    <div class="code-block" id="configCode">
+      <button class="copy-btn" data-copy="configCode">Copy</button>
+<span class="cmt">// config/site-config.js — overridable via settings/business</span>
+<span class="kw">upiVPA</span>: <span class="str">'iqbalmubashshir@icici'</span>
+<span class="kw">upiPayee</span>: <span class="str">'Mubashshir Iqbal'</span>
+<span class="kw">whatsapp</span>: <span class="str">'+919810147344'</span>
+<span class="kw">shopOrderEmail</span>: <span class="str">'info.amanahindia@gmail.com'</span>
+
+<span class="kw">marketplace</span>: {
+  <span class="kw">deliveryFlat</span>: <span class="str">79</span>,
+  <span class="kw">deliveryFreeMin</span>: <span class="str">499</span>,
+  <span class="kw">commissionPct</span>: <span class="str">15</span>
+}
+    </div>
+  </section>
+
+  <!-- DATA & TESTING -->
+  <section id="panel-data" class="tab-panel" role="tabpanel">
+    <nav class="sub-tab-nav" role="tablist" aria-label="Data sections">
+      <button class="sub-tab-btn active" role="tab" data-subtab="database">Database Schema</button>
+      <button class="sub-tab-btn" role="tab" data-subtab="security">Security Rules</button>
+      <button class="sub-tab-btn" role="tab" data-subtab="testing">Testing</button>
+      <button class="sub-tab-btn" role="tab" data-subtab="notifications">Notifications</button>
+    </nav>
+
+    <div id="sub-database" class="sub-tab-panel active">
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Collection</th><th>Written by</th><th>Read by</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td><code>orders</code></td><td>Checkout, payment proof</td><td>Admin, profile, seller</td><td>Customer orders + fulfilment</td></tr>
+            <tr><td><code>users</code></td><td>Auth + profile</td><td>Admin customers</td><td>User profiles</td></tr>
+            <tr><td><code>products</code></td><td>Admin CRUD</td><td>Storefront</td><td>Product catalog</td></tr>
+            <tr><td><code>sellers</code></td><td>Admin + signup</td><td>Admin, storefront</td><td>Seller info</td></tr>
+            <tr><td><code>admins/{uid}</code></td><td>Super_admin</td><td>Admin portal</td><td>Role assignments</td></tr>
+            <tr><td><code>audit_logs</code></td><td>Admin writes</td><td>super_admin</td><td>Audit trail</td></tr>
+            <tr><td><code>settings/business</code></td><td>Admin Settings</td><td>js/core/config.js</td><td>Runtime overrides</td></tr>
+            <tr><td><code>settings/bestsellers</code></td><td>Admin Settings</td><td>Catalog/homepage</td><td>Best-seller ranking</td></tr>
+            <tr><td><code>settings/social</code></td><td>Admin Settings</td><td>Homepage</td><td>Instagram reel IDs</td></tr>
+            <tr><td><code>settings/verticals</code></td><td>Admin Settings</td><td>verticals-visibility.js</td><td>Category visibility</td></tr>
+            <tr><td><code>settings/site_launch</code></td><td>Admin Settings</td><td>site-launch-gate.js</td><td>Site online/offline</td></tr>
+            <tr><td><code>settings/seller_portal</code></td><td>Admin Settings</td><td>seller-portal-gate.js</td><td>Seller portal visibility</td></tr>
+            <tr><td><code>settings/delivery_partners</code></td><td>Admin Settings</td><td>Dispatch modals</td><td>Courier configuration</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="sub-security" class="sub-tab-panel">
+      <div class="card">
+        <ul style="list-style:none;padding:0">
+          <li style="padding:10px 0;border-bottom:1px solid var(--border)"><strong>Anyone (no auth):</strong> Create orders, read public settings</li>
+          <li style="padding:10px 0;border-bottom:1px solid var(--border)"><strong>Signed-in customer:</strong> Read/update own orders, read/write own profile</li>
+          <li style="padding:10px 0;border-bottom:1px solid var(--border)"><strong>Approved seller:</strong> Read orders they fulfil, update own seller_fulfilment.&lt;uid&gt;</li>
+          <li style="padding:10px 0"><strong>Admins:</strong> Role-based access via admins/{uid} document
+            <div style="margin-top:8px">
+              <span class="tag tag-role">super_admin</span>
+              <span class="tag tag-role">ops_admin</span>
+              <span class="tag tag-role">catalog_admin</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div id="sub-testing" class="sub-tab-panel">
+      <div class="card-grid">
+        <div class="info-card"><h3>1,161 Tests</h3><p>Jest 29 in Node.js environment — no DOM required for domain layer.</p></div>
+        <div class="info-card"><h3>20+ Suites</h3><p>Mirror source tree: domain, core, infrastructure, components, notification.</p></div>
+        <div class="info-card"><h3>CI Gates</h3><p>All deploys require tests to pass — PR-preview and main-deploy workflows.</p></div>
+      </div>
+      <div class="card">
+        <p><strong>Test directories:</strong></p>
+        <p>
+          <span class="tag">__tests__/domain/</span>
+          <span class="tag">__tests__/core/</span>
+          <span class="tag">__tests__/infrastructure/</span>
+          <span class="tag">__tests__/components/</span>
+          <span class="tag">__tests__/notification/</span>
+          <span class="tag">admin-utils</span>
+          <span class="tag">seller-utils</span>
+          <span class="tag">order-export</span>
+          <span class="tag">order-fulfilment</span>
+          <span class="tag">order-receipt</span>
+        </p>
+      </div>
+    </div>
+
+    <div id="sub-notifications" class="sub-tab-panel">
+      <h3 style="font-family:var(--font-display);margin-bottom:12px">Telegram Bot (@AlQuranEducationBot)</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Event</th><th>Trigger</th><th>Content</th></tr></thead>
+          <tbody>
+            <tr><td>New Order</td><td>Checkout confirmation</td><td>Order ID, customer name/mobile, items, total</td></tr>
+            <tr><td>Payment Approved</td><td>Admin action</td><td>Order ID, amount</td></tr>
+            <tr><td>Payment Rejected</td><td>Admin action</td><td>Order ID, reason</td></tr>
+            <tr><td>New Signup</td><td>First Google auth</td><td>Name, email, mobile</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card" style="margin-top:16px">
+        <p><strong>WhatsApp &amp; Email:</strong> Auto-opens wa.me link after checkout with itemized order. Order receipts via FormSubmit.co (best-effort, 10-second timeout, never blocks checkout).</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- OPERATIONS -->
+  <section id="panel-operations" class="tab-panel" role="tabpanel">
+    <h2 class="section-title">Deployment &amp; CI/CD</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Trigger</th><th>Workflow</th><th>Jobs</th></tr></thead>
+        <tbody>
+          <tr><td>Pull request to main</td><td><code>.github/workflows/pr-preview.yml</code></td><td>test → deploy-preview</td></tr>
+          <tr><td>Push to main</td><td><code>.github/workflows/main-deploy.yml</code></td><td>test → deploy + firestore rules</td></tr>
+          <tr><td>Manual</td><td>Bootstrap Admin (workflow_dispatch)</td><td>Seed Firestore data</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card-grid">
+      <div class="info-card">
+        <h3>Path Filters</h3>
+        <p>CI runs when HTML, CSS, JS, admin, seller, data, config, firestore.rules, or workflow files change. README, docs/, scripts/ skip CI on main.</p>
+      </div>
+      <div class="info-card">
+        <h3>Cache Busting</h3>
+        <p>Every commit auto-bumps <code>?v=20260701t</code> in all HTML via pre-commit hook. Ensures fresh JS/CSS (1-hour browser cache).</p>
+      </div>
+    </div>
+
+    <h2 class="section-title">Current Metrics</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Metric</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>Codebase Size</td><td>~8,977 KB</td></tr>
+          <tr><td>Product Catalog</td><td>150+ products</td></tr>
+          <tr><td>Test Coverage</td><td>1,161 tests across 20+ suites</td></tr>
+          <tr><td>Admin Roles</td><td>3 (super_admin, ops_admin, catalog_admin)</td></tr>
+          <tr><td>Order Statuses</td><td>6 stages</td></tr>
+          <tr><td>Active Sellers</td><td>4 (Manshurat, Good Tree, Alif, Aariz)</td></tr>
+          <tr><td>Marketplace Verticals</td><td>4 (Books, Clothing, Attar, Umrah)</td></tr>
+          <tr><td>Discount Tiers</td><td>5 (5–20% based on MRP)</td></tr>
+          <tr><td>Notifications</td><td>Telegram, WhatsApp, Email</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="summary-footer">
+      <h2>Amanah India v1.7</h2>
+      <p>Fully-functional, production-ready serverless Islamic e-commerce marketplace.</p>
+      <p>Built June 15 – July 1, 2026 · 136+ commits · SOLID architecture · No bundler, no framework</p>
+      <div class="status">✅ Operational — <a href="https://shopamanah.in" style="color:#4ade80" target="_blank" rel="noopener">shopamanah.in</a></div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+(function () {
+  'use strict';
+
+  function init() {
+    initPrimaryTabs();
+    initSubTabs();
+    initTimeline();
+    initFeatureSearch();
+    initCopyButtons();
+    initDownloadBar();
+    initDeepLink();
+  }
+
+  function initPrimaryTabs() {
+    var tabBtns = document.querySelectorAll('.tab-nav .tab-btn');
+    var tabPanels = document.querySelectorAll('.tab-panel');
+
+    tabBtns.forEach(function (btn) {
+      btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        var id = btn.getAttribute('data-tab');
+        tabBtns.forEach(function (b) {
+          b.classList.toggle('active', b === btn);
+          b.setAttribute('aria-selected', b === btn ? 'true' : 'false');
+        });
+        tabPanels.forEach(function (p) {
+          p.classList.toggle('active', p.id === 'panel-' + id);
+        });
+        if (history.replaceState) {
+          history.replaceState(null, '', '#' + id);
+        }
+        var container = document.querySelector('.container');
+        if (container) {
+          window.scrollTo({ top: container.offsetTop - 8, behavior: 'smooth' });
+        }
+      });
+    });
+  }
+
+  function initSubTabs() {
+    document.querySelectorAll('.tab-panel').forEach(function (panel) {
+      var subBtns = panel.querySelectorAll('.sub-tab-nav .sub-tab-btn');
+      if (!subBtns.length) return;
+
+      subBtns.forEach(function (btn) {
+        btn.addEventListener('click', function (e) {
+          e.preventDefault();
+          var subId = btn.getAttribute('data-subtab');
+          subBtns.forEach(function (b) { b.classList.toggle('active', b === btn); });
+          panel.querySelectorAll('.sub-tab-panel').forEach(function (sp) {
+            sp.classList.toggle('active', sp.id === 'sub-' + subId);
+          });
+        });
+      });
+    });
+  }
+
+  function initTimeline() {
+    var timelineItems = document.querySelectorAll('.timeline-item');
+
+    timelineItems.forEach(function (item) {
+      var header = item.querySelector('.timeline-header');
+      if (!header) return;
+
+      header.addEventListener('click', function (e) {
+        e.preventDefault();
+        var isOpen = item.classList.contains('open');
+        timelineItems.forEach(function (ti) {
+          ti.classList.remove('open');
+          var h = ti.querySelector('.timeline-header');
+          if (h) h.setAttribute('aria-expanded', 'false');
+        });
+        if (!isOpen) {
+          item.classList.add('open');
+          header.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+
+    var latest = document.querySelector('.timeline-item[data-version="1.7"]');
+    if (latest) {
+      latest.classList.add('open');
+      var latestHeader = latest.querySelector('.timeline-header');
+      if (latestHeader) latestHeader.setAttribute('aria-expanded', 'true');
+    }
+
+    window._timelineItems = timelineItems;
+  }
+
+  function initFeatureSearch() {
+    var searchInput = document.getElementById('featureSearch');
+    if (!searchInput) return;
+
+    searchInput.addEventListener('input', function () {
+      var q = searchInput.value.toLowerCase().trim();
+      document.querySelectorAll('.feature-table tbody tr').forEach(function (row) {
+        var text = row.textContent.toLowerCase();
+        row.classList.toggle('hidden-row', q.length > 0 && text.indexOf(q) === -1);
+      });
+    });
+  }
+
+  function initCopyButtons() {
+    document.querySelectorAll('.copy-btn').forEach(function (btn) {
+      btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var block = document.getElementById(btn.getAttribute('data-copy'));
+        if (!block) return;
+        var text = block.textContent.replace('Copy', '').trim();
+
+        function onCopied() {
+          btn.textContent = 'Copied!';
+          btn.classList.add('copied');
+          setTimeout(function () {
+            btn.textContent = 'Copy';
+            btn.classList.remove('copied');
+          }, 2000);
+        }
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(onCopied).catch(function () {
+            fallbackCopy(text, onCopied);
+          });
+        } else {
+          fallbackCopy(text, onCopied);
+        }
+      });
+    });
+  }
+
+  function fallbackCopy(text, cb) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.left = '-9999px';
+    document.body.appendChild(ta);
+    ta.select();
+    try {
+      document.execCommand('copy');
+      if (cb) cb();
+    } catch (err) { /* ignore */ }
+    document.body.removeChild(ta);
+  }
+
+  function initDownloadBar() {
+    var printBtn = document.getElementById('printBtn');
+    var expandAllBtn = document.getElementById('expandAllBtn');
+    var mdBtn = document.getElementById('downloadMdBtn');
+    var timelineItems = window._timelineItems || document.querySelectorAll('.timeline-item');
+
+    if (printBtn) {
+      printBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        timelineItems.forEach(function (item) {
+          item.classList.add('open');
+          var h = item.querySelector('.timeline-header');
+          if (h) h.setAttribute('aria-expanded', 'true');
+        });
+        setTimeout(function () { window.print(); }, 350);
+      });
+    }
+
+    if (expandAllBtn) {
+      expandAllBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        var allOpen = Array.prototype.every.call(timelineItems, function (item) {
+          return item.classList.contains('open');
+        });
+        timelineItems.forEach(function (item) {
+          item.classList.toggle('open', !allOpen);
+          var h = item.querySelector('.timeline-header');
+          if (h) h.setAttribute('aria-expanded', !allOpen ? 'true' : 'false');
+        });
+        expandAllBtn.textContent = allOpen ? '📂 Expand All Releases' : '📁 Collapse All Releases';
+      });
+    }
+
+    if (mdBtn) {
+      mdBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        var embedded = document.getElementById('embedded-md');
+        var text = embedded ? embedded.textContent.trim() : '';
+        if (text) {
+          downloadBlob(text, 'Amanah-India-Work-Summary-v1.7.md', 'text/markdown');
+        }
+      });
+    }
+  }
+
+  function downloadBlob(content, filename, mime) {
+    var blob = new Blob([content], { type: mime });
+    var url = URL.createObjectURL(blob);
+    var link = document.createElement('a');
+    link.href = url;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  }
+
+  function initDeepLink() {
+    var hash = location.hash.replace('#', '');
+    if (!hash) return;
+    var targetBtn = document.querySelector('.tab-btn[data-tab="' + hash + '"]');
+    if (targetBtn) targetBtn.click();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
+
+<script type="text/plain" id="embedded-md"># Amanah India — Complete Work Summary
+
+**Project:** E-Commerce marketplace for Islamic merchandise  
+**Live URL:** https://shopamanah.in  
+**Repository:** https://github.com/iqbalmuddassir/al-amanah-store-india  
+**Promoted by:** Manshurat Publishers  
+**Build period:** June 15 – July 1, 2026  
+**Current version:** v1.7  
+**Last updated:** July 1, 2026  
+**Status:** ✅ Live and operational
+
+---
+
+## Table of Contents
+
+1. [Executive Summary](#executive-summary)
+2. [Key Metrics](#key-metrics)
+3. [Release Timeline](#release-timeline)
+4. [Current Features](#current-features)
+5. [Technical Architecture](#technical-architecture)
+6. [Database & Security](#database--security)
+7. [Testing & Quality Assurance](#testing--quality-assurance)
+8. [Deployment & CI/CD](#deployment--cicd)
+9. [Major Engineering Workstreams](#major-engineering-workstreams)
+10. [Planned Enhancements](#planned-enhancements)
+11. [Documentation Index](#documentation-index)
+12. [Conclusion](#conclusion)
+
+---
+
+## Executive Summary
+
+**Amanah India** is a production-ready, serverless e-commerce marketplace for Indian Muslim brands — Islamic books, ethnic wear, attar, and Umrah services. The platform is **100% static** (no backend server required), hosted on Firebase Hosting with GitHub Actions CI/CD.
+
+The system comprises three applications:
+
+| Application | URL | Purpose |
+|-------------|-----|---------|
+| Customer Storefront | https://shopamanah.in | Browse, cart, checkout, profile, order tracking |
+| Admin Portal | https://shopamanah.in/admin | Role-gated operations, CMS, settings |
+| Seller Central | https://shopamanah.in/seller | Self-service seller dashboard (portal-gated) |
+
+**Core design principles:**
+- No bundler, no framework — vanilla JS/HTML/CSS served as-is
+- localStorage primary for cart and orders; Firestore best-effort sync
+- Guest checkout fully supported — no auth required
+- Layered clean architecture: domain → infrastructure → components → apps → pages
+- 1,161 unit tests gate every deployment
+
+**Books vertical is live.** Clothing, attar/perfume, and Umrah verticals exist in the UI but are hidden by default until a super admin enables them via `settings/verticals`.
+
+---
+
+## Key Metrics
+
+| Metric | Value |
+|--------|-------|
+| **Version** | v1.7 |
+| **Releases shipped** | 7 (v1.0 – v1.7) |
+| **Git commits (since June 2026)** | 222+ |
+| **Unit tests** | 1,161 (22 test suites) |
+| **Product catalog** | 155 products |
+| **Active sellers** | 4 (Manshurat, Good Tree, Alif, Aariz) |
+| **Admin roles** | 3 (super_admin, ops_admin, catalog_admin) |
+| **Order pipeline stages** | 6 (admin/seller), 5 (customer view) |
+| **Marketplace verticals** | 4 (Books live; Clothing, Attar, Umrah gated) |
+| **Discount tiers** | 5 (5–20% based on MRP) |
+| **Codebase size** | ~1.5 MB (JS, HTML, CSS) |
+| **Hosting uptime** | 99.9% (Firebase Hosting SLA) |
+| **Notifications** | Telegram, WhatsApp, Email (FormSubmit) |
+
+---
+
+## Release Timeline
+
+### v1.7 — Dispatch Tracking & Storefront Polish (July 1, 2026)
+
+- **Dispatch tracking MVP:** Admin/seller mark orders shipped with delivery partner, tracking number, and dispatch date
+- **Delivery partners settings:** Super-admin manages courier list in Firestore (`settings/delivery_partners`) — never hardcoded
+- **Storefront UI:** Coffee palette color update, alignment polish, favicon, checkout layout, marquee gating
+- **Seller & Admin fixes:** Unified Add/Edit product UI, permission-denied errors resolved, featured toggle hidden from sellers
+- **Single-order refresh:** Order detail sheet re-fetches tracking data on open (best-effort)
+- **CI/CD polish:** Split workflows (PR-preview vs main-deploy), Firebase deploy auth restored
+
+### v1.6 — Storefront Revamp & Custom-Domain Auth (June 24, 2026)
+
+- **Storefront redesign:** New navigation, homepage revamp, filterable shop catalog, light-first theme, About & Contact pages
+- **Auth fixes:** Google sign-in restored on custom domain (`shopamanah.in`) via authDomain + CSP frame-src fixes
+- **Super-admin CMS:** About/Contact pages togglable without redeploy
+- **Seller portal stabilization:** Gate no longer hides live dashboard when enabled
+
+### v1.5 — Unit Test Suite & Agent Docs (June 22, 2026)
+
+- **Comprehensive testing:** 1,161 tests across 22 modules (Jest 29)
+- **Tests in CI:** Jest runs on every pull request and gates all deploys
+- **Documentation:** CLAUDE.md refreshed with full codebase inventory; AGENTS.md guide for AI assistants
+
+### v1.4 — Multi-App Refactor & Business Settings (June 21, 2026)
+
+- **Per-app auth isolation:** Separate Firebase instances for admin, seller, storefront (sign-in no longer bleeds across apps)
+- **Business settings panel:** Runtime-editable config (UPI VPA, WhatsApp, discount tiers, GST) via Firestore `settings/business` — **no deploy required**
+- **Admin improvements:** View/edit mode toggle, cancelled-order filters, seller-wise bulk delete, site launch gate
+- **Storefront polish:** Cart qty stepper restored, New/Sale tags, editor-picks re-render, checkout parity
+
+### v1.3 — Clean Architecture Refactor (June 19, 2026)
+
+- **SOLID redesign:** Layered architecture (domain → infrastructure → components → apps → pages)
+- **Directory restructuring:** `js/` organized by concern; `css/` split into base/components/pages
+- **URL renames:** `shop.html` → `catalog.html`, `product.html` → `product-detail.html`, `sell.html` → `become-a-seller.html`
+- **Bug fixes:** WhatsApp FAB restoration, seller login unblock, version bump script auto-discovery
+
+### v1.2 — Seller Fulfillment & Asset Protection (June 19, 2026)
+
+- **Seller orders:** Per-seller order breakdown, per-seller fulfilment stages, seller-attributed checkout items
+- **Asset security:** CSS/canvas watermarks on book covers, interaction blockers (context menu, drag)
+- **Developer experience:** `bump-versions.mjs` cache-busting script, `.githooks/pre-commit` auto-versioning
+
+### v1.1 — Admin & Seller Portals (June 18, 2026)
+
+- **Admin portal MVP:** Dashboard, orders, products, sellers, customers, admins, reports sections
+- **Access control:** Google Sign-In gated by Firestore `admins/{uid}` roles
+- **Seller portal:** Registration with admin approval, self-service dashboard, product CSV upload, live order management
+- **Order pipeline:** 6-stage fulfilment (pending_verification → confirmed → shipped → in_transit → out_for_delivery → delivered)
+- **Notifications:** Telegram bot alerts, order receipts, CSV export
+
+### v1.0 — Customer Portal (June 15, 2026)
+
+- **Customer features:** Profile page, order history, 5-stage status tracking, cross-device sync, multi-address support
+- **Theme:** Minimalist Islamic literature design (luxe black & gold, dark/light mode)
+- **Payments:** UPI push payment (mobile deep links, desktop QR code, customer self-reports)
+- **Security:** Content Security Policy, asset watermarks, interaction blockers
+
+---
+
+## Current Features
+
+### Customer Storefront
+
+| Feature | Status | Details |
+|---------|--------|---------|
+| Homepage | ✅ Complete | Hero banner, editor picks, newly launched preview, social reels carousel, bestseller tiles |
+| Catalog (`/catalog`) | ✅ Complete | 155 products, multi-parameter filters (sort, age, language, price, new/bestseller), search |
+| Product Detail | ✅ Complete | Full specs, add-to-cart, qty controls, related products, image gallery |
+| Shopping Cart | ✅ Complete | localStorage primary, Firestore optional sync, qty controls, pricing breakdown |
+| Checkout | ✅ Complete | 4-step flow (review → delivery → UPI → confirmation), guest checkout supported |
+| UPI Payment | ✅ Complete | Mobile: deep links (GPay, PhonePe, Paytm, BHIM); Desktop: QR code, UPI ID copy |
+| Order History (`/profile`) | ✅ Complete | All past orders, 5-stage status tracker, cross-device sync (guest orders follow login) |
+| Payment Proof | ✅ Complete | One-time UPI transaction ID submission, self-healing if checkout save failed |
+| Order Cancellation | ✅ Complete | Customers can cancel pre-shipment from order sheet |
+| Order Receipt | ✅ Complete | Downloadable HTML receipt for customer and admin |
+| Dispatch Tracking | ✅ Complete | Track shipment link from order detail sheet (opens carrier tracking page) |
+| Authentication | ✅ Complete | Google Sign-In + Phone OTP, optional (guest checkout supported) |
+| Profile Management | ✅ Complete | Display name, mobile, multi-address support, dark/light mode |
+| About Page | ✅ Complete | Brand story, super-admin visibility toggle (CMS editable without deploy) |
+| Contact Page | ✅ Complete | WhatsApp, email, support details |
+| Help Page | ✅ Complete | FAQ, shipping, payment, returns info |
+| Theme & UI | ✅ Complete | Coffee palette, Amiri/Cormorant Garamond fonts, mobile-first |
+| SEO | ✅ Complete | robots.txt, sitemap.xml, OpenGraph tags, canonical links, branded 404 page |
+
+### Admin Portal (`/admin`)
+
+| Feature | Status | Role Access | Details |
+|---------|--------|-------------|---------|
+| Dashboard | ✅ Complete | super_admin, ops_admin | Revenue, recent orders/sellers, key metrics |
+| Orders | ✅ Complete | super_admin, ops_admin | Live feed, 6-stage pipeline, payment verification |
+| Dispatch Tracking | ✅ Complete | super_admin, ops_admin | Mark shipped with delivery partner, tracking #, customer links |
+| Products | ✅ Complete | super_admin, catalog_admin | CRUD, image upload, CSV bulk import, soft delete |
+| Sellers | ✅ Complete | super_admin, catalog_admin | CRUD, logo upload, product count tracking |
+| Customers | ✅ Complete | super_admin, ops_admin | User profiles, order history, read-only |
+| Admins | ✅ Complete | super_admin only | Add/remove admins, assign roles |
+| Reports | ✅ Complete | super_admin, ops_admin, catalog_admin | Sales insights, inventory reports, CSV export |
+| Settings | ✅ Complete | super_admin only | See Admin Settings below |
+| Audit Logging | ✅ Complete | All admin writes | Firestore `audit_logs` collection |
+
+#### Admin Settings (Runtime Configuration — no deploy required)
+
+| Setting | Firestore Doc | Effect |
+|---------|---------------|--------|
+| Site Launch | `settings/site_launch` | Toggle storefront online/offline (coming-soon gate) |
+| Seller Portal | `settings/seller_portal` | Toggle `/seller` between live portal and coming-soon |
+| Business Settings | `settings/business` | UPI VPA, WhatsApp, email, discount tiers, GST, shipping rates |
+| Marketplace Verticals | `settings/verticals` | Show/hide clothing, perfume, umrah categories |
+| Best Sellers | `settings/bestsellers` | Recompute ranking from orders; powers "Best selling" sort |
+| Homepage Social | `settings/social` | Instagram reel IDs for homepage carousel |
+| Delivery Partners | `settings/delivery_partners` | Courier list with tracking URL patterns |
+
+### Seller Portal (`/seller`)
+
+| Feature | Status | Details |
+|---------|--------|---------|
+| Registration | ✅ Complete | Google Sign-In with admin approval gate |
+| Dashboard | ✅ Complete | Revenue, order count, bestseller products, mobile-friendly |
+| Products | ✅ Complete | CSV upload, CRUD, image upload, seller-wise bulk delete |
+| Orders | ✅ Complete | Live feed, per-seller fulfilment pipeline, dispatch modal |
+| Order Export | ✅ Complete | CSV download with date filter |
+| Portal Gate | ✅ Complete | Super-admin toggle; coming-soon when disabled |
+
+---
+
+## Technical Architecture
+
+### Stack
+
+| Layer | Technology | Notes |
+|-------|-----------|-------|
+| Hosting | Firebase Hosting | GitHub Actions CI/CD, push to `main` auto-deploys |
+| Frontend | Vanilla JS, HTML, CSS | No bundler, no framework |
+| Auth | Firebase Authentication | Google Sign-In + Phone OTP, optional |
+| Database | Cloud Firestore | Orders, users, products, sellers, settings, audit logs |
+| Storage | Firebase Storage | Product covers, seller logos |
+| Notifications | Telegram Bot + WhatsApp | Client-side HTTP POST (best-effort) |
+| Email | FormSubmit.co | Order receipts (best-effort) |
+| Payments | UPI push | Mobile deep links; Desktop QR code |
+| Testing | Jest 29 (Node) | 1,161 tests, gates all CI deploys |
+
+### Layered Architecture
+
+```
+pages → apps → components → domain / infrastructure → core
+```
+
+- **`js/domain/`** — Pure business logic (no DOM, no Firebase). Fully testable in Node.
+- **`js/infrastructure/`** — Firebase and localStorage adapters only.
+- **`js/core/`** — Singletons (`AmanahConfig`) and pure utilities.
+- **`js/components/`** — Reusable UI widgets (cart, checkout, auth modal, etc.).
+- **`js/apps/`** — App-level bootstraps (admin, seller, storefront chrome).
+- **`js/pages/`** — Per-page orchestration scripts.
+
+### Key Globals
+
+| Global | Source | Purpose |
+|--------|--------|---------|
+| `window.SITE_CONFIG` | `config/site-config.js` | Business constants |
+| `window.AmanahConfig` | `js/core/config.js` | Runtime config wrapper (reads Firestore) |
+| `window.AmanahFirebase` | `js/firebase-service.js` | Auth + Firestore wrapper |
+| `window.AmanahOrderStatusPipeline` | `js/domain/order-status-pipeline.js` | Order status definitions |
+| `window._storefrontPage` | Page boot script | Per-page orchestration |
+| `BOOKS` | `data/catalog.js` | Product catalog (155 entries) |
+
+### Order Pipeline
+
+**Customer view:**
+```
+Processing → Dispatched → In Transit → Out for Delivery → Delivered (or Cancelled)
+```
+
+**Admin/Seller view:**
+```
+pending_verification → confirmed → shipped → in_transit → out_for_delivery → delivered
+```
+
+**Dispatch tracking (v1.7):**
+- Admin/Seller marks shipped via modal requiring delivery partner, tracking number, tracking URL, estimated delivery
+- Data stored in `orders/{id}.dispatch` or `orders/{id}.seller_fulfilment.{uid}.dispatch`
+- Delivery partners managed in `settings/delivery_partners` (Firestore-driven, never hardcoded)
+- Customer sees "Track shipment" button in order detail sheet
+
+### Business Constants (`config/site-config.js`)
+
+All values overridable at runtime via Firestore `settings/business` without redeploying:
+
+```
+UPI VPA:     iqbalmubashshir@icici
+Payee:       Mubashshir Iqbal
+WhatsApp:    +919810147344
+Email:       info.amanahindia@gmail.com
+Shipping:    ₹79 flat, FREE above ₹499 MRP
+Commission:  15% marketplace fee
+Discounts:   5 tiers (5–20% based on item MRP)
+```
+
+---
+
+## Database & Security
+
+### Firestore Collections
+
+| Collection | Written by | Read by | Purpose |
+|------------|-----------|---------|---------|
+| `orders` | Checkout, payment proof | Admin, profile, seller | Customer orders + fulfilment |
+| `users` | Auth + profile | Admin customers | User profiles |
+| `products` | Admin CRUD | Storefront | Product catalog |
+| `sellers` | Admin + signup | Admin, storefront | Seller info |
+| `admins/{uid}` | Super_admin | Admin portal | Role assignments |
+| `audit_logs` | Admin writes | super_admin | Audit trail |
+| `settings/*` | Admin Settings | Various gates/CMS | Runtime configuration |
+
+### Security Rules Summary
+
+| Actor | Permissions |
+|-------|-------------|
+| Anyone (no auth) | Create orders, read public settings, read live products |
+| Signed-in customer | Read/update own orders, read/write own profile |
+| Approved seller | Read orders they fulfil, update own `seller_fulfilment.<uid>` |
+| `ops_admin` | Read/update all orders and users |
+| `catalog_admin` | Full CRUD on products and sellers |
+| `super_admin` | Everything + admins, settings writes, order deletes |
+
+---
+
+## Testing & Quality Assurance
+
+| Scope | Count | Details |
+|-------|-------|---------|
+| Total tests | 1,161 | Jest 29, Node.js environment |
+| Test suites | 22 | Mirror source tree structure |
+| Coverage areas | Domain, core, infrastructure, components, notifications | Pure code — no Firebase/DOM mocks needed for domain |
+| CI gates | All deploys | PR-preview and main-deploy workflows |
+
+**Test directories:**
+- `__tests__/domain/` — pricing, order pipeline, cart, UPI, dispatch
+- `__tests__/core/` — business settings, delivery partners, utils
+- `__tests__/infrastructure/` — repositories
+- `__tests__/components/` — card renderers
+- `__tests__/notification/` — email, telegram, whatsapp
+- Plus: admin-utils, seller-utils, order-export, order-fulfilment, order-receipt
+
+---
+
+## Deployment & CI/CD
+
+### Workflows
+
+| Trigger | Workflow | Jobs |
+|---------|----------|------|
+| Pull request to `main` | `.github/workflows/pr-preview.yml` | test → deploy-preview + PR comment |
+| Push to `main` | `.github/workflows/main-deploy.yml` | test → deploy + firestore rules |
+| Manual | Bootstrap Admin (`workflow_dispatch`) | Seed Firestore data |
+
+### Cache Busting
+
+Every commit auto-bumps `?v=20260701t` query strings in all HTML via `.githooks/pre-commit` hook (activates on `npm install`). Ensures users get fresh JS/CSS immediately (1-hour browser cache).
+
+### Security Headers
+
+Configured in `firebase.json`: Content-Security-Policy, X-Frame-Options, HSTS, Referrer-Policy, Permissions-Policy.
+
+---
+
+## Major Engineering Workstreams
+
+### 1. Multi-App Refactor (Phases 0–3 complete)
+
+Tracked in `docs/multi-app-refactor-plan.md`:
+
+| Phase | Description | Status |
+|-------|-------------|--------|
+| 0 | Quick wins (dead code, cart key, strip unused scripts) | ✅ Done |
+| 1A | Per-app auth isolation (3 Firebase contexts) | ✅ Done |
+| 1 | Shared kernel (firebase-client, csv, utils, audit-log) | ✅ Done |
+| 2 | Storefront chrome extraction | ✅ Done |
+| 3 | Storefront page boot (replace monolithic catalog script) | ✅ Done |
+| 4–7 | Script manifests, split monoliths, HTML partials, esbuild bundles | Not started |
+
+### 2. Business Settings Runtime CMS
+
+Super admins edit UPI VPA, WhatsApp, discount tiers, GST, shipping, editor picks, and marketplace fees in Admin → Settings → Business Settings. Changes propagate to all connected clients within 5 minutes (localStorage cache TTL). **No redeploy required.**
+
+### 3. Feature Gates & CMS
+
+| Gate | Firestore Doc | Default | Behavior |
+|------|---------------|---------|----------|
+| Site launch | `settings/site_launch` | ON | Redirects storefront to coming-soon when disabled |
+| Seller portal | `settings/seller_portal` | ON | Redirects `/seller` to coming-soon when disabled |
+| Marketplace verticals | `settings/verticals` | OFF | Hides clothing, perfume, umrah until enabled |
+| Best sellers | `settings/bestsellers` | — | Homepage/catalog "Best selling" sort order |
+| Homepage social | `settings/social` | — | Instagram reel IDs for carousel |
+
+### 4. Dispatch Tracking (v1.7)
+
+- Shared dispatch modal (`js/components/dispatch-modal.js`) for admin and seller
+- Pure validation logic in `js/domain/dispatch-info.js`
+- Delivery partners CRUD in admin settings with enable/disable toggle
+- Customer tracking via external carrier link (no carrier API polling — deliberate v1 scope)
+
+### 5. Notifications
+
+**Telegram Bot (`@AlQuranEducationBot`):**
+
+| Event | Trigger |
+|-------|---------|
+| New Order | Checkout confirmation |
+| Payment Approved/Rejected | Admin action |
+| New Signup | First Google auth |
+
+**WhatsApp:** Auto-opens `wa.me` link after checkout with itemized order.  
+**Email:** FormSubmit.co order receipts (best-effort, 10-second timeout).
+
+---
+
+## Planned Enhancements
+
+Documented in repo PRDs and TODO files — not yet implemented:
+
+| Item | Document | Priority | Summary |
+|------|----------|----------|---------|
+| Store copy & FAQ CMS | `docs/todo-store-copy-faq.md` | Planned | Move announcement bar, FAQ, hero copy to Firestore `settings/store_copy` |
+| Google Apps Script email relay | `docs/prd-google-apps-script-email.md` | High | Customer order confirmation emails without Blaze plan |
+| Open Graph banner image | `docs/prd-og-image.md` | Medium | 1200×630px social sharing image replacing square icon |
+| Multi-app phases 4–7 | `docs/multi-app-refactor-plan.md` | Low | Script manifests, split monoliths, optional esbuild |
+| Razorpay / automated payments | `docs/PRD.md` §11 | Future | Webhook-driven order confirmation |
+| PWA, wishlist, reviews | `docs/PRD.md` §11 | Future | Customer experience enhancements |
+
+---
+
+## Documentation Index
+
+| File | Purpose |
+|------|---------|
+| `README.md` | Development setup, deployment, custom-domain auth checklist |
+| `CLAUDE.md` | Full codebase inventory, architecture, key files, Firestore schema |
+| `AGENTS.md` | AI assistant guide, conventions, code patterns, CI/CD |
+| `docs/PRD.md` | Product Requirements Document (v1.0 comprehensive spec) |
+| `docs/multi-app-refactor-plan.md` | Multi-app refactor tracking (phases 0–7) |
+| `docs/todo-store-copy-faq.md` | Planned store copy CMS |
+| `docs/prd-google-apps-script-email.md` | Planned email relay PRD |
+| `docs/prd-og-image.md` | Planned OG image PRD |
+| `docs/project-summary.html` | Interactive HTML summary with tabs |
+| `docs/amanah-work-summary.md` | This document |
+
+---
+
+## Conclusion
+
+**Amanah India v1.7** is a fully-functional, production-ready serverless Islamic e-commerce marketplace. The platform has evolved through 7 releases over 17 days (June 15 – July 1, 2026), 222+ commits, and 1,161 unit tests gating every deployment.
+
+**What was built:**
+- Complete customer storefront with UPI checkout, order tracking, and guest support
+- Role-based admin portal with runtime CMS and dispatch tracking
+- Self-service seller portal with per-seller fulfilment
+- Clean layered architecture with comprehensive test coverage
+- CI/CD pipeline with PR previews and production auto-deploy
+
+**Live:** https://shopamanah.in  
+**Status:** ✅ Operational
+
+---
+
+*Generated July 1, 2026 · Amanah India v1.7*
+</script>
+</body>
+</html>
