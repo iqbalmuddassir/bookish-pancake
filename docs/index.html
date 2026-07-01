@@ -117,6 +117,15 @@
         .card-dm h2 { color: var(--accent-dm); }
         .card-quran h2 { color: var(--accent-quran); }
         .card-leadgen h2 { color: #b38600; }
+        .card-amanah h2 { color: #AB7743; }
+
+        .card-private {
+            display: none;
+        }
+
+        body.private-mode .card-private {
+            display: flex;
+        }
 
         .card p {
             font-size: 1.125rem;
@@ -142,6 +151,7 @@
         .card-dm .card-action { color: var(--accent-dm); }
         .card-quran .card-action { color: var(--accent-quran); }
         .card-leadgen .card-action { color: #b38600; }
+        .card-amanah .card-action { color: #AB7743; }
 
         #themeToggle {
             position: fixed;
@@ -218,6 +228,14 @@
                     <div class="card-action">Start the Course <span>&rarr;</span></div>
                 </div>
             </a>
+
+            <a href="amanah-india/index.html" class="card card-amanah card-private">
+                <div class="card-content">
+                    <h2>Amanah India</h2>
+                    <p>Internal project summary for the production-ready Islamic e-commerce marketplace — storefront, admin portal, seller central, architecture, and release timeline.</p>
+                    <div class="card-action">View Project Summary <span>&rarr;</span></div>
+                </div>
+            </a>
         </main>
     </div>
 
@@ -228,6 +246,10 @@
     <script>
         const themeToggle = document.getElementById('themeToggle');
         const body = document.body;
+
+        if (new URLSearchParams(window.location.search).get('mode') === 'private') {
+            body.classList.add('private-mode');
+        }
 
         const savedTheme = localStorage.getItem('hub-theme');
         if (savedTheme) {
