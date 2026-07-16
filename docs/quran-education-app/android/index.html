@@ -532,11 +532,17 @@
                 overscroll-behavior-x: contain;
             }
             .gallery::-webkit-scrollbar { display: none; }
-            .gallery figure { min-width: 160px; flex-shrink: 0; scroll-snap-align: start; }
+            .gallery figure {
+                flex: 0 0 min(42vw, 168px);
+                width: min(42vw, 168px);
+                max-width: min(42vw, 168px);
+                scroll-snap-align: start;
+            }
         }
 
         .gallery figure {
             margin: 0;
+            min-width: 0;
             animation: fadeSlide 0.7s ease both;
         }
 
@@ -547,6 +553,8 @@
 
         .gallery img {
             width: 100%;
+            max-width: 100%;
+            height: auto;
             border-radius: 18px;
             box-shadow: var(--shadow);
             display: block;
@@ -563,6 +571,38 @@
             text-transform: uppercase;
             color: var(--stone);
             text-align: center;
+        }
+
+        .mode-toggle {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 28px;
+        }
+
+        .mode-toggle button {
+            font-family: inherit;
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 10px;
+            border: 1px solid var(--line);
+            background: transparent;
+            color: var(--stone);
+            cursor: pointer;
+            transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+        }
+
+        .mode-toggle button[aria-pressed="true"] {
+            background: var(--sage);
+            color: #f4faf6;
+            border-color: transparent;
+        }
+
+        body.dark-mode .mode-toggle button[aria-pressed="true"] { color: #0c1210; }
+
+        @media (prefers-color-scheme: dark) {
+            body:not(.light-mode) .mode-toggle button[aria-pressed="true"] { color: #0c1210; }
         }
 
         .v1-strip {
@@ -757,14 +797,14 @@
         <div class="stage" aria-hidden="true">
             <div class="stage-glow"></div>
             <div class="phone-stack phone-stack--left">
-                <img src="../Prayer-time.png" alt="" />
+                <img src="assets/prayer-light.png" alt="" data-light="assets/prayer-light.png" data-dark="assets/prayer-dark.png" />
             </div>
             <div class="phone">
                 <div class="phone-hole"></div>
-                <img src="../Home-page.png" alt="Quran Urdu Android home screen" />
+                <img src="assets/home-light.png" alt="Quran Urdu Android home screen" data-light="assets/home-light.png" data-dark="assets/home-dark.png" />
             </div>
             <div class="phone-stack phone-stack--right">
-                <img src="../Ecode-with-Manual-and-AI.png" alt="" />
+                <img src="assets/ecodes-light.png" alt="" data-light="assets/ecodes-light.png" data-dark="assets/ecodes-dark.png" />
             </div>
         </div>
     </header>
@@ -822,27 +862,32 @@
     <section class="section" aria-labelledby="gallery-heading">
         <p class="section-label">Screens</p>
         <h2 class="section-title" id="gallery-heading">From home to Qibla</h2>
-        <p class="section-lede">A few moments from the Android experience — home, player, Halal checker, prayer, and Qibla.</p>
+        <p class="section-lede">Latest captures from the Android app — home, player, Halal checker, prayer, and Qibla — in light and dark.</p>
+
+        <div class="mode-toggle" role="group" aria-label="Screenshot appearance">
+            <button type="button" id="modeLight" aria-pressed="true">Light</button>
+            <button type="button" id="modeDark" aria-pressed="false">Dark</button>
+        </div>
 
         <div class="gallery">
             <figure>
-                <img src="../Home-page.png" alt="Android home dashboard" loading="lazy" />
+                <img src="assets/home-light.png" alt="Android home dashboard" loading="lazy" data-light="assets/home-light.png" data-dark="assets/home-dark.png" />
                 <figcaption>Home</figcaption>
             </figure>
             <figure>
-                <img src="../Quran-player.png" alt="Android Quran player" loading="lazy" />
+                <img src="assets/player-light.png" alt="Android Quran player" loading="lazy" data-light="assets/player-light.png" data-dark="assets/player-dark.png" />
                 <figcaption>Player</figcaption>
             </figure>
             <figure>
-                <img src="../Ecode-with-Manual-and-AI.png" alt="Android AI Halal checker" loading="lazy" />
+                <img src="assets/ecodes-light.png" alt="Android E-code checker" loading="lazy" data-light="assets/ecodes-light.png" data-dark="assets/ecodes-dark.png" />
                 <figcaption>E-codes</figcaption>
             </figure>
             <figure>
-                <img src="../Prayer-time.png" alt="Android prayer times" loading="lazy" />
+                <img src="assets/prayer-light.png" alt="Android prayer times" loading="lazy" data-light="assets/prayer-light.png" data-dark="assets/prayer-dark.png" />
                 <figcaption>Prayer</figcaption>
             </figure>
             <figure>
-                <img src="../Qibla-direction.png" alt="Android Qibla compass" loading="lazy" />
+                <img src="assets/qibla-light.png" alt="Android Qibla compass" loading="lazy" data-light="assets/qibla-light.png" data-dark="assets/qibla-dark.png" />
                 <figcaption>Qibla</figcaption>
             </figure>
         </div>
@@ -929,6 +974,21 @@
     document.querySelectorAll('.curr-year').forEach(el => {
         el.textContent = new Date().getFullYear();
     });
+
+    const modeLight = document.getElementById('modeLight');
+    const modeDark = document.getElementById('modeDark');
+
+    function setShotMode(mode) {
+        const useDark = mode === 'dark';
+        document.querySelectorAll('[data-light][data-dark]').forEach(img => {
+            img.src = useDark ? img.dataset.dark : img.dataset.light;
+        });
+        modeLight.setAttribute('aria-pressed', String(!useDark));
+        modeDark.setAttribute('aria-pressed', String(useDark));
+    }
+
+    modeLight.addEventListener('click', () => setShotMode('light'));
+    modeDark.addEventListener('click', () => setShotMode('dark'));
 </script>
 </body>
 </html>
