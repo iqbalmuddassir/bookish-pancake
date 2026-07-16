@@ -23,7 +23,10 @@ docs/
 ├── digital-marketing-ai/index.html
 ├── quran-education-app/
 │   ├── index.html
-│   └── terms_and_conditions.html
+│   ├── terms_and_conditions.html
+│   └── ios/                         # iOS redesign gallery (Coming soon)
+│       ├── islamic-swiftui-redesign.html
+│       └── assets/redesign/
 ├── local-lead-gen-agency/index.html
 └── amanah-india/index.html
 ```

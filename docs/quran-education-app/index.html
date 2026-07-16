@@ -127,6 +127,88 @@
           text-align: center;
         }
 
+        .platform-label {
+          display: inline-block;
+          margin: 0 0 12px;
+          padding: 6px 14px;
+          border-radius: 999px;
+          background: rgba(15, 118, 110, 0.12);
+          color: var(--primary);
+          font-size: 0.8rem;
+          font-weight: 700;
+          letter-spacing: 0.04em;
+          text-transform: uppercase;
+        }
+
+        .ios-section {
+          margin: 100px 0 60px;
+          padding: 56px 40px;
+          text-align: center;
+          background: var(--surface);
+          border: 1px solid var(--border);
+          border-radius: var(--radius);
+          box-shadow: var(--shadow);
+        }
+
+        .ios-section h2 {
+          font-size: clamp(1.8rem, 4vw, 2.5rem);
+          color: var(--heading);
+          margin: 0 0 12px;
+          font-weight: 900;
+          letter-spacing: -0.02em;
+        }
+
+        .ios-badge {
+          display: inline-block;
+          margin-left: 8px;
+          padding: 4px 12px;
+          border-radius: 999px;
+          background: var(--secondary);
+          color: #0f172a;
+          font-size: 0.75rem;
+          font-weight: 800;
+          letter-spacing: 0.03em;
+          vertical-align: middle;
+          text-transform: uppercase;
+        }
+
+        .ios-section > p {
+          max-width: 640px;
+          margin: 0 auto 28px;
+          opacity: 0.85;
+          font-size: 1.05rem;
+        }
+
+        .ios-link {
+          display: inline-block;
+          margin-bottom: 36px;
+          color: var(--primary);
+          font-weight: 700;
+          text-decoration: none;
+        }
+
+        .ios-link:hover {
+          text-decoration: underline;
+        }
+
+        .ios-preview-grid {
+          display: flex;
+          overflow-x: auto;
+          gap: 16px;
+          padding: 8px 0 4px;
+          scrollbar-width: none;
+          justify-content: flex-start;
+        }
+
+        .ios-preview-grid::-webkit-scrollbar {
+          display: none;
+        }
+
+        .ios-preview-grid .screenshot-item {
+          min-width: 160px;
+          max-width: 160px;
+        }
+
         .video-wrapper {
           max-width: 315px; /* Better for vertical shorts */
           margin: 0 auto 40px;
@@ -296,6 +378,7 @@
           .how-it-works { padding: 60px 24px; }
           .feature-card { padding: 32px; }
           .video-container { width: 100%; }
+          .ios-section { padding: 40px 24px; margin: 72px 0 40px; }
           #themeToggle { top: 16px; right: 16px; width: 38px; height: 38px; font-size: 1rem; }
         }
     </style>
@@ -310,8 +393,9 @@
         <a href="https://play.google.com/store/apps/details?id=com.mi.alquran" class="cta-button">Download on Google Play</a>
     </header>
 
-    <!-- Visual Showcase Section -->
+    <!-- Visual Showcase Section (Android) -->
     <section class="media-section">
+        <span class="platform-label">Android</span>
         <h2>Experience the App</h2>
 
         <div class="video-wrapper">
@@ -340,6 +424,29 @@
             </div>
             <div class="screenshot-item">
                 <img src="Qibla-direction.png" alt="Qibla Compass">
+            </div>
+        </div>
+    </section>
+
+    <section class="ios-section" aria-labelledby="ios-heading">
+        <h2 id="ios-heading">iOS <span class="ios-badge">Coming soon</span></h2>
+        <p>A native SwiftUI companion with the same Quran, prayer times, and E-code tools — plus a calm home hub, bookmarks, and a next-prayer widget. Preview the redesign gallery below.</p>
+        <a class="ios-link" href="ios/islamic-swiftui-redesign.html">View iOS redesign gallery →</a>
+        <div class="ios-preview-grid" role="list">
+            <div class="screenshot-item" role="listitem">
+                <img src="ios/assets/redesign/home-light.png" alt="iOS home hub (light)">
+            </div>
+            <div class="screenshot-item" role="listitem">
+                <img src="ios/assets/redesign/quran-list-light.png" alt="iOS Quran list (light)">
+            </div>
+            <div class="screenshot-item" role="listitem">
+                <img src="ios/assets/redesign/player-light.png" alt="iOS Quran player (light)">
+            </div>
+            <div class="screenshot-item" role="listitem">
+                <img src="ios/assets/redesign/prayer-times-light.png" alt="iOS prayer times (light)">
+            </div>
+            <div class="screenshot-item" role="listitem">
+                <img src="ios/assets/redesign/ecodes-light.png" alt="iOS E-codes (light)">
             </div>
         </div>
     </section>

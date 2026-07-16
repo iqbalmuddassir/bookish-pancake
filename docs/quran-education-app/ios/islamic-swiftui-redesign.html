@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Minimalist Islamic SwiftUI Redesign — Quran Urdu</title>
+  <style>
+    :root {
+      --sage: #1b3a2f;
+      --sage-soft: #2d5a48;
+      --brass: #b08d57;
+      --mist: #f4f7f5;
+      --stone: #747974;
+      --card: #ffffff;
+      --ink: #1a1f1c;
+      --line: rgba(27, 58, 47, 0.12);
+      --radius: 20px;
+      --shadow: 0 8px 28px rgba(27, 58, 47, 0.08);
+      --max: 880px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --sage: #8cc7a6;
+        --sage-soft: #a8d9bc;
+        --brass: #e6c67a;
+        --mist: #1a1e1c;
+        --stone: #b2bdb4;
+        --card: #252a27;
+        --ink: #eef2ef;
+        --line: rgba(140, 199, 166, 0.18);
+        --shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
+      }
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+      background:
+        radial-gradient(ellipse 80% 50% at 100% 0%, rgba(27, 58, 47, 0.06), transparent 55%),
+        radial-gradient(ellipse 60% 40% at 0% 100%, rgba(176, 141, 87, 0.07), transparent 50%),
+        var(--mist);
+      color: var(--ink);
+      line-height: 1.65;
+    }
+
+    .wrap {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 2.5rem 1.25rem 4rem;
+    }
+
+    header {
+      margin-bottom: 2.5rem;
+      padding-bottom: 1.75rem;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .eyebrow {
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--brass);
+      margin: 0 0 0.75rem;
+    }
+
+    h1 {
+      font-size: clamp(1.85rem, 4vw, 2.4rem);
+      font-weight: 600;
+      line-height: 1.2;
+      color: var(--sage);
+      margin: 0 0 1rem;
+    }
+
+    .meta {
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 0.9rem;
+      color: var(--stone);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1.25rem;
+      margin: 0;
+      list-style: none;
+      padding: 0;
+    }
+
+    .meta strong { color: var(--ink); font-weight: 600; }
+
+    .lede {
+      margin: 1.25rem 0 0;
+      font-size: 1.05rem;
+      color: var(--stone);
+      max-width: 38em;
+    }
+
+    h2 {
+      font-size: 1.35rem;
+      color: var(--sage);
+      margin: 2.5rem 0 1rem;
+      font-weight: 600;
+    }
+
+    h3 {
+      font-size: 1.05rem;
+      color: var(--sage-soft);
+      margin: 1.75rem 0 0.6rem;
+      font-weight: 600;
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+
+    p, li { font-size: 1rem; }
+    ul { padding-left: 1.2rem; }
+    li { margin: 0.35rem 0; }
+    li::marker { color: var(--brass); }
+
+    a {
+      color: var(--sage);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+    }
+    a:hover { color: var(--brass); }
+
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 1.25rem 1.35rem;
+      margin: 1.25rem 0;
+      border: 1px solid var(--line);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 0.9rem;
+      margin: 1rem 0;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 0.65rem 0.75rem;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+    }
+
+    th {
+      color: var(--sage);
+      font-weight: 600;
+      font-size: 0.75rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    code, .path {
+      font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+      font-size: 0.85em;
+      background: rgba(27, 58, 47, 0.06);
+      padding: 0.1em 0.35em;
+      border-radius: 4px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      code, .path { background: rgba(140, 199, 166, 0.12); }
+    }
+
+    ol.steps {
+      font-family: system-ui, -apple-system, sans-serif;
+      padding-left: 1.35rem;
+    }
+
+    ol.steps li { margin: 0.5rem 0; }
+
+    .diagram {
+      background: var(--card);
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      padding: 1.25rem;
+      margin: 1.25rem 0;
+      overflow-x: auto;
+    }
+
+    .diagram .mermaid {
+      display: flex;
+      justify-content: center;
+    }
+
+    footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--line);
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 0.85rem;
+      color: var(--stone);
+    }
+
+    footer a { color: var(--sage); }
+
+    .gallery-intro {
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 0.9rem;
+      color: var(--stone);
+      margin: 0 0 1.25rem;
+    }
+
+    .pair {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin: 0 0 2rem;
+    }
+
+    @media (max-width: 640px) {
+      .pair { grid-template-columns: 1fr; }
+    }
+
+    .shot {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      margin: 0;
+    }
+
+    .shot figcaption {
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--stone);
+      padding: 0.65rem 0.85rem;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .shot figcaption .mode {
+      color: var(--brass);
+    }
+
+    .shot img {
+      display: block;
+      width: 100%;
+      height: auto;
+      background: #000;
+    }
+
+    .screen-label {
+      font-size: 1.05rem;
+      color: var(--sage-soft);
+      margin: 0 0 0.75rem;
+      font-weight: 600;
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <p class="eyebrow">Quran Urdu · Maintainer docs</p>
+      <h1>Minimalist Islamic SwiftUI Redesign</h1>
+      <ul class="meta">
+        <li><strong>Status:</strong> Implemented (2026-07)</li>
+        <li><strong>Visual tone:</strong> Quiet Mosque Courtyard</li>
+        <li><strong>Plan name:</strong> Islamic SwiftUI Redesign</li>
+      </ul>
+      <p class="lede">
+        Preserves the redesign plan for future reference and notes what shipped
+        (including post-plan refinements). Prefer this page over chat history when
+        extending the home hub, design system, or widget.
+      </p>
+    </header>
+
+    <h2>Goals</h2>
+    <ul>
+      <li>Stay on <strong>native SwiftUI</strong> (iOS 16.2+, Adhan + SnapshotTesting unchanged).</li>
+      <li>Replace the flat card menu with a calm <strong>home hub</strong>.</li>
+      <li>Introduce a small <strong>design system</strong> (tokens + shared components).</li>
+      <li>Add engagement: next-prayer countdown, continue-listening hero, rukoo bookmarks, subtle haptics, and a <strong>WidgetKit</strong> next-prayer widget.</li>
+      <li>No analytics, accounts, or first-party networking.</li>
+    </ul>
+
+    <h2>Visual direction</h2>
+    <div class="card">
+      <table>
+        <thead>
+          <tr>
+            <th>Token</th>
+            <th>Light</th>
+            <th>Dark</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Sage / icon</td>
+            <td>Deep sage <code>#1B3A2F</code></td>
+            <td>Luminous sage (adaptive)</td>
+          </tr>
+          <tr>
+            <td>Brass CTA</td>
+            <td>Muted gold <code>#B08D57</code></td>
+            <td>Brighter brass (adaptive)</td>
+          </tr>
+          <tr>
+            <td>Canvas</td>
+            <td>Mist <code>#F4F7F5</code></td>
+            <td>Charcoal</td>
+          </tr>
+          <tr>
+            <td>Shape</td>
+            <td colspan="2">20pt continuous corners, generous whitespace</td>
+          </tr>
+          <tr>
+            <td>Motif</td>
+            <td colspan="2">None — plain mist / charcoal canvas (decorative star watermark removed)</td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="margin: 0.5rem 0 0; font-size: 0.95rem; color: var(--stone);">
+        Accessibility: never status-by-color-only (E-Code chips include labels).
+        Prefer <code>AppTheme.Colors.icon</code> / adaptive sage–brass over hard-coded dark greens.
+      </p>
+    </div>
+
+    <h2>Home hub flow</h2>
+    <div class="diagram">
+      <pre class="mermaid">
+flowchart TB
+  subgraph home [HomeHub]
+    Greeting
+    NextPrayerCard
+    ContinueCard
+    FeatureGrid
+  end
+  Greeting --> NextPrayerCard
+  NextPrayerCard --> PrayerTimes
+  ContinueCard --> Player
+  FeatureGrid --> QuranUrdu
+  FeatureGrid --> QuranEn
+  FeatureGrid --> PrayerTimes
+  FeatureGrid --> ECodes
+  Widget --> NextPrayerCard
+      </pre>
+    </div>
+
+    <h2>Final screens — light &amp; dark</h2>
+    <p class="gallery-intro">
+      Latest light/dark screen captures from the iOS app snapshot suite.
+    </p>
+
+    <p class="screen-label">Home hub</p>
+    <div class="pair">
+      <figure class="shot">
+        <figcaption><span>Home</span><span class="mode">Light</span></figcaption>
+        <img src="assets/redesign/home-light.png" alt="Home hub in light mode" width="390" height="844" loading="lazy" />
+      </figure>
+      <figure class="shot">
+        <figcaption><span>Home</span><span class="mode">Dark</span></figcaption>
+        <img src="assets/redesign/home-dark.png" alt="Home hub in dark mode" width="390" height="844" loading="lazy" />
+      </figure>
+    </div>
+
+    <p class="screen-label">Quran list</p>
+    <div class="pair">
+      <figure class="shot">
+        <figcaption><span>Quran</span><span class="mode">Light</span></figcaption>
+        <img src="assets/redesign/quran-list-light.png" alt="Quran list in light mode" width="390" height="844" loading="lazy" />
+      </figure>
+      <figure class="shot">
+        <figcaption><span>Quran</span><span class="mode">Dark</span></figcaption>
+        <img src="assets/redesign/quran-list-dark.png" alt="Quran list in dark mode" width="390" height="844" loading="lazy" />
+      </figure>
+    </div>
+
+    <p class="screen-label">Player</p>
+    <div class="pair">
+      <figure class="shot">
+        <figcaption><span>Player</span><span class="mode">Light</span></figcaption>
+        <img src="assets/redesign/player-light.png" alt="Quran player in light mode" width="390" height="844" loading="lazy" />
+      </figure>
+      <figure class="shot">
+        <figcaption><span>Player</span><span class="mode">Dark</span></figcaption>
+        <img src="assets/redesign/player-dark.png" alt="Quran player in dark mode" width="390" height="844" loading="lazy" />
+      </figure>
+    </div>
+
+    <p class="screen-label">Prayer times</p>
+    <div class="pair">
+      <figure class="shot">
+        <figcaption><span>Prayer</span><span class="mode">Light</span></figcaption>
+        <img src="assets/redesign/prayer-times-light.png" alt="Prayer times in light mode" width="390" height="844" loading="lazy" />
+      </figure>
+      <figure class="shot">
+        <figcaption><span>Prayer</span><span class="mode">Dark</span></figcaption>
+        <img src="assets/redesign/prayer-times-dark.png" alt="Prayer times in dark mode" width="390" height="844" loading="lazy" />
+      </figure>
+    </div>
+
+    <p class="screen-label">E-Codes</p>
+    <div class="pair">
+      <figure class="shot">
+        <figcaption><span>E-Codes</span><span class="mode">Light</span></figcaption>
+        <img src="assets/redesign/ecodes-light.png" alt="E-Codes in light mode" width="390" height="844" loading="lazy" />
+      </figure>
+      <figure class="shot">
+        <figcaption><span>E-Codes</span><span class="mode">Dark</span></figcaption>
+        <img src="assets/redesign/ecodes-dark.png" alt="E-Codes in dark mode" width="390" height="844" loading="lazy" />
+      </figure>
+    </div>
+
+    <h2>What shipped</h2>
+
+    <h3>Design system — <span class="path">Quran Education/DesignSystem/</span></h3>
+    <ul>
+      <li><code>AppTheme</code> — adaptive colors, spacing, radii</li>
+      <li><code>AppTheme.Colors.navigationTitle</code> — white in dark mode, black in light mode
+        (applied once in <code>Quran_EducationApp.init</code> via <code>UINavigationBarAppearance</code>)</li>
+      <li><code>SoftGeometryBackground</code> — solid adaptive canvas (no decorative motifs)</li>
+      <li><code>QECard</code>, <code>QEPrimaryButton</code>, <code>Haptics</code></li>
+    </ul>
+
+    <h3>Home hub — <code>MenuView</code></h3>
+    <ul>
+      <li>Time-aware greeting (<em>Assalamualaikum</em> + morning/afternoon/evening)</li>
+      <li>Next-prayer card (tap → Prayer Times)</li>
+      <li>Continue listening → <code>ResumePlayerDestination</code> → player (auto-play)</li>
+      <li>Empty state prompts starting with Urdu Quran</li>
+      <li>2×2 feature tiles; typed <code>HomeDestination</code> navigation</li>
+      <li>Help sheet: privacy bullets + Terms &amp; Conditions web link</li>
+      <li>Share: app icon (<code>LaunchLogo</code>) + message + landing page
+        <a href="https://iqbalmuddassir.github.io/bookish-pancake/quran-education-app/">quran-education-app</a>
+      </li>
+    </ul>
+
+    <h3>Quran</h3>
+    <ul>
+      <li>Bookmark toggle per rukoo; All / Bookmarks filter chips</li>
+      <li>Persist via <code>UserPrefHelper</code> (<code>surahKey|rukooIndex</code> per language)</li>
+      <li>Brass FAB for resume; sage visualizer on player</li>
+    </ul>
+
+    <h3>Prayer times</h3>
+    <ul>
+      <li>Hero next-prayer + vertical timeline</li>
+      <li>Adhan UTC dates formatted with the <strong>location timezone</strong> from reverse geocoding</li>
+      <li>Writes App Group snapshot for the widget</li>
+    </ul>
+
+    <h3>E-Codes</h3>
+    <ul>
+      <li>Soft status chips with label + color; VoiceOver on rows</li>
+      <li>Adaptive chip colors for dark mode</li>
+    </ul>
+
+    <h3>Launch</h3>
+    <ul>
+      <li>Mist background + centered <code>LaunchLogo</code> (app icon asset)</li>
+    </ul>
+
+    <h3>Widget — <code>QuranEducationWidget</code></h3>
+    <ul>
+      <li>Small/medium “Next prayer” widget</li>
+      <li>Deep link <code>quraneducation://prayer</code> → home opens Prayer Times</li>
+      <li>Shared model in <span class="path">Shared/NextPrayerSnapshot.swift</span></li>
+      <li>App Group: <code>group.com.mi.Quran-Education</code></li>
+    </ul>
+
+    <h2>Tech notes for maintainers</h2>
+    <div class="card">
+      <table>
+        <thead>
+          <tr>
+            <th>Area</th>
+            <th>Detail</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Navigation</td>
+            <td><code>MenuView</code> owns <code>NavigationStack</code> + <code>navigationDestination</code>.
+              Large titles keep the standard layout (title above search). Title color comes from
+              <code>AppTheme.Colors.navigationTitle</code>.</td>
+          </tr>
+          <tr>
+            <td>Startup</td>
+            <td><code>HomePrayerModel.startIfNeeded()</code> defers location/timer work; widget reload only when snapshot data changes</td>
+          </tr>
+          <tr>
+            <td>Prefs</td>
+            <td><code>UserPrefHelper</code> — resume playback + bookmarks</td>
+          </tr>
+          <tr>
+            <td>Entitlements</td>
+            <td>App + widget App Group entitlements</td>
+          </tr>
+          <tr>
+            <td>URL scheme</td>
+            <td><code>quraneducation</code> in Info.plist</td>
+          </tr>
+          <tr>
+            <td>Localization</td>
+            <td>Keys in <code>en.lproj</code> / <code>ur.lproj</code> + <code>L10n</code></td>
+          </tr>
+          <tr>
+            <td>XcodeGen</td>
+            <td>App sources include app folder + <code>Shared</code>; widget embeds into app</td>
+          </tr>
+          <tr>
+            <td>Lint paths</td>
+            <td>SwiftFormat also lints <code>Shared</code> and <code>QuranEducationWidget</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Implementation order (historical)</h2>
+    <ol class="steps">
+      <li>DesignSystem tokens + soft background + shared components</li>
+      <li>Home hub + prayer countdown model + themed navigation</li>
+      <li>Quran bookmarks + list/player restyle</li>
+      <li>Prayer timeline + App Group bridge</li>
+      <li>E-Code restyle + a11y</li>
+      <li>Widget target + deep link</li>
+      <li>Localization, snapshots, lint</li>
+    </ol>
+
+    <h2>Post-plan refinements (also shipped)</h2>
+    <ul>
+      <li>Quran list row vertical alignment (title / download / bookmark)</li>
+      <li>Launch logo instead of text-only splash</li>
+      <li>Continue listening opens player (not list)</li>
+      <li>Dark-mode adaptive icon/chip colors</li>
+      <li>Nav title color via <code>AppTheme.Colors.navigationTitle</code> (light/dark)</li>
+      <li>Location timezone for prayer formatting</li>
+      <li>Help T&amp;C link; share landing page + app icon</li>
+    </ul>
+
+    <h2>Snapshots</h2>
+    <p>
+      Gallery images above are light/dark captures from the iOS app’s screenshot
+      test suite (iPhone-sized references). They document the shipping visual
+      design until the App Store release.
+    </p>
+
+    <h2>Android parity</h2>
+    <p>
+      iOS leads visually after this redesign. Feature set (Quran / Prayer / E-Codes /
+      offline / resume) stays equivalent; bookmarks + home-screen widget are
+      iOS-first engagement extras.
+    </p>
+
+    <footer>
+      <p>Quran Urdu iOS · redesign reference · <a href="../index.html">Back to Al-Quran Education</a></p>
+    </footer>
+  </div>
+
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+    const dark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: dark ? "dark" : "base",
+      themeVariables: dark
+        ? {
+            primaryColor: "#252a27",
+            primaryTextColor: "#eef2ef",
+            primaryBorderColor: "#8cc7a6",
+            lineColor: "#b08d57",
+            secondaryColor: "#1a1e1c",
+            tertiaryColor: "#2d5a48"
+          }
+        : {
+            primaryColor: "#f4f7f5",
+            primaryTextColor: "#1b3a2f",
+            primaryBorderColor: "#1b3a2f",
+            lineColor: "#b08d57",
+            secondaryColor: "#ffffff",
+            tertiaryColor: "#e8efe9"
+          }
+    });
+  </script>
+</body>
+</html>
