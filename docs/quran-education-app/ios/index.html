@@ -470,11 +470,6 @@
                 overscroll-behavior-x: contain;
             }
 
-            .gallery figure {
-                min-width: 148px;
-                scroll-snap-align: start;
-            }
-
             .v1-strip {
                 padding: 24px 18px;
                 margin: 8px 0 48px;
@@ -574,13 +569,22 @@
                 gap: 14px;
                 padding-bottom: 8px;
                 scrollbar-width: none;
+                -webkit-overflow-scrolling: touch;
+                scroll-snap-type: x mandatory;
+                overscroll-behavior-x: contain;
             }
             .gallery::-webkit-scrollbar { display: none; }
-            .gallery figure { min-width: 160px; flex-shrink: 0; }
+            .gallery figure {
+                flex: 0 0 min(42vw, 168px);
+                width: min(42vw, 168px);
+                max-width: min(42vw, 168px);
+                scroll-snap-align: start;
+            }
         }
 
         .gallery figure {
             margin: 0;
+            min-width: 0;
             animation: fadeSlide 0.7s ease both;
         }
 
@@ -591,6 +595,8 @@
 
         .gallery img {
             width: 100%;
+            max-width: 100%;
+            height: auto;
             border-radius: 18px;
             box-shadow: var(--shadow);
             display: block;
