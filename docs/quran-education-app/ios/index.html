@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Quran Urdu for iPhone — Coming Soon</title>
+    <meta name="description" content="Quran Urdu for iOS: native SwiftUI companion with Quran audio in English &amp; Urdu, prayer times, next-prayer widget, and Halal E-codes. Version 1.0 coming soon." />
+    <link rel="icon" href="../assets/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon-16.png" />
+    <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+        :root {
+            --sage: #1b3a2f;
+            --sage-soft: #2d5a48;
+            --brass: #b08d57;
+            --mist: #f0f4f1;
+            --canvas: #e8efe9;
+            --ink: #121816;
+            --stone: #5c6560;
+            --surface: rgba(255, 255, 255, 0.78);
+            --line: rgba(27, 58, 47, 0.12);
+            --shadow: 0 24px 64px rgba(27, 58, 47, 0.12);
+            --phone-frame: #1a1f1c;
+        }
+
+        body.dark-mode {
+            --sage: #8cc7a6;
+            --sage-soft: #a8d9bc;
+            --brass: #e6c67a;
+            --mist: #121614;
+            --canvas: #0c0f0d;
+            --ink: #eef2ef;
+            --stone: #a8b2aa;
+            --surface: rgba(28, 34, 30, 0.88);
+            --line: rgba(140, 199, 166, 0.16);
+            --shadow: 0 24px 64px rgba(0, 0, 0, 0.45);
+            --phone-frame: #0a0c0b;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body:not(.light-mode) {
+                --sage: #8cc7a6;
+                --sage-soft: #a8d9bc;
+                --brass: #e6c67a;
+                --mist: #121614;
+                --canvas: #0c0f0d;
+                --ink: #eef2ef;
+                --stone: #a8b2aa;
+                --surface: rgba(28, 34, 30, 0.88);
+                --line: rgba(140, 199, 166, 0.16);
+                --shadow: 0 24px 64px rgba(0, 0, 0, 0.45);
+                --phone-frame: #0a0c0b;
+            }
+        }
+
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        html { overflow-x: clip; }
+
+        body {
+            margin: 0;
+            font-family: 'Outfit', system-ui, sans-serif;
+            color: var(--ink);
+            background: var(--canvas);
+            line-height: 1.65;
+            overflow-x: clip;
+            transition: background-color 0.35s ease, color 0.35s ease;
+        }
+
+        .atmosphere {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            background:
+                radial-gradient(ellipse 70% 50% at 70% 0%, rgba(176, 141, 87, 0.16), transparent 55%),
+                radial-gradient(ellipse 60% 45% at 10% 40%, rgba(27, 58, 47, 0.14), transparent 50%),
+                var(--canvas);
+        }
+
+        body.dark-mode .atmosphere {
+            background:
+                radial-gradient(ellipse 70% 50% at 70% 0%, rgba(230, 198, 122, 0.1), transparent 55%),
+                radial-gradient(ellipse 60% 45% at 10% 40%, rgba(140, 199, 166, 0.1), transparent 50%),
+                var(--canvas);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body:not(.light-mode) .atmosphere {
+                background:
+                    radial-gradient(ellipse 70% 50% at 70% 0%, rgba(230, 198, 122, 0.1), transparent 55%),
+                    radial-gradient(ellipse 60% 45% at 10% 40%, rgba(140, 199, 166, 0.1), transparent 50%),
+                    var(--canvas);
+            }
+        }
+
+        @keyframes riseIn {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes phoneFloat {
+            0%, 100% { transform: translateY(0) rotate(-2deg); }
+            50% { transform: translateY(-12px) rotate(-1deg); }
+        }
+
+        @keyframes fadeSlide {
+            from { opacity: 0; transform: translateX(16px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .wrap {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+            padding-left: max(24px, env(safe-area-inset-left, 0px));
+            padding-right: max(24px, env(safe-area-inset-right, 0px));
+        }
+
+        .topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 12px 0 8px;
+            padding-top: max(12px, calc(env(safe-area-inset-top, 0px) + 6px));
+            position: relative;
+            z-index: 2;
+        }
+
+        .back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--stone);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .back:hover { color: var(--sage); }
+
+        #themeToggle {
+            width: 44px;
+            height: 44px;
+            flex-shrink: 0;
+            border-radius: 50%;
+            background: var(--surface);
+            border: 1px solid var(--line);
+            color: var(--ink);
+            cursor: pointer;
+            display: grid;
+            place-items: center;
+            backdrop-filter: blur(10px);
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        #themeToggle svg { width: 18px; height: 18px; display: none; }
+        body.dark-mode #themeToggle .icon-sun,
+        body.light-mode #themeToggle .icon-moon { display: block; }
+        @media (prefers-color-scheme: dark) {
+            body:not(.light-mode):not(.dark-mode) #themeToggle .icon-sun { display: block; }
+        }
+        @media (prefers-color-scheme: light) {
+            body:not(.light-mode):not(.dark-mode) #themeToggle .icon-moon { display: block; }
+        }
+
+        /* —— Hero —— */
+        .hero {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 40px;
+            align-items: center;
+            padding: 12px 0 56px;
+        }
+
+        @media (max-width: 900px) {
+            .hero {
+                grid-template-columns: 1fr;
+                min-height: auto;
+                text-align: center;
+                gap: 28px;
+                padding: 4px 0 40px;
+            }
+        }
+
+        .coming-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--brass);
+            margin: 0 0 18px;
+            animation: riseIn 0.8s ease both;
+        }
+
+        .coming-badge svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .brand-mark {
+            width: clamp(64px, 12vw, 88px);
+            height: auto;
+            display: block;
+            margin: 0 0 12px;
+            filter: drop-shadow(0 10px 24px rgba(27, 58, 47, 0.2));
+            animation: riseIn 0.8s ease both;
+        }
+
+        @media (max-width: 900px) {
+            .brand-mark { margin-left: auto; margin-right: auto; }
+        }
+
+        .brand {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: clamp(2.8rem, 7vw, 4.4rem);
+            font-weight: 600;
+            line-height: 1.05;
+            letter-spacing: -0.02em;
+            color: var(--sage);
+            margin: 0 0 8px;
+            animation: riseIn 0.85s ease 0.08s both;
+        }
+
+        .brand em {
+            font-style: italic;
+            color: var(--brass);
+            font-weight: 500;
+        }
+
+        .version-tag {
+            display: inline-block;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--stone);
+            margin-bottom: 20px;
+            animation: riseIn 0.85s ease 0.14s both;
+        }
+
+        .lede {
+            font-size: 1.15rem;
+            color: var(--stone);
+            max-width: 28em;
+            margin: 0 0 32px;
+            animation: riseIn 0.85s ease 0.2s both;
+        }
+
+        @media (max-width: 900px) {
+            .lede { margin-left: auto; margin-right: auto; }
+        }
+
+        .cta-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            animation: riseIn 0.85s ease 0.28s both;
+        }
+
+        @media (max-width: 900px) {
+            .cta-row { justify-content: center; }
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 14px 22px;
+            min-height: 52px;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            border: 1px solid transparent;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .btn svg { width: 20px; height: 20px; }
+
+        .btn-primary {
+            background: var(--sage);
+            color: #f4faf6;
+            box-shadow: 0 14px 36px rgba(27, 58, 47, 0.3);
+        }
+
+        body.dark-mode .btn-primary { color: #0c1210; }
+
+        @media (prefers-color-scheme: dark) {
+            body:not(.light-mode) .btn-primary { color: #0c1210; }
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            background: var(--sage-soft);
+        }
+
+        .btn-ghost {
+            background: var(--surface);
+            color: var(--ink);
+            border-color: var(--line);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-ghost:hover {
+            transform: translateY(-3px);
+            border-color: var(--brass);
+        }
+
+        .privacy-note {
+            margin-top: 22px;
+            font-size: 0.88rem;
+            color: var(--stone);
+            animation: riseIn 0.85s ease 0.36s both;
+        }
+
+        /* Phone stage */
+        .stage {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 520px;
+            animation: riseIn 1s ease 0.2s both;
+        }
+
+        .stage-glow {
+            position: absolute;
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(176, 141, 87, 0.28), transparent 70%);
+            filter: blur(4px);
+            z-index: 0;
+        }
+
+        .phone {
+            position: relative;
+            z-index: 1;
+            width: min(260px, 70vw);
+            padding: 12px;
+            border-radius: 36px;
+            background: linear-gradient(145deg, #2a302c, var(--phone-frame));
+            box-shadow:
+                0 40px 80px rgba(0, 0, 0, 0.28),
+                inset 0 1px 0 rgba(255, 255, 255, 0.08);
+            animation: phoneFloat 6s ease-in-out infinite;
+        }
+
+        .phone-notch {
+            position: absolute;
+            top: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 36%;
+            height: 18px;
+            background: #000;
+            border-radius: 12px;
+            z-index: 2;
+        }
+
+        .phone img {
+            display: block;
+            width: 100%;
+            border-radius: 26px;
+            background: #000;
+        }
+
+        .phone-stack {
+            position: absolute;
+            width: min(200px, 48vw);
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 20px 48px rgba(0, 0, 0, 0.22);
+            opacity: 0.55;
+            z-index: 0;
+        }
+
+        .phone-stack--left {
+            left: 4%;
+            top: 18%;
+            transform: rotate(-8deg);
+        }
+
+        .phone-stack--right {
+            right: 4%;
+            bottom: 14%;
+            transform: rotate(7deg);
+            opacity: 0.45;
+        }
+
+        .phone-stack img {
+            display: block;
+            width: 100%;
+        }
+
+        @media (max-width: 900px) {
+            .phone-stack { display: none; }
+            .stage { min-height: 0; padding: 8px 0 16px; }
+            .phone { width: min(220px, 58vw); }
+            .stage-glow { width: 240px; height: 240px; }
+        }
+
+        @media (max-width: 768px) {
+            .wrap {
+                padding-left: max(16px, env(safe-area-inset-left, 0px));
+                padding-right: max(16px, env(safe-area-inset-right, 0px));
+            }
+
+            .back {
+                font-size: 0.85rem;
+                min-width: 0;
+            }
+
+            .brand {
+                font-size: clamp(2.4rem, 12vw, 3.4rem);
+            }
+
+            .lede {
+                font-size: 1.02rem;
+                margin-bottom: 24px;
+                padding: 0 2px;
+            }
+
+            .cta-row {
+                width: 100%;
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 340px;
+                margin: 0 auto;
+            }
+
+            .privacy-note {
+                font-size: 0.82rem;
+                padding: 0 8px;
+                line-height: 1.45;
+            }
+
+            .section {
+                padding: 24px 0 56px;
+            }
+
+            .section-lede {
+                margin-bottom: 32px;
+                padding: 0 4px;
+            }
+
+            .feature-item h3 { font-size: 1.35rem; }
+
+            .gallery {
+                margin: 0;
+                padding: 0 0 8px;
+                -webkit-overflow-scrolling: touch;
+                scroll-snap-type: x mandatory;
+                overscroll-behavior-x: contain;
+            }
+
+            .gallery figure {
+                min-width: 148px;
+                scroll-snap-align: start;
+            }
+
+            .v1-strip {
+                padding: 24px 18px;
+                margin: 8px 0 48px;
+                gap: 18px;
+                border-radius: 20px;
+            }
+
+            .closing {
+                padding: 44px 20px;
+                margin-bottom: 40px;
+                border-radius: 22px;
+            }
+
+            footer {
+                padding: 32px 0 max(48px, env(safe-area-inset-bottom, 0px));
+            }
+        }
+
+        @media (max-width: 380px) {
+            .brand { font-size: 2.2rem; }
+            .coming-badge { font-size: 0.7rem; letter-spacing: 0.08em; }
+            .phone { width: min(200px, 64vw); }
+        }
+
+        /* —— Features —— */
+        .section {
+            padding: 40px 0 80px;
+        }
+
+        .section-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--brass);
+            margin: 0 0 10px;
+            text-align: center;
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: clamp(2rem, 4.5vw, 2.8rem);
+            font-weight: 600;
+            text-align: center;
+            color: var(--sage);
+            margin: 0 0 12px;
+        }
+
+        .section-lede {
+            text-align: center;
+            color: var(--stone);
+            max-width: 36em;
+            margin: 0 auto 48px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 28px 40px;
+        }
+
+        @media (max-width: 700px) {
+            .feature-grid { grid-template-columns: 1fr; }
+        }
+
+        .feature-item {
+            padding-top: 20px;
+            border-top: 1px solid var(--line);
+        }
+
+        .feature-item h3 {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.55rem;
+            font-weight: 600;
+            margin: 0 0 10px;
+            color: var(--ink);
+        }
+
+        .feature-item p {
+            margin: 0;
+            color: var(--stone);
+            font-size: 0.98rem;
+        }
+
+        /* —— Gallery —— */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 900px) {
+            .gallery {
+                display: flex;
+                overflow-x: auto;
+                gap: 14px;
+                padding-bottom: 8px;
+                scrollbar-width: none;
+            }
+            .gallery::-webkit-scrollbar { display: none; }
+            .gallery figure { min-width: 160px; flex-shrink: 0; }
+        }
+
+        .gallery figure {
+            margin: 0;
+            animation: fadeSlide 0.7s ease both;
+        }
+
+        .gallery figure:nth-child(2) { animation-delay: 0.06s; }
+        .gallery figure:nth-child(3) { animation-delay: 0.12s; }
+        .gallery figure:nth-child(4) { animation-delay: 0.18s; }
+        .gallery figure:nth-child(5) { animation-delay: 0.24s; }
+
+        .gallery img {
+            width: 100%;
+            border-radius: 18px;
+            box-shadow: var(--shadow);
+            display: block;
+            transition: transform 0.35s ease;
+        }
+
+        .gallery figure:hover img {
+            transform: translateY(-8px);
+        }
+
+        .gallery figcaption {
+            margin-top: 10px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: var(--stone);
+            text-align: center;
+        }
+
+        .mode-toggle {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 28px;
+        }
+
+        .mode-toggle button {
+            font-family: inherit;
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 10px;
+            border: 1px solid var(--line);
+            background: transparent;
+            color: var(--stone);
+            cursor: pointer;
+            transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+        }
+
+        .mode-toggle button[aria-pressed="true"] {
+            background: var(--sage);
+            color: #f4faf6;
+            border-color: transparent;
+        }
+
+        body.dark-mode .mode-toggle button[aria-pressed="true"] { color: #0c1210; }
+
+        @media (prefers-color-scheme: dark) {
+            body:not(.light-mode) .mode-toggle button[aria-pressed="true"] { color: #0c1210; }
+        }
+
+        /* —— Version strip —— */
+        .v1-strip {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            padding: 36px 28px;
+            border-radius: 24px;
+            border: 1px solid var(--line);
+            background: var(--surface);
+            backdrop-filter: blur(12px);
+            margin: 20px 0 80px;
+        }
+
+        @media (max-width: 800px) {
+            .v1-strip { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media (max-width: 480px) {
+            .v1-strip { grid-template-columns: 1fr; }
+        }
+
+        .v1-item strong {
+            display: block;
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.35rem;
+            font-weight: 600;
+            color: var(--sage);
+            margin-bottom: 4px;
+        }
+
+        .v1-fact span {
+            font-size: 0.9rem;
+            color: var(--stone);
+        }
+
+        /* —— Closing —— */
+        .closing {
+            text-align: center;
+            padding: 64px 28px;
+            margin-bottom: 64px;
+            border-radius: 28px;
+            border: 1px solid var(--line);
+            background:
+                linear-gradient(155deg, rgba(176, 141, 87, 0.1), transparent 55%),
+                var(--surface);
+        }
+
+        .closing h2 {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 600;
+            color: var(--sage);
+            margin: 0 0 12px;
+        }
+
+        .closing p {
+            color: var(--stone);
+            margin: 0 0 28px;
+            max-width: 32em;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 0 64px;
+            border-top: 1px solid var(--line);
+            color: var(--stone);
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: var(--sage);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        footer a:hover { color: var(--brass); }
+
+        .footer-links {
+            margin-top: 14px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px 22px;
+            justify-content: center;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="atmosphere" aria-hidden="true"></div>
+
+<div class="wrap">
+    <nav class="topbar">
+        <a class="back" href="../index.html">← Al-Quran Education</a>
+        <button id="themeToggle" aria-label="Toggle theme" type="button">
+            <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                <circle cx="12" cy="12" r="4"/>
+                <path d="M12 3v2M12 19v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M3 12h2M19 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/>
+            </svg>
+            <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                <path d="M21 14.5A8.5 8.5 0 0 1 9.5 3 7 7 0 1 0 21 14.5z"/>
+            </svg>
+        </button>
+    </nav>
+
+    <header class="hero">
+        <div>
+            <img class="brand-mark" src="../assets/logo.svg" width="104" height="104" alt="Al-Quran Education logo" />
+            <p class="coming-badge">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M18.7 12.7c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.2-2.8.9-3.5.9s-1.8-.8-3-.8c-1.5 0-2.9.9-3.7 2.3-1.6 2.7-.4 6.8 1.1 9 .8 1.1 1.7 2.3 2.9 2.2 1.1 0 1.6-.7 3-.7s1.8.7 3 .7 2-1.1 2.8-2.2c.9-1.3 1.2-2.5 1.3-2.6-.1 0-2.4-.9-2.5-3.5zm-2.3-6.8c.6-.8 1.1-1.8.9-2.9-1 .1-2.1.6-2.8 1.4-.6.7-1.2 1.8-1 2.8 1.1.1 2.2-.5 2.9-1.3z"/></svg>
+                Coming soon to the App Store
+            </p>
+            <h1 class="brand">Quran <em>Urdu</em></h1>
+            <p class="version-tag">Version 1.0 for iPhone</p>
+            <p class="lede">A calm native companion for tilawat, prayer times, and Halal E-codes — built in SwiftUI with a quiet mosque-courtyard feel. No accounts. No tracking. Just the tools you need every day.</p>
+            <div class="cta-row">
+                <a class="btn btn-primary" href="mailto:iqbal.muddassir@gmail.com?subject=Notify%20me%20when%20Quran%20Urdu%20iOS%20launches">
+                    Notify me at launch
+                </a>
+                <a class="btn btn-ghost" href="../android/index.html">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M17.5 8.5h-.8l-.4-1.1A4.5 4.5 0 0 0 12 4.5c-1.9 0-3.5 1.1-4.3 2.9l-.4 1.1h-.8C4.7 8.5 3.5 9.7 3.5 11.2v6.3c0 .8.7 1.5 1.5 1.5h1v2.5a1.5 1.5 0 0 0 3 0V19h6v2.5a1.5 1.5 0 0 0 3 0V19h1c.8 0 1.5-.7 1.5-1.5v-6.3c0-1.5-1.2-2.7-2.5-2.7zM9 6.8A2.5 2.5 0 0 1 12 5.5c1 0 1.9.6 2.3 1.5L14 8H10l-.3-.7c-.1-.2-.2-.3-.3-.5H9zm-1.5 5.2a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm9 0a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/></svg>
+                    Explore Android
+                </a>
+            </div>
+            <p class="privacy-note">Requires iOS 16.2+ · Location used only for prayer times · Data stays on your device</p>
+        </div>
+
+        <div class="stage" aria-hidden="true">
+            <div class="stage-glow"></div>
+            <div class="phone-stack phone-stack--left">
+                <img src="assets/redesign/prayer-times-light.png" alt="" data-light="assets/redesign/prayer-times-light.png" data-dark="assets/redesign/prayer-times-dark.png" />
+            </div>
+            <div class="phone">
+                <div class="phone-notch"></div>
+                <img id="heroPhone" src="assets/redesign/home-light.png" alt="Quran Urdu home screen" data-light="assets/redesign/home-light.png" data-dark="assets/redesign/home-dark.png" />
+            </div>
+            <div class="phone-stack phone-stack--right">
+                <img src="assets/redesign/ecodes-light.png" alt="" data-light="assets/redesign/ecodes-light.png" data-dark="assets/redesign/ecodes-dark.png" />
+            </div>
+        </div>
+    </header>
+
+    <section class="section">
+        <p class="section-label">Inside version 1.0</p>
+        <h2 class="section-title">Everything for a mindful day</h2>
+        <p class="section-lede">The first release brings a focused home hub and three self-contained tools — the same spirit as Android, designed natively for Apple.</p>
+
+        <div class="feature-grid">
+            <div class="feature-item">
+                <h3>Calm home hub</h3>
+                <p>Time-aware greeting, next-prayer countdown, and one-tap continue listening so you pick up your recitation without hunting for the right surah.</p>
+            </div>
+            <div class="feature-item">
+                <h3>Quran audio &amp; translation</h3>
+                <p>Urdu and English audio with translations. Browse by surah and rukoo, search, bookmark, download for offline play, and resume from the home screen.</p>
+            </div>
+            <div class="feature-item">
+                <h3>Prayer times + widget</h3>
+                <p>Location-based daily times calculated on-device with Adhan. A home-screen Next Prayer widget keeps the countdown on your Lock Screen glance path.</p>
+            </div>
+            <div class="feature-item">
+                <h3>Halal E-codes</h3>
+                <p>Search food additive codes for halal, haram, or doubtful status — clear labeled chips, VoiceOver-friendly, from a bundled offline database.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" aria-labelledby="gallery-heading">
+        <p class="section-label">Look &amp; feel</p>
+        <h2 class="section-title" id="gallery-heading">Quiet mosque courtyard</h2>
+        <p class="section-lede">Sage and brass tones, soft surfaces, and generous space — light and dark modes included.</p>
+
+        <div class="mode-toggle" role="group" aria-label="Screenshot appearance">
+            <button type="button" id="modeLight" aria-pressed="true">Light</button>
+            <button type="button" id="modeDark" aria-pressed="false">Dark</button>
+        </div>
+
+        <div class="gallery" id="gallery">
+            <figure>
+                <img src="assets/redesign/home-light.png" alt="Home hub" data-light="assets/redesign/home-light.png" data-dark="assets/redesign/home-dark.png" />
+                <figcaption>Home</figcaption>
+            </figure>
+            <figure>
+                <img src="assets/redesign/quran-list-light.png" alt="Quran list" data-light="assets/redesign/quran-list-light.png" data-dark="assets/redesign/quran-list-dark.png" />
+                <figcaption>Quran</figcaption>
+            </figure>
+            <figure>
+                <img src="assets/redesign/player-light.png" alt="Quran player" data-light="assets/redesign/player-light.png" data-dark="assets/redesign/player-dark.png" />
+                <figcaption>Player</figcaption>
+            </figure>
+            <figure>
+                <img src="assets/redesign/prayer-times-light.png" alt="Prayer times" data-light="assets/redesign/prayer-times-light.png" data-dark="assets/redesign/prayer-times-dark.png" />
+                <figcaption>Prayer</figcaption>
+            </figure>
+            <figure>
+                <img src="assets/redesign/ecodes-light.png" alt="E-codes" data-light="assets/redesign/ecodes-light.png" data-dark="assets/redesign/ecodes-dark.png" />
+                <figcaption>E-codes</figcaption>
+            </figure>
+        </div>
+    </section>
+
+    <div class="v1-strip" aria-label="Version 1.0 details">
+        <div class="v1-fact">
+            <strong>1.0.0</strong>
+            <span>First App Store release</span>
+        </div>
+        <div class="v1-fact">
+            <strong>SwiftUI</strong>
+            <span>Native iOS 16.2+</span>
+        </div>
+        <div class="v1-fact">
+            <strong>EN · UR</strong>
+            <span>Localized interface</span>
+        </div>
+        <div class="v1-fact">
+            <strong>Private</strong>
+            <span>No accounts or analytics</span>
+        </div>
+    </div>
+
+    <section class="closing">
+        <h2>Be first when it lands</h2>
+        <p>Drop a note and we’ll let you know the moment Quran Urdu is on the App Store. Meanwhile, explore the Android app — it’s live today.</p>
+        <div class="cta-row" style="justify-content: center;">
+            <a class="btn btn-primary" href="mailto:iqbal.muddassir@gmail.com?subject=Notify%20me%20when%20Quran%20Urdu%20iOS%20launches">Notify me at launch</a>
+            <a class="btn btn-ghost" href="../android/index.html">Explore Android →</a>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024–<span class="curr-year"></span> Al-Quran Education · Quran Urdu for iOS</p>
+        <div class="footer-links">
+            <a href="../terms_and_conditions.html">Terms &amp; Conditions</a>
+            <a href="mailto:iqbal.muddassir@gmail.com">Support</a>
+            <a href="../android/index.html">Android app</a>
+        </div>
+    </footer>
+</div>
+
+<script>
+    const body = document.body;
+    const themeToggle = document.getElementById('themeToggle');
+    const savedTheme = localStorage.getItem('quran-app-theme');
+    if (savedTheme) body.classList.add(savedTheme);
+
+    function isDarkTheme() {
+        if (body.classList.contains('dark-mode')) return true;
+        if (body.classList.contains('light-mode')) return false;
+        return window.matchMedia('(prefers-color-scheme: dark)').matches;
+    }
+
+    function syncThemeToggle() {
+        const dark = isDarkTheme();
+        themeToggle.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
+        themeToggle.title = dark ? 'Light mode' : 'Dark mode';
+    }
+
+    syncThemeToggle();
+
+    themeToggle.addEventListener('click', () => {
+        if (body.classList.contains('dark-mode')) {
+            body.classList.remove('dark-mode');
+            body.classList.add('light-mode');
+            localStorage.setItem('quran-app-theme', 'light-mode');
+        } else if (body.classList.contains('light-mode')) {
+            body.classList.remove('light-mode');
+            body.classList.add('dark-mode');
+            localStorage.setItem('quran-app-theme', 'dark-mode');
+        } else {
+            const next = isDarkTheme() ? 'light-mode' : 'dark-mode';
+            body.classList.add(next);
+            localStorage.setItem('quran-app-theme', next);
+        }
+        syncThemeToggle();
+    });
+
+    document.querySelectorAll('.curr-year').forEach(el => {
+        el.textContent = new Date().getFullYear();
+    });
+
+    const modeLight = document.getElementById('modeLight');
+    const modeDark = document.getElementById('modeDark');
+
+    function setShotMode(mode) {
+        const useDark = mode === 'dark';
+        document.querySelectorAll('[data-light][data-dark]').forEach(img => {
+            img.src = useDark ? img.dataset.dark : img.dataset.light;
+        });
+        modeLight.setAttribute('aria-pressed', String(!useDark));
+        modeDark.setAttribute('aria-pressed', String(useDark));
+    }
+
+    modeLight.addEventListener('click', () => setShotMode('light'));
+    modeDark.addEventListener('click', () => setShotMode('dark'));
+</script>
+</body>
+</html>
