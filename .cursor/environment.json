@@ -1,0 +1,17 @@
+{
+  "name": "bookish-pancake",
+  "install": "python3 --version && test -f docs/index.html && echo 'Static site ready — no package install required'",
+  "terminals": [
+    {
+      "name": "docs-server",
+      "command": "python3 -m http.server 8000 --directory docs",
+      "description": "Serves the docs/ portfolio site at http://localhost:8000 for local preview and visual checks."
+    }
+  ],
+  "ports": [
+    {
+      "name": "docs site",
+      "port": 8000
+    }
+  ]
+}
