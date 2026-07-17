@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Digital Marketing with AI from Scratch | 3-Month Freelancer Roadmap</title>
   <meta name="description" content="A complete step-by-step website to learn digital marketing with AI from scratch in 3 months and start freelancing using free authentic resources." />
-  <meta name="theme-color" content="#0f172a" />
+  <meta name="theme-color" content="#e5e9e6" />
 
   <meta property="og:title" content="Digital Marketing with AI from Scratch | 3-Month Freelancer Roadmap" />
   <meta property="og:description" content="Learn digital marketing with AI from scratch, follow a 12-week curriculum, build a portfolio, and start freelancing." />
@@ -13,62 +13,86 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --bg: #07111f;
-      --bg-soft: #0f172a;
-      --panel: rgba(255,255,255,0.06);
-      --panel-2: rgba(255,255,255,0.08);
-      --text: #e7eefc;
-      --muted: #9eb0cc;
-      --border: rgba(255,255,255,0.10);
-      --primary: #7c9cff;
-      --primary-2: #4fd1ff;
-      --accent: #8ef0c8;
-      --warning: #ffd166;
-      --danger: #fb7185;
-      --success: #34d399;
-      --shadow: 0 20px 55px rgba(0,0,0,0.28);
-      --radius: 20px;
-      --radius-sm: 14px;
-      --max: 1280px;
+      --bg: #e5e9e6;
+      --bg-deep: #d2d8d3;
+      --ink: #171a18;
+      --muted: #5c645e;
+      --line: #171a18;
+      --line-soft: color-mix(in srgb, var(--ink) 22%, transparent);
+      --accent: #8c1f2f;
+      --surface: #eef1ee;
+      --panel: transparent;
+      --panel-2: color-mix(in srgb, var(--ink) 4%, transparent);
+      --text: var(--ink);
+      --border: var(--line-soft);
+      --primary: var(--accent);
+      --primary-2: var(--accent);
+      --success: #1f6b4a;
+      --warning: #8a5a12;
+      --danger: #8c1f2f;
+      --shadow: none;
+      --radius: 0;
+      --radius-sm: 0;
+      --max: 1120px;
     }
 
     body.light {
-      --bg: #f5f7fb;
-      --bg-soft: #ffffff;
-      --panel: rgba(15,23,42,0.04);
-      --panel-2: rgba(15,23,42,0.06);
-      --text: #0f172a;
-      --muted: #516079;
-      --border: rgba(15,23,42,0.10);
-      --primary: #4f46e5;
-      --primary-2: #0ea5e9;
-      --accent: #10b981;
-      --warning: #d97706;
-      --danger: #e11d48;
-      --success: #059669;
-      --shadow: 0 18px 45px rgba(15,23,42,0.08);
+      --bg: #e5e9e6;
+      --bg-deep: #d2d8d3;
+      --ink: #171a18;
+      --muted: #5c645e;
+      --line: #171a18;
+      --accent: #8c1f2f;
+      --surface: #eef1ee;
+      --panel-2: color-mix(in srgb, var(--ink) 4%, transparent);
+      --success: #1f6b4a;
+      --warning: #8a5a12;
+    }
+
+    body.dark {
+      --bg: #141816;
+      --bg-deep: #1c211e;
+      --ink: #e8ece9;
+      --muted: #a3aaa5;
+      --line: #e8ece9;
+      --accent: #e07a86;
+      --surface: #1c211e;
+      --panel-2: color-mix(in srgb, var(--ink) 6%, transparent);
+      --success: #7dbaa8;
+      --warning: #d4a574;
     }
 
     @media (prefers-color-scheme: light) {
       body:not(.dark) {
-        --bg: #f5f7fb;
-        --bg-soft: #ffffff;
-        --panel: rgba(15,23,42,0.04);
-        --panel-2: rgba(15,23,42,0.06);
-        --text: #0f172a;
-        --muted: #516079;
-        --border: rgba(15,23,42,0.10);
-        --primary: #4f46e5;
-        --primary-2: #0ea5e9;
-        --accent: #10b981;
-        --warning: #d97706;
-        --danger: #e11d48;
-        --success: #059669;
-        --shadow: 0 18px 45px rgba(15,23,42,0.08);
+        --bg: #e5e9e6;
+        --bg-deep: #d2d8d3;
+        --ink: #171a18;
+        --muted: #5c645e;
+        --line: #171a18;
+        --accent: #8c1f2f;
+        --surface: #eef1ee;
+        --panel-2: color-mix(in srgb, var(--ink) 4%, transparent);
+        --success: #1f6b4a;
+        --warning: #8a5a12;
+      }
+    }
+
+    @media (prefers-color-scheme: dark) {
+      body:not(.light) {
+        --bg: #141816;
+        --bg-deep: #1c211e;
+        --ink: #e8ece9;
+        --muted: #a3aaa5;
+        --line: #e8ece9;
+        --accent: #e07a86;
+        --surface: #1c211e;
+        --panel-2: color-mix(in srgb, var(--ink) 6%, transparent);
+        --success: #7dbaa8;
+        --warning: #d4a574;
       }
     }
 
@@ -77,21 +101,19 @@
 
     body {
       margin: 0;
-      font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      color: var(--text);
+      font-family: "Space Grotesk", sans-serif;
+      color: var(--ink);
       background:
-        radial-gradient(circle at 0% 0%, rgba(124,156,255,0.18), transparent 24%),
-        radial-gradient(circle at 100% 0%, rgba(79,209,255,0.14), transparent 22%),
-        linear-gradient(180deg, var(--bg) 0%, var(--bg-soft) 100%);
-      line-height: 1.6;
-      transition: background 0.25s ease, color 0.25s ease;
+        linear-gradient(105deg, var(--bg) 0%, var(--bg) 58%, var(--bg-deep) 58%, var(--bg-deep) 100%);
+      line-height: 1.55;
+      transition: background 0.3s ease, color 0.3s ease;
     }
 
-    a { color: var(--primary-2); text-decoration: none; }
-    a:hover { text-decoration: underline; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; text-underline-offset: 3px; }
 
     .container {
-      width: min(100% - 32px, var(--max));
+      width: min(100% - 2.5rem, var(--max));
       margin: 0 auto;
     }
 
@@ -99,231 +121,302 @@
       position: sticky;
       top: 0;
       z-index: 1000;
-      backdrop-filter: blur(14px);
-      background: color-mix(in srgb, var(--bg-soft) 78%, transparent);
-      border-bottom: 1px solid var(--border);
+      background: color-mix(in srgb, var(--bg) 88%, transparent);
+      border-bottom: 1.5px solid var(--line);
+      backdrop-filter: blur(8px);
     }
 
     .nav-inner {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 16px;
-      padding: 14px 0;
+      gap: 1rem;
+      padding: 0.85rem 0;
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: 12px;
-      font-weight: 800;
+      gap: 0.75rem;
+      font-weight: 700;
       letter-spacing: -0.03em;
-      color: var(--text);
+      color: var(--ink);
+      text-decoration: none;
+      font-size: 0.95rem;
     }
 
+    .brand:hover { text-decoration: none; color: var(--accent); }
+
     .brand-mark {
-      width: 38px;
-      height: 38px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, var(--accent), var(--primary-2), var(--primary));
-      box-shadow: var(--shadow);
+      width: 0.65rem;
+      height: 0.65rem;
+      background: var(--accent);
+      flex-shrink: 0;
     }
 
     .nav-links {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
+      gap: 0.15rem;
       align-items: center;
     }
 
     .nav-links a {
       color: var(--muted);
       background: transparent;
-      border: 1px solid transparent;
-      padding: 10px 12px;
-      border-radius: 999px;
+      border: 0;
+      border-bottom: 2px solid transparent;
+      padding: 0.45rem 0.55rem;
+      border-radius: 0;
       font: inherit;
+      font-size: 0.88rem;
+      font-weight: 500;
       cursor: pointer;
-      transition: 0.2s ease;
+      transition: color 0.2s ease, border-color 0.2s ease;
     }
 
-    .nav-links a:hover {
-      background: var(--panel);
-      border-color: var(--border);
-      color: var(--text);
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--ink);
+      border-bottom-color: var(--accent);
       text-decoration: none;
+      background: transparent;
     }
+
+    .progress-strip {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      padding: 0.55rem 0 0.7rem;
+      border-top: 1px solid var(--line-soft);
+    }
+
+    .progress-strip strong {
+      font-size: 0.8rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .progress-strip .small { white-space: nowrap; }
+
+    .progress-strip .progress-bar { flex: 1; }
+
+    #continueBtn {
+      white-space: nowrap;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--ink);
+      background: transparent;
+      border: 0;
+      border-bottom: 2px solid var(--accent);
+      padding: 0.15rem 0;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    #continueBtn:hover { color: var(--accent); }
 
     #themeToggle {
       position: fixed;
-      bottom: 20px;
-      right: 20px;
+      top: 1.15rem;
+      right: 1.15rem;
       z-index: 2000;
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: var(--panel-2);
-      border: 1px solid var(--border);
-      color: var(--text);
+      width: 2.5rem;
+      height: 2.5rem;
+      border: 1.5px solid var(--line);
+      border-radius: 0;
+      background: var(--surface);
+      color: var(--ink);
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2rem;
-      box-shadow: var(--shadow);
-      transition: all 0.2s ease;
+      display: grid;
+      place-items: center;
+      transition: background 0.2s ease, color 0.2s ease;
     }
 
     #themeToggle:hover {
-      transform: scale(1.1);
+      background: var(--ink);
+      color: var(--bg);
+      transform: none;
+    }
+
+    #themeToggle svg { width: 1rem; height: 1rem; }
+    #themeToggle .icon-moon { display: none; }
+    body.dark #themeToggle .icon-sun { display: none; }
+    body.dark #themeToggle .icon-moon { display: block; }
+
+    @media (prefers-color-scheme: dark) {
+      body:not(.light) #themeToggle .icon-sun { display: none; }
+      body:not(.light) #themeToggle .icon-moon { display: block; }
+      body.light #themeToggle .icon-sun { display: block; }
+      body.light #themeToggle .icon-moon { display: none; }
     }
 
     .hero {
-      padding: 72px 0 36px;
+      padding: 4.5rem 0 2.5rem;
+      min-height: auto;
     }
 
     .hero-grid {
       display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 24px;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 2.5rem;
+      align-items: end;
     }
 
     .card {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
+      background: transparent;
+      border: 0;
+      border-radius: 0;
+      box-shadow: none;
     }
 
     .hero-card {
-      padding: 34px;
+      padding: 0;
       position: relative;
-      overflow: hidden;
+      overflow: visible;
     }
 
-    .hero-card::after {
-      content: "";
-      position: absolute;
-      right: -60px;
-      bottom: -60px;
-      width: 220px;
-      height: 220px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(79,209,255,0.18), transparent 60%);
-      pointer-events: none;
-    }
+    .hero-card::after { display: none; }
 
     .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 12px;
-      border-radius: 999px;
-      background: rgba(124,156,255,0.12);
-      border: 1px solid rgba(124,156,255,0.20);
-      font-size: 0.86rem;
-      font-weight: 700;
-      margin-bottom: 18px;
+      display: block;
+      margin: 0 0 1.1rem;
+      padding: 0;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--muted);
+    }
+
+    .hero-kicker {
+      margin: 0 0 0.85rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: -0.01em;
     }
 
     h1 {
-      margin: 0 0 14px;
-      font-size: clamp(2.2rem, 5vw, 4.5rem);
-      line-height: 1.02;
+      margin: 0 0 1rem;
+      font-size: clamp(2.4rem, 6vw, 4.6rem);
+      line-height: 0.96;
       letter-spacing: -0.05em;
+      font-weight: 700;
+      max-width: 14ch;
     }
 
     .hero p {
-      margin: 0 0 22px;
+      margin: 0 0 1.4rem;
       color: var(--muted);
-      max-width: 68ch;
-      font-size: 1.03rem;
+      max-width: 42rem;
+      font-size: 1.05rem;
     }
 
     .cta-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 20px;
+      gap: 0.85rem 1.25rem;
+      margin-top: 1.5rem;
+      align-items: center;
     }
 
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
-      padding: 13px 18px;
-      border-radius: 14px;
-      border: 1px solid transparent;
-      font-weight: 700;
-      transition: transform 0.15s ease, background 0.2s ease;
+      gap: 0.5rem;
+      padding: 0.7rem 0;
+      border-radius: 0;
+      border: 0;
+      border-bottom: 2px solid transparent;
+      font-weight: 600;
+      font-family: inherit;
+      font-size: 0.98rem;
+      transition: color 0.2s ease, border-color 0.2s ease;
       text-decoration: none;
       cursor: pointer;
+      background: transparent;
+      color: var(--ink);
     }
 
     .btn:hover {
-      transform: translateY(-1px);
+      transform: none;
       text-decoration: none;
+      color: var(--accent);
     }
 
     .btn-primary {
-      color: #08111f;
-      background: linear-gradient(135deg, var(--accent), var(--primary-2));
+      color: var(--ink);
+      background: transparent;
+      border-bottom-color: var(--accent);
     }
 
     .btn-secondary {
-      color: var(--text);
-      background: var(--panel-2);
-      border-color: var(--border);
+      color: var(--muted);
+      background: transparent;
+      border-bottom-color: var(--line-soft);
     }
+
+    .btn-secondary:hover { border-bottom-color: var(--accent); }
 
     .chip-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 8px;
+      gap: 0.55rem 1rem;
+      margin-top: 0.25rem;
     }
 
     .chip {
-      padding: 8px 12px;
-      border-radius: 999px;
-      background: var(--panel-2);
-      border: 1px solid var(--border);
+      padding: 0;
+      border-radius: 0;
+      background: transparent;
+      border: 0;
       color: var(--muted);
-      font-size: 0.9rem;
+      font-size: 0.88rem;
+      font-weight: 500;
+    }
+
+    .chip::before {
+      content: "·";
+      margin-right: 0.45rem;
+      color: var(--accent);
     }
 
     .hero-side {
       display: grid;
-      gap: 16px;
+      gap: 1.25rem;
+      border-left: 1.5px solid var(--line);
+      padding-left: 1.5rem;
     }
 
-    .side-panel {
-      padding: 22px;
-    }
+    .side-panel { padding: 0; }
 
     .side-panel h3 {
-      margin: 0 0 12px;
-      font-size: 1rem;
+      margin: 0 0 0.65rem;
+      font-size: 0.95rem;
+      font-weight: 600;
     }
 
     .stats {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 12px;
+      gap: 0.75rem;
     }
 
     .stat {
-      padding: 16px;
-      border-radius: 16px;
-      background: var(--panel-2);
-      border: 1px solid var(--border);
+      padding: 0.85rem 0;
+      border-radius: 0;
+      background: transparent;
+      border: 0;
+      border-top: 1px solid var(--line-soft);
     }
 
     .stat strong {
       display: block;
-      font-size: 1.35rem;
-      margin-bottom: 4px;
+      font-size: 1.25rem;
+      margin-bottom: 0.15rem;
     }
 
     .check-list, .mini-list {
@@ -334,47 +427,49 @@
 
     .check-list li, .mini-list li {
       position: relative;
-      padding-left: 26px;
-      margin-bottom: 10px;
+      padding-left: 1.15rem;
+      margin-bottom: 0.55rem;
       color: var(--muted);
+      font-size: 0.95rem;
     }
 
     .check-list li::before {
-      content: "✓";
+      content: "–";
       position: absolute;
       left: 0;
       top: 0;
-      font-weight: 800;
+      font-weight: 700;
       color: var(--accent);
     }
 
-    section {
-      padding: 28px 0;
-    }
+    section { padding: 2.75rem 0; }
 
     .section-head {
       display: flex;
       justify-content: space-between;
       align-items: end;
-      gap: 18px;
-      margin-bottom: 18px;
+      gap: 1.25rem;
+      margin-bottom: 1.35rem;
+      padding-bottom: 0.85rem;
+      border-bottom: 2px solid var(--line);
     }
 
     .section-head h2 {
-      margin: 0 0 8px;
-      font-size: clamp(1.6rem, 3vw, 2.3rem);
+      margin: 0 0 0.4rem;
+      font-size: clamp(1.55rem, 3vw, 2.1rem);
       letter-spacing: -0.04em;
+      font-weight: 700;
     }
 
     .section-head p {
       margin: 0;
       color: var(--muted);
-      max-width: 80ch;
+      max-width: 52rem;
     }
 
     .grid-2, .grid-3, .grid-4 {
       display: grid;
-      gap: 18px;
+      gap: 0;
     }
 
     .grid-2 { grid-template-columns: repeat(2, 1fr); }
@@ -382,75 +477,89 @@
     .grid-4 { grid-template-columns: repeat(4, 1fr); }
 
     .info-card, .resource-card, .tool-card, .price-card, .faq-item, .footer-card, .module-card {
-      padding: 22px;
+      padding: 1.25rem 1rem 1.25rem 0;
+      border-top: 1px solid var(--line-soft);
     }
 
     .tag, .badge {
       display: inline-block;
-      margin-bottom: 10px;
-      padding: 6px 10px;
-      border-radius: 999px;
+      margin-bottom: 0.45rem;
+      padding: 0;
+      border-radius: 0;
       font-size: 0.78rem;
-      font-weight: 800;
-      background: rgba(124,156,255,0.12);
-      border: 1px solid rgba(124,156,255,0.22);
-      color: var(--text);
+      font-weight: 700;
+      background: transparent;
+      border: 0;
+      color: var(--accent);
+      letter-spacing: 0.02em;
     }
 
-    .info-card h3, .resource-card h3, .tool-card h3, .price-card h3, .module-card h3 {
-      margin: 0 0 8px;
-      font-size: 1.06rem;
+    .info-card h3, .resource-card h3, .tool-card h3, .price-card h3, .module-card h3, .faq-item h3 {
+      margin: 0 0 0.45rem;
+      font-size: 1.05rem;
+      letter-spacing: -0.02em;
     }
 
     .info-card p, .resource-card p, .tool-card p, .price-card p, .faq-item p, .footer-card p, .module-card p {
-      margin: 0 0 10px;
+      margin: 0 0 0.55rem;
       color: var(--muted);
     }
 
     .progress-wrap {
-      padding: 22px;
+      padding: 0;
+      border-top: 1.5px solid var(--line);
+      padding-top: 1rem;
     }
 
     .progress-top {
       display: flex;
       justify-content: space-between;
-      gap: 12px;
+      gap: 0.75rem;
       align-items: center;
-      margin-bottom: 12px;
+      margin-bottom: 0.55rem;
     }
 
     .progress-bar {
       width: 100%;
-      height: 12px;
-      border-radius: 999px;
-      background: var(--panel-2);
+      height: 4px;
+      border-radius: 0;
+      background: var(--line-soft);
       overflow: hidden;
-      border: 1px solid var(--border);
+      border: 0;
     }
 
     .progress-fill {
       width: 0%;
       height: 100%;
-      background: linear-gradient(90deg, var(--accent), var(--primary-2), var(--primary));
+      background: var(--accent);
       transition: width 0.25s ease;
     }
 
     .note {
-      padding: 14px 16px;
-      border-radius: 14px;
-      background: rgba(255, 209, 102, 0.10);
-      border: 1px solid rgba(255, 209, 102, 0.18);
-      color: var(--text);
-      margin-top: 12px;
+      padding: 0.65rem 0 0;
+      border-radius: 0;
+      background: transparent;
+      border: 0;
+      color: var(--muted);
+      margin-top: 0.35rem;
+      font-size: 0.85rem;
     }
 
-    .roadmap {
-      display: grid;
-      gap: 16px;
-    }
+    .roadmap { display: grid; gap: 0; }
 
     .week-card {
       overflow: hidden;
+      border-bottom: 1px solid var(--line-soft);
+      transition: background 0.2s ease;
+    }
+
+    .week-card.done {
+      background: color-mix(in srgb, var(--success) 7%, transparent);
+    }
+
+    .week-card.done .week-badge {
+      color: var(--success);
+      border-color: var(--success);
     }
 
     .week-header {
@@ -458,154 +567,193 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 16px;
+      gap: 1rem;
       text-align: left;
-      padding: 20px 22px;
+      padding: 1.15rem 0.15rem;
       background: transparent;
-      color: var(--text);
+      color: var(--ink);
       border: 0;
       cursor: pointer;
       font: inherit;
     }
 
+    .week-header:hover .week-title h3 { color: var(--accent); }
+
     .week-left {
       display: flex;
-      gap: 16px;
+      gap: 1rem;
       align-items: flex-start;
     }
 
     .week-badge {
-      min-width: 88px;
-      text-align: center;
-      padding: 12px 10px;
-      border-radius: 14px;
-      background: linear-gradient(135deg, rgba(124,156,255,0.25), rgba(79,209,255,0.16));
-      border: 1px solid var(--border);
-      font-weight: 800;
+      min-width: 4.5rem;
+      text-align: left;
+      padding: 0.2rem 0 0;
+      border-radius: 0;
+      background: transparent;
+      border: 0;
+      border-bottom: 2px solid var(--line);
+      font-weight: 700;
+      font-size: 0.85rem;
     }
 
     .week-title h3 {
-      margin: 0 0 6px;
-      font-size: 1.12rem;
+      margin: 0 0 0.25rem;
+      font-size: 1.08rem;
+      letter-spacing: -0.02em;
+      transition: color 0.2s ease;
     }
 
     .week-title p {
       margin: 0;
       color: var(--muted);
+      font-size: 0.92rem;
     }
 
     .week-arrow {
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       color: var(--muted);
       transition: transform 0.2s ease;
     }
 
-    .week-card.open .week-arrow {
-      transform: rotate(180deg);
-    }
+    .week-card.open .week-arrow { transform: rotate(180deg); }
 
     .week-body {
       display: none;
-      padding: 0 22px 22px;
+      padding: 0 0.15rem 1.25rem;
     }
 
-    .week-card.open .week-body {
-      display: block;
-    }
+    .week-card.open .week-body { display: block; }
 
     .subcard, .template-box {
-      padding: 18px;
-      border-radius: 16px;
-      background: var(--panel-2);
-      border: 1px solid var(--border);
+      padding: 1rem 0;
+      border-radius: 0;
+      background: transparent;
+      border: 0;
+      border-top: 1px solid var(--line-soft);
     }
 
     .subcard h4, .template-box h4 {
-      margin: 0 0 8px;
-      font-size: 1rem;
+      margin: 0 0 0.45rem;
+      font-size: 0.98rem;
     }
 
     .subcard p, .template-box p {
-      margin: 0 0 10px;
+      margin: 0 0 0.55rem;
       color: var(--muted);
     }
 
     .week-actions {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 14px;
+      gap: 0.65rem;
+      margin-top: 0.85rem;
       align-items: center;
     }
 
     .week-check {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
-      padding: 10px 12px;
-      border-radius: 12px;
-      background: var(--panel-2);
-      border: 1px solid var(--border);
+      gap: 0.55rem;
+      padding: 0.45rem 0;
+      border-radius: 0;
+      background: transparent;
+      border: 0;
       color: var(--muted);
       cursor: pointer;
       user-select: none;
+      font-weight: 500;
     }
 
     .week-check input {
       accent-color: var(--success);
-      width: 18px;
-      height: 18px;
+      width: 1.05rem;
+      height: 1.05rem;
     }
 
     .module-grid, .resource-grid, .toolkit-grid, .pricing-grid, .faq {
       display: grid;
-      gap: 18px;
+      gap: 0;
     }
 
-    .module-grid, .resource-grid, .toolkit-grid, .pricing-grid { grid-template-columns: repeat(3, 1fr); }
+    .module-grid, .resource-grid, .toolkit-grid, .pricing-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
 
     .template-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 18px;
+      gap: 0 2rem;
     }
 
     .template-content {
       white-space: pre-wrap;
-      color: var(--text);
-      font-size: 0.95rem;
-      line-height: 1.7;
-      background: rgba(0,0,0,0.08);
-      border: 1px solid var(--border);
-      padding: 14px;
-      border-radius: 12px;
+      color: var(--ink);
+      font-size: 0.92rem;
+      line-height: 1.65;
+      background: var(--panel-2);
+      border: 1px solid var(--line-soft);
+      border-left: 2px solid var(--accent);
+      padding: 0.9rem 1rem;
+      border-radius: 0;
     }
 
-    .copy-btn {
-      margin-top: 12px;
-    }
+    .copy-btn { margin-top: 0.75rem; }
 
     .small {
-      font-size: 0.92rem;
+      font-size: 0.85rem;
       color: var(--muted);
     }
 
     .highlight {
-      color: var(--text);
+      color: var(--ink);
       font-weight: 700;
     }
 
     .success-note {
       color: var(--success);
-      font-weight: 700;
-      font-size: 0.92rem;
-      min-height: 20px;
-      margin-top: 8px;
+      font-weight: 600;
+      font-size: 0.88rem;
+      min-height: 1.2rem;
+      margin-top: 0.4rem;
     }
 
-    .faq {
-      grid-template-columns: 1fr;
+    .faq { grid-template-columns: 1fr; }
+
+    .resume-banner {
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin: 0 0 1.5rem;
+      padding: 0.85rem 0;
+      border-top: 1.5px solid var(--line);
+      border-bottom: 1.5px solid var(--line);
     }
+
+    .resume-banner.show { display: flex; }
+
+    .resume-banner p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .site-footer {
+      border-top: 2px solid var(--line);
+      margin-top: 1rem;
+      padding: 1.5rem 0 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    .site-footer a { color: var(--ink); font-weight: 600; }
+    .site-footer a:hover { color: var(--accent); }
 
     @media (max-width: 1100px) {
       .hero-grid,
@@ -619,54 +767,80 @@
       .template-grid {
         grid-template-columns: 1fr;
       }
+
+      .hero-side {
+        border-left: 0;
+        border-top: 1.5px solid var(--line);
+        padding-left: 0;
+        padding-top: 1.5rem;
+      }
     }
 
     @media (max-width: 720px) {
+      body { background: var(--bg); }
+
       .nav-inner {
         flex-direction: column;
         align-items: flex-start;
       }
 
-      .stats {
-        grid-template-columns: 1fr;
-      }
+      .progress-strip { flex-wrap: wrap; }
 
-      .week-left {
-        flex-direction: column;
-      }
+      .stats { grid-template-columns: 1fr; }
 
-      .week-header {
-        align-items: flex-start;
-      }
+      .week-left { flex-direction: column; gap: 0.35rem; }
+
+      .week-header { align-items: flex-start; }
+
+      h1 { max-width: none; }
 
       #themeToggle {
-        top: 10px;
-        right: 10px;
-        width: 38px;
-        height: 38px;
-        font-size: 1rem;
+        top: 0.75rem;
+        right: 0.75rem;
+        width: 2.25rem;
+        height: 2.25rem;
       }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
     }
   </style>
 </head>
 <body>
-  <button id="themeToggle" type="button" aria-label="Toggle theme">🌓</button>
+  <button id="themeToggle" type="button" aria-label="Toggle theme">
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+      <circle cx="12" cy="12" r="4"></circle>
+      <path d="M12 2v2.2M12 19.8V22M4.93 4.93l1.56 1.56M17.51 17.51l1.56 1.56M2 12h2.2M19.8 12H22M4.93 19.07l1.56-1.56M17.51 6.49l1.56-1.56"></path>
+    </svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+      <path d="M20.5 14.3A8.2 8.2 0 1 1 9.7 3.5a6.6 6.6 0 1 0 10.8 10.8z"></path>
+    </svg>
+  </button>
 
   <nav class="nav">
-    <div class="container nav-inner">
-      <div class="brand">
-        <div class="brand-mark"></div>
-        <div>Digital Marketing with AI • 3-Month Freelancer Roadmap</div>
-      </div>
+    <div class="container">
+      <div class="nav-inner">
+        <a class="brand" href="../index.html">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span>Digital Marketing AI</span>
+        </a>
 
-      <div class="nav-links">
-        <a href="#overview">Overview</a>
-        <a href="#modules">Modules</a>
-        <a href="#curriculum">12 Weeks</a>
-        <a href="#resources">Courses</a>
-        <a href="#income">Income</a>
-        <a href="#toolkit">Toolkit</a>
-        <a href="#faq">FAQ</a>
+        <div class="nav-links">
+          <a href="#overview">Overview</a>
+          <a href="#modules">Modules</a>
+          <a href="#curriculum">12 Weeks</a>
+          <a href="#resources">Courses</a>
+          <a href="#income">Income</a>
+          <a href="#toolkit">Toolkit</a>
+          <a href="#faq">FAQ</a>
+        </div>
+      </div>
+      <div class="progress-strip" aria-label="Course progress">
+        <strong>Progress</strong>
+        <div class="progress-bar"><div class="progress-fill" id="progressFillNav"></div></div>
+        <span id="progressTextNav" class="small">0 of 12</span>
+        <button id="continueBtn" type="button">Continue</button>
       </div>
     </div>
   </nav>
@@ -674,33 +848,35 @@
   <header class="hero">
     <div class="container hero-grid">
       <div class="card hero-card">
-        <div class="eyebrow">Beginner friendly • No budget • Non-technical • Income-focused</div>
-        <h1>Learn Digital Marketing with AI from Scratch and Start Freelancing in 3 Months</h1>
+        <p class="hero-kicker">3-month freelancer roadmap</p>
+        <h1>Digital Marketing with AI</h1>
+        <p class="eyebrow">Beginner friendly · No budget · Non-technical · Income-focused</p>
         <p>
-          This roadmap is designed for someone starting from zero, with no budget, who wants to build practical digital marketing skills
-          using AI and turn them into beginner freelance services. It focuses on <span class="highlight">what to learn</span>,
-          <span class="highlight">what to practice</span>, <span class="highlight">what to build</span>, and
+          Start from zero and build practical marketing skills with AI — then turn them into beginner freelance services.
+          Focus on <span class="highlight">what to learn</span>,
+          <span class="highlight">what to practice</span>,
+          <span class="highlight">what to build</span>, and
           <span class="highlight">how to start earning</span>.
         </p>
 
         <div class="chip-row">
-          <span class="chip">Digital Marketing Basics</span>
-          <span class="chip">AI Workflows</span>
-          <span class="chip">Content Marketing</span>
-          <span class="chip">SEO Writing</span>
-          <span class="chip">Email Marketing</span>
+          <span class="chip">Basics</span>
+          <span class="chip">AI workflows</span>
+          <span class="chip">Content</span>
+          <span class="chip">SEO</span>
+          <span class="chip">Email</span>
           <span class="chip">Freelancing</span>
         </div>
 
         <div class="cta-row">
-          <a class="btn btn-primary" href="#curriculum">Start the 12-Week Plan</a>
-          <a class="btn btn-secondary" href="#toolkit">Open Freelancer Toolkit</a>
+          <a class="btn btn-primary" href="#curriculum">Start the 12-week plan</a>
+          <a class="btn btn-secondary" href="#toolkit">Open freelancer toolkit</a>
         </div>
       </div>
 
       <div class="hero-side">
         <div class="card side-panel">
-          <h3>Who this roadmap is for</h3>
+          <h3>Who this is for</h3>
           <ul class="check-list">
             <li>Beginners with no technical background</li>
             <li>Job seekers who need a low-cost skill path</li>
@@ -710,7 +886,7 @@
         </div>
 
         <div class="card side-panel">
-          <h3>What you can offer after this</h3>
+          <h3>What you can offer</h3>
           <ul class="check-list">
             <li>Social media content packages</li>
             <li>SEO-friendly blog writing</li>
@@ -728,13 +904,19 @@
           <div class="progress-bar">
             <div class="progress-fill" id="progressFill"></div>
           </div>
-          <div class="note">Progress is saved locally in your browser.</div>
+          <div class="note">Saved in this browser. Use Continue in the top bar to resume.</div>
         </div>
       </div>
     </div>
   </header>
 
   <main>
+    <div class="container">
+      <div class="resume-banner" id="resumeBanner">
+        <p id="resumeText">You have saved progress on this roadmap.</p>
+        <button class="btn btn-primary" id="resumeBtn" type="button">Resume where you left off</button>
+      </div>
+    </div>
     <section id="overview">
       <div class="container">
         <div class="section-head">
@@ -1716,12 +1898,12 @@ Thank you again,
     </section>
   </main>
 
-  <footer style="text-align:center; margin:24px;">
-    &copy; Copyright 2024-<span class="curr-year"></span> Designed with ❤️ by Muddassir Iqbal. All rights reserved.
+  <footer class="container site-footer">
+    <span>&copy; 2024–<span class="curr-year"></span> Muddassir Iqbal</span>
+    <a href="../index.html">Back to Bridge to Purpose</a>
   </footer>
 
   <script>
-    // Theme
     const body = document.body;
     const themeToggle = document.getElementById('themeToggle');
 
@@ -1738,9 +1920,7 @@ Thank you again,
     }
 
     const savedTheme = localStorage.getItem('dm_ai_theme_final');
-    if (savedTheme) {
-      updateTheme(savedTheme);
-    }
+    if (savedTheme) updateTheme(savedTheme);
 
     themeToggle.addEventListener('click', () => {
       if (body.classList.contains('light')) {
@@ -1756,7 +1936,6 @@ Thank you again,
       }
     });
 
-    // Expand/collapse weeks
     const weekCards = document.querySelectorAll('.week-card');
     weekCards.forEach(card => {
       const header = card.querySelector('.week-header');
@@ -1771,10 +1950,53 @@ Thank you again,
       weekCards.forEach(card => card.classList.remove('open'));
     });
 
-    // Progress
     const progressFill = document.getElementById('progressFill');
     const progressText = document.getElementById('progressText');
+    const progressFillNav = document.getElementById('progressFillNav');
+    const progressTextNav = document.getElementById('progressTextNav');
     const checkboxes = document.querySelectorAll('.week-complete');
+    const resumeBanner = document.getElementById('resumeBanner');
+    const resumeText = document.getElementById('resumeText');
+
+    function firstIncompleteIndex() {
+      for (let i = 0; i < checkboxes.length; i++) {
+        if (!checkboxes[i].checked) return i;
+      }
+      return Math.max(0, checkboxes.length - 1);
+    }
+
+    function continueLearning() {
+      const index = firstIncompleteIndex();
+      const card = weekCards[index];
+      weekCards.forEach(c => c.classList.remove('open'));
+      card.classList.add('open');
+      card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      resumeBanner.classList.remove('show');
+    }
+
+    function updateProgress() {
+      let completed = 0;
+      checkboxes.forEach((checkbox, index) => {
+        if (checkbox.checked) completed++;
+        localStorage.setItem('dm_ai_week_final_' + (index + 1), checkbox.checked);
+        weekCards[index].classList.toggle('done', checkbox.checked);
+      });
+      const total = checkboxes.length;
+      const percent = total ? (completed / total) * 100 : 0;
+      progressFill.style.width = percent + '%';
+      progressFillNav.style.width = percent + '%';
+      progressText.textContent = completed + ' of ' + total + ' weeks completed';
+      progressTextNav.textContent = completed + ' of ' + total;
+      if (completed > 0 && completed < total) {
+        resumeText.textContent = 'Week ' + (firstIncompleteIndex() + 1) + ' is next — ' + completed + ' of ' + total + ' weeks done.';
+        resumeBanner.classList.add('show');
+      } else if (completed === total && total > 0) {
+        resumeText.textContent = 'All 12 weeks complete. Review the toolkit and start outreach.';
+        resumeBanner.classList.add('show');
+      } else {
+        resumeBanner.classList.remove('show');
+      }
+    }
 
     function loadProgress() {
       checkboxes.forEach((checkbox, index) => {
@@ -1784,32 +2006,25 @@ Thank you again,
       updateProgress();
     }
 
-    function updateProgress() {
-      let completed = 0;
-      checkboxes.forEach((checkbox, index) => {
-        if (checkbox.checked) completed++;
-        localStorage.setItem('dm_ai_week_final_' + (index + 1), checkbox.checked);
-      });
-      const total = checkboxes.length;
-      const percent = (completed / total) * 100;
-      progressFill.style.width = percent + '%';
-      progressText.textContent = completed + ' of ' + total + ' weeks completed';
-    }
-
     checkboxes.forEach(cb => cb.addEventListener('change', updateProgress));
     loadProgress();
 
-    // Copy templates
+    document.getElementById('continueBtn').addEventListener('click', continueLearning);
+    document.getElementById('resumeBtn').addEventListener('click', continueLearning);
+
     document.querySelectorAll('.copy-btn').forEach(btn => {
       btn.addEventListener('click', async () => {
         const targetId = btn.getAttribute('data-copy');
-        const text = document.getElementById(targetId).innerText;
+        const textEl = document.getElementById(targetId);
         const note = document.getElementById('note-' + targetId);
-
         try {
-          await navigator.clipboard.writeText(text);
-          note.textContent = 'Copied to clipboard.';
-          setTimeout(() => note.textContent = '', 2000);
+          await navigator.clipboard.writeText(textEl.innerText);
+          note.textContent = 'Copied.';
+          btn.textContent = 'Copied';
+          setTimeout(() => {
+            note.textContent = '';
+            btn.textContent = 'Copy Template';
+          }, 2000);
         } catch (e) {
           note.textContent = 'Copy failed. Please copy manually.';
           setTimeout(() => note.textContent = '', 2500);
@@ -1817,8 +2032,26 @@ Thank you again,
       });
     });
 
+    // Active section highlighting
+    const navLinks = document.querySelectorAll('.nav-links a');
+    const sections = [...navLinks].map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+
+    function syncActiveNav() {
+      const y = window.scrollY + 140;
+      let current = sections[0];
+      sections.forEach(sec => {
+        if (sec.offsetTop <= y) current = sec;
+      });
+      navLinks.forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === '#' + current.id);
+      });
+    }
+
+    window.addEventListener('scroll', syncActiveNav, { passive: true });
+    syncActiveNav();
+
     document.querySelectorAll('.curr-year').forEach(el => {
-        el.textContent = new Date().getFullYear();
+      el.textContent = new Date().getFullYear();
     });
   </script>
 </body>
