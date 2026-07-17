@@ -814,6 +814,37 @@
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
   }
+
+  #themeToggle {
+    position: fixed;
+    top: 1.25rem;
+    right: 1.25rem;
+    z-index: 2000;
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 1.5px solid var(--ink);
+    border-radius: 0;
+    background: var(--surface);
+    color: var(--ink);
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+  #themeToggle:hover { background: var(--ink); color: var(--bg); }
+  #themeToggle svg { width: 1rem; height: 1rem; }
+  #themeToggle .icon-moon { display: none; }
+  html.dark #themeToggle .icon-sun { display: none; }
+  html.dark #themeToggle .icon-moon { display: block; }
+  @media (prefers-color-scheme: dark) {
+    html:not(.light) #themeToggle .icon-sun { display: none; }
+    html:not(.light) #themeToggle .icon-moon { display: block; }
+    html.light #themeToggle .icon-sun { display: block; }
+    html.light #themeToggle .icon-moon { display: none; }
+  }
+  @media (max-width: 860px) {
+    #themeToggle { top: 0.75rem; right: 0.75rem; }
+  }
 </style>
 </head>
 <body>
@@ -827,8 +858,17 @@
     <span></span><span></span><span></span>
   </button>
   <span class="topbar-title">Lead Gen Agency Course</span>
-  <button class="theme-btn" id="themeToggleMobile" onclick="toggleTheme()" aria-label="Toggle theme">Theme</button>
 </header>
+
+<button id="themeToggle" type="button" aria-label="Toggle theme">
+  <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+    <circle cx="12" cy="12" r="4"></circle>
+    <path d="M12 2v2.2M12 19.8V22M4.93 4.93l1.56 1.56M17.51 17.51l1.56 1.56M2 12h2.2M19.8 12H22M4.93 19.07l1.56-1.56M17.51 6.49l1.56-1.56"></path>
+  </svg>
+  <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+    <path d="M20.5 14.3A8.2 8.2 0 1 1 9.7 3.5a6.6 6.6 0 1 0 10.8 10.8z"></path>
+  </svg>
+</button>
 
 <!-- SIDEBAR -->
 <aside class="sidebar" id="sidebar">
@@ -866,9 +906,6 @@
   <div class="sidebar-foot">
     <button class="continue-btn" id="continueModule" type="button" hidden>Continue module</button>
     Built for Indian freelancers &amp; agency founders. Prices in INR.
-    <button class="theme-btn-sidebar" id="themeToggleSidebar" onclick="toggleTheme()">
-      <span id="themeLabel">Light mode</span>
-    </button>
   </div>
 </aside>
 
@@ -1691,11 +1728,6 @@
   function applyTheme(theme) {
     html.classList.remove('light', 'dark');
     html.classList.add(theme);
-    const isLight = theme === 'light';
-    const label = document.getElementById('themeLabel');
-    const mobileBtn = document.getElementById('themeToggleMobile');
-    if (label) label.textContent = isLight ? 'Dark mode' : 'Light mode';
-    if (mobileBtn) mobileBtn.textContent = isLight ? 'Dark' : 'Light';
     localStorage.setItem('theme', theme);
   }
 
@@ -1706,6 +1738,9 @@
 
   const saved = localStorage.getItem('theme') || getSystemTheme();
   applyTheme(saved);
+
+  const themeToggle = document.getElementById('themeToggle');
+  if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
 
   window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
     if (!localStorage.getItem('theme')) applyTheme(e.matches ? 'dark' : 'light');
