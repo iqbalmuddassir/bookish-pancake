@@ -84,109 +84,35 @@
             inset: 0;
             z-index: -1;
             pointer-events: none;
-            overflow: hidden;
-            background: var(--canvas);
-        }
-
-        /* Soft multi-stop glows fading into canvas (not CSS `transparent`) to limit banding */
-        .atmosphere::before {
-            content: "";
-            position: absolute;
-            inset: 0;
             background:
-                radial-gradient(ellipse 110% 70% at 50% -12%,
-                    rgba(27, 58, 47, 0.20) 0%,
-                    rgba(27, 58, 47, 0.11) 18%,
-                    rgba(27, 58, 47, 0.055) 34%,
-                    rgba(27, 58, 47, 0.02) 50%,
-                    rgba(232, 239, 233, 0) 68%),
-                radial-gradient(ellipse 65% 50% at 105% 26%,
-                    rgba(176, 141, 87, 0.15) 0%,
-                    rgba(176, 141, 87, 0.08) 20%,
-                    rgba(176, 141, 87, 0.035) 40%,
-                    rgba(176, 141, 87, 0.012) 56%,
-                    rgba(232, 239, 233, 0) 72%),
-                radial-gradient(ellipse 55% 45% at -5% 85%,
-                    rgba(45, 90, 72, 0.13) 0%,
-                    rgba(45, 90, 72, 0.065) 22%,
-                    rgba(45, 90, 72, 0.025) 42%,
-                    rgba(45, 90, 72, 0.008) 58%,
-                    rgba(232, 239, 233, 0) 74%);
+                radial-gradient(ellipse 90% 55% at 50% -10%, rgba(27, 58, 47, 0.18), transparent 55%),
+                radial-gradient(ellipse 50% 40% at 100% 30%, rgba(176, 141, 87, 0.14), transparent 50%),
+                radial-gradient(ellipse 45% 35% at 0% 80%, rgba(45, 90, 72, 0.12), transparent 45%),
+                var(--canvas);
             animation: atmosphereShift 18s ease-in-out infinite alternate;
         }
 
-        /* Static PNG grain dither — avoids SVG feTurbulence hangs in headless Chrome */
-        .atmosphere::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            opacity: 0.08;
-            mix-blend-mode: soft-light;
-            pointer-events: none;
-            background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAAAAABWESUoAAAEK0lEQVR42gEgBN/7AKVNyhglMLsdbRMs3tYjey7ZHj9yH8sZcRdElNZJPJ1cADRgvjEgHmn+2qDu6LmZf1x8KZn9r+WTJTzWVK9N+tcUACegrrP+6SMvivIhH57kkcWxC+y1Vjv8Hm+TQn7LyP4pAFXlzY5G3I7Ut8J2TSpaTXZ3BvhdhpACSta9o0Ab6cjLAMzJNfbNH2EiauFTOK4aNABNM7oNJGrATIGxuvI+O/nuAPX3nytJNK+H9VILablLDZguhbtVtnKocmN6zXRm/LYOAA6P8YRjsOSyuilwNHTwZKxo9wD1sCs9xmb0W96qLMrtAM0rUVdBDk3uSvKzT0MKBzRH3mNsDoBslXumhNZDH7XqANdCTQnhXQJMWEjyPR+m9zYdf2GNFTLnDiDipmaN5/R+AIRn5UbVPsjioSV72yVsmz5Pu0mBRu9wMMv5U3JS3M6tANdktqMvuwmt6uEJxKmXIDl1NSuHixRcikLYhM9M/actAI4dXdkliQgthSpxIoc+6AWt1YlCFno4UoYZXGefnGmUAORbirEJgBIHCWHzfeQ23f3JnW51r2VHz7EbQgckgtxTABwrw5B8lhfrXlCJ5AGGuqilfRGeb7ZdAKvDKvOOZn8CAC6HLUnMFckLmZt3K0/Hpv1MkUoW20cIdSsPFUS4NcDnABkJffqHAekjLyHygSaHeGl26/zDJ/WTF2UnS6mCm0QGAPYf+Ikyb/qUku3u7jxmnyvyCJTqJ+aJxmtrJi5IhrhDAI85unb++MkMUQH75s+aSNWwwKE9qQCmrcs9ZAaUgb4hAMnHJ7jbjBiPNBqSTH+I36Fhv9sOzGgpGdLmRpL4GUFXAPHUr5CYgoXPepr3yT1VUiZq/nDnqubaR2J8LlmvLqN6ALyEZwrTxNNrwIqtH/+OuEBuL4p/xMzk3Z8LQRDZ8voAACXI7+V/N3JPTTfqKxQAQHcTm0GA3zkyJJlixoVyAAWaAOuOoXzzeH4O0p0cC2P/1ymDdNm9dPwRrde5ymUDlSJpAP1mn2N27nGHlzf9X3L41RxKyRttDEjUGh5eyeagOShUAKhhXu8Qn8G/qeJWNwEojymz1z9qwrae3SwZ8mS+5GKlALryD9J+zxTAEe0gH4NjIK25i6sWhqKNmAEhDHc28+7FAIDc/EP+XQSbTXino+u5KGXIUX7QIRH2plLaNSSHK2oxANf/5Fh3RNXreD6Wlo+JvoKFZeB+X314TpBgpyHKgH12ADPtEjQC83blvxSWdz0ZYWMmvlvlhQM2s28TvK5IFmiCABNoBafRvl6fJ2gQ/fcg0DPKTy5Ty4rRkZ3VGp+21NUJALpkyM9oA95Q2Douz7rrU0IHGkjLLb1XSrKRUlciN8T7AGWaQBb3oRvGLFJxz2TyXW8VzFDEtz9MfmIVE6U8x+mcBer31vB+v3QAAAAASUVORK5CYII=");
-            background-repeat: repeat;
-            background-size: 64px 64px;
-        }
-
-        body.dark-mode .atmosphere::before {
+        body.dark-mode .atmosphere {
             background:
-                radial-gradient(ellipse 110% 70% at 50% -12%,
-                    rgba(140, 199, 166, 0.18) 0%,
-                    rgba(140, 199, 166, 0.1) 16%,
-                    rgba(140, 199, 166, 0.05) 32%,
-                    rgba(140, 199, 166, 0.02) 48%,
-                    rgba(12, 15, 13, 0) 66%),
-                radial-gradient(ellipse 70% 55% at 105% 22%,
-                    rgba(230, 198, 122, 0.14) 0%,
-                    rgba(230, 198, 122, 0.075) 18%,
-                    rgba(230, 198, 122, 0.035) 36%,
-                    rgba(230, 198, 122, 0.012) 52%,
-                    rgba(12, 15, 13, 0) 70%),
-                radial-gradient(ellipse 60% 50% at -5% 88%,
-                    rgba(45, 90, 72, 0.4) 0%,
-                    rgba(45, 90, 72, 0.22) 18%,
-                    rgba(45, 90, 72, 0.1) 36%,
-                    rgba(45, 90, 72, 0.035) 52%,
-                    rgba(12, 15, 13, 0) 70%);
-        }
-
-        body.dark-mode .atmosphere::after {
-            opacity: 0.22;
-            mix-blend-mode: overlay;
+                radial-gradient(ellipse 90% 55% at 50% -10%, rgba(140, 199, 166, 0.12), transparent 55%),
+                radial-gradient(ellipse 50% 40% at 100% 30%, rgba(230, 198, 122, 0.08), transparent 50%),
+                radial-gradient(ellipse 45% 35% at 0% 80%, rgba(27, 58, 47, 0.35), transparent 45%),
+                var(--canvas);
         }
 
         @media (prefers-color-scheme: dark) {
-            body:not(.light-mode) .atmosphere::before {
+            body:not(.light-mode) .atmosphere {
                 background:
-                    radial-gradient(ellipse 110% 70% at 50% -12%,
-                        rgba(140, 199, 166, 0.18) 0%,
-                        rgba(140, 199, 166, 0.1) 16%,
-                        rgba(140, 199, 166, 0.05) 32%,
-                        rgba(140, 199, 166, 0.02) 48%,
-                        rgba(12, 15, 13, 0) 66%),
-                    radial-gradient(ellipse 70% 55% at 105% 22%,
-                        rgba(230, 198, 122, 0.14) 0%,
-                        rgba(230, 198, 122, 0.075) 18%,
-                        rgba(230, 198, 122, 0.035) 36%,
-                        rgba(230, 198, 122, 0.012) 52%,
-                        rgba(12, 15, 13, 0) 70%),
-                    radial-gradient(ellipse 60% 50% at -5% 88%,
-                        rgba(45, 90, 72, 0.4) 0%,
-                        rgba(45, 90, 72, 0.22) 18%,
-                        rgba(45, 90, 72, 0.1) 36%,
-                        rgba(45, 90, 72, 0.035) 52%,
-                        rgba(12, 15, 13, 0) 70%);
-            }
-
-            body:not(.light-mode) .atmosphere::after {
-                opacity: 0.22;
-                mix-blend-mode: overlay;
+                    radial-gradient(ellipse 90% 55% at 50% -10%, rgba(140, 199, 166, 0.12), transparent 55%),
+                    radial-gradient(ellipse 50% 40% at 100% 30%, rgba(230, 198, 122, 0.08), transparent 50%),
+                    radial-gradient(ellipse 45% 35% at 0% 80%, rgba(27, 58, 47, 0.35), transparent 45%),
+                    var(--canvas);
             }
         }
 
         @keyframes atmosphereShift {
-            from { transform: translate3d(0, 0, 0) scale(1); opacity: 0.88; }
-            to { transform: translate3d(1.2%, -0.8%, 0) scale(1.06); opacity: 1; }
+            from { filter: hue-rotate(0deg) saturate(1); }
+            to { filter: hue-rotate(8deg) saturate(1.08); }
         }
 
         @keyframes riseIn {
@@ -199,9 +125,10 @@
             50% { transform: translateY(-10px); }
         }
 
+        /* Keep translateX(-50%) — bare scale() was shoving the glow into overflow:hidden */
         @keyframes pulseSoft {
-            0%, 100% { opacity: 0.55; transform: scale(1); }
-            50% { opacity: 0.9; transform: scale(1.04); }
+            0%, 100% { opacity: 0.55; transform: translateX(-50%) scale(1); }
+            50% { opacity: 0.9; transform: translateX(-50%) scale(1.04); }
         }
 
         .container {
@@ -259,38 +186,16 @@
 
         .hero-glow {
             position: absolute;
-            width: min(560px, 88vw);
-            height: min(560px, 88vw);
+            width: min(520px, 80vw);
+            height: min(520px, 80vw);
             border-radius: 50%;
-            background: radial-gradient(circle,
-                rgba(176, 141, 87, 0.22) 0%,
-                rgba(176, 141, 87, 0.12) 28%,
-                rgba(176, 141, 87, 0.05) 48%,
-                rgba(176, 141, 87, 0) 72%);
-            top: 10%;
+            background: radial-gradient(circle, rgba(176, 141, 87, 0.22), transparent 68%);
+            top: 12%;
             left: 50%;
             transform: translateX(-50%);
             animation: pulseSoft 7s ease-in-out infinite;
             z-index: 0;
             pointer-events: none;
-        }
-
-        body.dark-mode .hero-glow {
-            background: radial-gradient(circle,
-                rgba(230, 198, 122, 0.18) 0%,
-                rgba(230, 198, 122, 0.09) 28%,
-                rgba(140, 199, 166, 0.045) 48%,
-                rgba(140, 199, 166, 0) 72%);
-        }
-
-        @media (prefers-color-scheme: dark) {
-            body:not(.light-mode) .hero-glow {
-                background: radial-gradient(circle,
-                    rgba(230, 198, 122, 0.18) 0%,
-                    rgba(230, 198, 122, 0.09) 28%,
-                    rgba(140, 199, 166, 0.045) 48%,
-                    rgba(140, 199, 166, 0) 72%);
-            }
         }
 
         .hero > *:not(.hero-glow) { position: relative; z-index: 1; }
@@ -486,17 +391,11 @@
         }
 
         .platform--android::before {
-            background: radial-gradient(ellipse 80% 60% at 100% 0%,
-                rgba(61, 220, 132, 0.22) 0%,
-                rgba(61, 220, 132, 0.10) 35%,
-                rgba(61, 220, 132, 0) 70%);
+            background: radial-gradient(ellipse 80% 60% at 100% 0%, rgba(61, 220, 132, 0.18), transparent 55%);
         }
 
         .platform--ios::before {
-            background: radial-gradient(ellipse 80% 60% at 0% 0%,
-                rgba(176, 141, 87, 0.24) 0%,
-                rgba(176, 141, 87, 0.10) 35%,
-                rgba(176, 141, 87, 0) 70%);
+            background: radial-gradient(ellipse 80% 60% at 0% 0%, rgba(176, 141, 87, 0.2), transparent 55%);
         }
 
         .platform-head {
