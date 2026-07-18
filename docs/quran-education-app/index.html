@@ -125,9 +125,10 @@
             50% { transform: translateY(-10px); }
         }
 
+        /* Keep translateX(-50%) — bare scale() wiped centering and clipped the glow */
         @keyframes pulseSoft {
-            0%, 100% { opacity: 0.55; transform: scale(1); }
-            50% { opacity: 0.9; transform: scale(1.04); }
+            0%, 100% { opacity: 0.55; transform: translateX(-50%) scale(1); }
+            50% { opacity: 0.9; transform: translateX(-50%) scale(1.04); }
         }
 
         .container {
