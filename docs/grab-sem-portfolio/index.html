@@ -208,9 +208,30 @@
   }
   .calibration b { color: var(--ink); }
 
+  .contact-line {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem 1.25rem;
+    margin: -0.85rem 0 1.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--muted);
+    opacity: 0;
+    animation: rise 0.8s ease forwards 0.34s;
+  }
+  .contact-line a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--border);
+  }
+  .contact-line a:hover {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+
   .stat-strip {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     border-top: 1.5px solid var(--ink);
     border-bottom: 1.5px solid var(--ink);
     opacity: 0;
@@ -219,8 +240,10 @@
   .stat-chip {
     padding: 1.1rem 0.9rem;
     border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
   }
-  .stat-chip:last-child { border-right: 0; }
+  .stat-chip:nth-child(4n) { border-right: 0; }
+  .stat-chip:nth-child(n+5) { border-bottom: 0; }
   .stat-chip .num {
     display: block;
     font-size: 1.45rem;
@@ -508,6 +531,63 @@
     color: var(--muted);
   }
 
+  /* ---------- CAREER ---------- */
+  .career-list {
+    border-top: 1.5px solid var(--ink);
+  }
+  .career-item {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0.75rem 1.5rem;
+    padding: 1.35rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .career-item h3 {
+    font-size: 1.05rem;
+    margin-bottom: 0.2rem;
+  }
+  .career-item .org {
+    font-size: 0.92rem;
+    color: var(--muted);
+    margin-bottom: 0.55rem;
+  }
+  .career-item p {
+    font-size: 0.95rem;
+    color: var(--text);
+    max-width: 44rem;
+  }
+  .career-item .when {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .skills-line {
+    margin-top: 1.75rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.92rem;
+    color: var(--muted);
+    max-width: 52rem;
+  }
+  .skills-line strong { color: var(--ink); }
+
+  .inline-quote {
+    margin-top: 1rem;
+    padding: 0.85rem 0 0.85rem 1rem;
+    border-left: 3px solid var(--accent);
+    font-size: 0.95rem;
+    color: var(--ink);
+    max-width: 40rem;
+  }
+  .inline-quote .attrib {
+    display: block;
+    margin-top: 0.45rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+
   /* ---------- FOOTER ---------- */
   footer {
     margin-top: 3rem;
@@ -540,15 +620,18 @@
   }
 
   @media (max-width: 900px) {
-    .stat-strip { grid-template-columns: repeat(3, 1fr); }
-    .stat-chip:nth-child(3) { border-right: 0; }
-    .stat-chip:nth-child(n+4) { border-top: 1px solid var(--border); }
+    .stat-strip { grid-template-columns: repeat(2, 1fr); }
+    .stat-chip:nth-child(4n) { border-right: 1px solid var(--border); }
+    .stat-chip:nth-child(2n) { border-right: 0; }
+    .stat-chip:nth-child(n+5) { border-bottom: 1px solid var(--border); }
+    .stat-chip:nth-child(n+7) { border-bottom: 0; }
     .ach-grid { grid-template-columns: 1fr 1fr; }
     .ach-card:nth-child(4n) { border-right: 1px solid var(--border); }
     .ach-card:nth-child(2n) { border-right: 0; }
     .ai-cols, .comp-grid, .tech-grid, .foot-grid { grid-template-columns: 1fr; }
     .comp { border-right: 0; }
     .tech-card { border-right: 0; }
+    .career-item { grid-template-columns: 1fr; gap: 0.35rem; }
   }
 
   @media (max-width: 640px) {
@@ -556,9 +639,6 @@
     body {
       background: var(--bg);
     }
-    .stat-strip { grid-template-columns: 1fr 1fr; }
-    .stat-chip:nth-child(2n) { border-right: 0; }
-    .stat-chip:nth-child(3) { border-right: 1px solid var(--border); }
     .leg { grid-template-columns: 2.5rem 1fr; gap: 0.85rem; }
     .ach-grid { grid-template-columns: 1fr; }
     .ach-card { border-right: 0; }
@@ -604,19 +684,25 @@
 <section class="hero wrap">
   <div class="eyebrow">Portfolio — Senior Engineering Manager, Consumer Experience</div>
   <h1 class="name">Muddassir Iqbal</h1>
-  <p class="role">Software Engineering Manager II, <strong>Geo Engineering</strong> at Grab — leading Consumer Maps across three hubs.</p>
+  <p class="role">Software Engineering Manager II · <strong>Geo Engineering</strong>, Grab — leading Consumer Maps across three hubs.</p>
   <div class="loc-line">Singapore — bridging Beijing &amp; Jakarta hubs · July 2026</div>
+  <div class="contact-line">
+    <a href="mailto:muddassir.iqbal@grabtaxi.com">muddassir.iqbal@grabtaxi.com</a>
+    <a href="https://www.linkedin.com/in/iqbalmuddassir" target="_blank" rel="noopener">linkedin.com/in/iqbalmuddassir</a>
+  </div>
   <p class="summary">Three years leading Grab's Consumer Maps engineering across three hubs — Singapore, Beijing, and Jakarta — spanning the SDKs behind the Grab app's home-screen map, wayfinding, and points-of-interest surfaces used by tens of millions of consumers every month. Engineering Owner for non-functional priorities across the Passenger, Driver, and Merchant apps, and technical gatekeeper for release stability across 20+ core SDKs. An AI-first builder-manager who has turned agentic tooling into a repeatable team practice, while personally shipping the org's hardest platform migrations and growing four direct reports into autonomous technical leads.</p>
   <div class="calibration">
     <b>Independently calibrated, not self-assessed:</b> his H1 2026 promotion case concluded he is already operating at G6 (Senior Manager) scope against Grab's Engineering &amp; Data Science Manager Career Ladder — leading across team boundaries, scaling reliability standards, and developing emerging leaders.
   </div>
   <div class="stat-strip">
     <div class="stat-chip"><span class="num">3</span><span class="lbl">Hubs led — SG · Beijing · Jakarta</span></div>
-    <div class="stat-chip"><span class="num">8+1</span><span class="lbl">Direct reports, +1 in offer stage</span></div>
+    <div class="stat-chip"><span class="num">8 (+1)</span><span class="lbl">Direct reports · +1 in offer stage</span></div>
     <div class="stat-chip"><span class="num">4</span><span class="lbl">Leads coached into autonomous owners</span></div>
-    <div class="stat-chip"><span class="num">20+</span><span class="lbl">SDKs owned as Eng. Owner, NFPs</span></div>
+    <div class="stat-chip"><span class="num">20+</span><span class="lbl">SDKs owned — Eng. Owner, NFPs</span></div>
     <div class="stat-chip"><span class="num">10+</span><span class="lbl">Tech families partnered, last 3 halves</span></div>
     <div class="stat-chip"><span class="num">221</span><span class="lbl">MRs H1'26 — 140 AI-assisted</span></div>
+    <div class="stat-chip"><span class="num">92nd</span><span class="lbl">Percentile AI tool usage, Grab</span></div>
+    <div class="stat-chip"><span class="num">Top 5%</span><span class="lbl">Performer — CEO + TGW Award</span></div>
   </div>
 </section>
 
@@ -632,12 +718,13 @@
         <div class="leg-eyebrow">Strategic Leadership</div>
         <h3>Turning technical bets into shipped roadmap</h3>
         <p>Owns the Consumer Maps NFP roadmap — the <strong>Kotlin 2.1 / Android 36 migration</strong>, the <strong>Nav 2.0 / MapLibre rearchitecture</strong>, Garnet Taiwan localisation, and experimentation-infra cleanup — translating multi-quarter technical bets into shipped roadmap items.</p>
-        <p>Product surfaces under his scope reach massive consumer traffic, and he spotted that third-party map traffic could be converted into Grab bookings — turning that insight into <strong>"Grab as a Navigation App,"</strong> now an estimated ~US$80K/week revenue line. He also structured a DGNSS precise-positioning partnership spanning Qualcomm, OPPO, and SwiftNav — a hardware-to-software strategic bet, not just an internal roadmap line.</p>
+        <p>Product surfaces under his scope reach massive consumer traffic: Trip Planner (<strong>1.97M MEU</strong>), Search &amp; Discovery (<strong>10.43M</strong> monthly sessions), and cross-sell DineOut discovery (<strong>~6M</strong> weekly unique users).</p>
+        <p>Spotted that third-party map traffic could be converted into Grab bookings, and turned that insight into <strong>"Grab as a Navigation App"</strong> — now an estimated ~US$80K/week revenue line. Structured a DGNSS precise-positioning partnership spanning Qualcomm, OPPO, and SwiftNav — a hardware-to-software strategic bet, not just an internal roadmap line.</p>
         <div class="metrics">
           <span><b>1.97M</b> MEU Trip Planner</span>
           <span><b>10.43M</b> /mo Search &amp; Discovery</span>
           <span><b>~6M</b> weekly DineOut discovery</span>
-          <span>CEO Award Q1'25 · TGW Award H1'25 — top 5%</span>
+          <span>Personal CEO Award Q1'25 · TGW Award H1'25 — top 5%</span>
         </div>
       </div>
     </div>
@@ -647,10 +734,14 @@
       <div class="leg-body">
         <div class="leg-eyebrow">Leader of Leaders</div>
         <h3>Growing a team, not just inheriting one</h3>
-        <p>Manages <strong>8 direct reports today, with a 9th offer already out</strong>. Coached four leads — Parking, Trip Planner, ParaTransit, and Discovery — into autonomous "cyborg" owners of their own surfaces; their track record under his mentorship: 1 promotion, 2 TGW Awards, and 2 CEO Awards earned by the people he grew, plus a major contribution to a report's own G6 promotion.</p>
-        <p>Has handled the harder side of people leadership too: successfully managed 2 performance-improvement cases and coached two borderline performance ratings back to a positive trajectory. As hiring manager, he stood up a new navigation team in Jakarta from zero — new hires ship production code within roughly 10 days, backed by onboarding guides he built.</p>
+        <p>Manages <strong>8 direct reports today, with a 9th offer already out</strong> — a team he's actively grown, not just inherited. Coached four leads — Parking, Trip Planner, ParaTransit, and Discovery — into autonomous "cyborg" owners of their own surfaces; their track record under his mentorship: 1 promotion, 2 TGW Awards, and 2 CEO Awards earned by the people he grew, plus a major contribution to a report's own G6 promotion.</p>
+        <p>Has handled the harder side of people leadership too: successfully managed 2 performance-improvement cases and coached two borderline performance ratings back to a positive trajectory. Hiring manager who stood up a new navigation team in Jakarta from zero — new hires ship production code within roughly 10 days, backed by onboarding guides he built.</p>
+        <blockquote class="inline-quote">
+          Your leadership taught me more than just technical or execution skills — it shaped how I think about responsibility, clarity, and growth as an engineer.
+          <span class="attrib">A mentee, on departure — Jan 2026</span>
+        </blockquote>
         <div class="metrics">
-          <span><b>8+1</b> reports</span>
+          <span><b>8 (+1)</b> reports</span>
           <span><b>4</b> leads → autonomous owners</span>
           <span><b>~10 days</b> to first production commit, Jakarta</span>
         </div>
@@ -663,7 +754,7 @@
         <div class="leg-eyebrow">Engineering Excellence</div>
         <h3>The org's hardest migrations, shipped personally</h3>
         <p>Turned around the Map Your City crowdsourcing platform as a first-time EM in Dec 2022, and built Grab's homegrown in-house navigation stack now powering the entire Driver app — both started as "sinking ships." Personally shipped the <strong>Kotlin 2.1 / K2 compiler and Android SDK 36 migration</strong> for kartapoi-sdk — KAPT→KSP, edge-to-edge UI across 22 screens, 5 SDK migrations, 1,385 unit tests green.</p>
-        <p>Sole architect of the Consumer Map Feature Flag Unification design, and led the 2.5-year, cross-platform KartaPOI Generic build spanning Android and iOS. As architectural gatekeeper for both release trains, he blocks non-compliant MRs on sight and is the primary investigator for the highest-severity native crashes, including historic <span class="mono">libgrabmap-gl.so</span> memory-corruption bugs no one else had traced.</p>
+        <p>Sole architect of the Consumer Map Feature Flag Unification design, and led the 2.5-year, cross-platform KartaPOI Generic build spanning Android and iOS. Architectural gatekeeper for both release trains — blocks non-compliant MRs on sight ("this will lead to a crash in prod") and is the primary investigator for the highest-severity native crashes, including historic <span class="mono">libgrabmap-gl.so</span> memory-corruption bugs no one else had traced.</p>
         <div class="metrics">
           <span><b>1,385</b> unit tests, migration</span>
           <span><b>22</b> screens, edge-to-edge</span>
@@ -827,6 +918,57 @@
       <p>Built and demoed an internal AI coding orchestrator to peer EMs; authored Claude Skills used org-wide; gave "Road to Super Engineering" on managers of AI agents.</p>
     </div>
   </div>
+  <p class="skills-line"><strong>Hands-on stack:</strong> Kotlin, Java, Jetpack Compose, SwiftUI, NDK/JNI, TensorFlow on-device, Room, RxJava, MVVM/VIPER, JUnit/Mockito, Cursor AI, Copilot, OpenAI — plus people management, sprint planning, and cross-team delivery.</p>
+</section>
+
+<section class="section wrap reveal">
+  <div class="section-head">
+    <span class="tag">Career path</span>
+    <h2>Before and into Geo Engineering</h2>
+    <p>Condensed from the April 2025 resume — earlier mobile leadership that led into Grab Consumer Maps.</p>
+  </div>
+  <div class="career-list">
+    <div class="career-item">
+      <div>
+        <h3>Software Engineering Manager</h3>
+        <div class="org">Grab · Geo Engineering / Consumer Maps</div>
+        <p>Leading senior engineers on cross-platform SDKs spanning on-device ML, map matching, and Compose UI kits for a super app with 10M+ DAU. Driving AI-tool adoption for productivity and business impact. Earlier as Lead Software Engineer on GrabDriver Maps &amp; Navigation: MVVM + RxJava migration, Kotlin conversion, localisation, and test coverage 70%→80% for an app with 10M+ downloads.</p>
+      </div>
+      <div class="when">Oct 2022 – Present<br>Lead SWE Aug 2019 – Sep 2022</div>
+    </div>
+    <div class="career-item">
+      <div>
+        <h3>Senior Software Engineer</h3>
+        <div class="org">OYO Rooms · Consumer app</div>
+        <p>Re-architected into VIPER, owned release lifecycle and API contracts, redesigned search filters and homepage widgetization, shipped the Wizard loyalty feature, cut latency, and migrated the codebase to Kotlin for an app with 10M+ downloads.</p>
+      </div>
+      <div class="when">Jun 2018 – Aug 2019</div>
+    </div>
+    <div class="career-item">
+      <div>
+        <h3>Android Developer</h3>
+        <div class="org">Roposo · Fashion social / commerce</div>
+        <p>Owned full development lifecycle across feed and story creation — OkHttp, ExoPlayer, custom gestures/animations, caching, and APK size/memory optimisation for 5M+ downloads.</p>
+      </div>
+      <div class="when">Dec 2015 – May 2018</div>
+    </div>
+    <div class="career-item">
+      <div>
+        <h3>Android Developer</h3>
+        <div class="org">Click Labs / Freelance · Vyomo, XBowling, Frugal, KeyToMe</div>
+        <p>Shipped Material Design apps with maps, GCM, Retrofit/Picasso, Facebook SDK, and AWS uploads — including Vyomo (salon aggregation, later Naturals@Home) and other on-demand products.</p>
+      </div>
+      <div class="when">Jun 2015 – Nov 2015</div>
+    </div>
+    <div class="career-item">
+      <div>
+        <h3>B.E. Computer Science &amp; Engineering</h3>
+        <div class="org">Chandigarh College of Engineering &amp; Technology, Panjab University · 8.23 CGPA</div>
+        <p>Senior Secondary, Hamdard Public School / Hamdard University — 86% (2010).</p>
+      </div>
+      <div class="when">Aug 2011 – Jun 2015</div>
+    </div>
+  </div>
 </section>
 
 <section class="section wrap reveal">
@@ -836,11 +978,11 @@
   </div>
   <div class="quotes">
     <div class="quote-card">
-      <p>Muddassir is a cornerstone of GEO stability, engineering excellence, and the mobile ecosystem — one of the few EMs in Grab who work in more than one domain.</p>
+      <p>Muddassir is a cornerstone of GEO stability, engineering excellence, and the mobile ecosystem… one of the few EMs in Grab who work in more than one domain.</p>
       <div class="attrib">Igor Steblii, Engineering Manager — H1 2026 promotion case</div>
     </div>
     <div class="quote-card">
-      <p>His work allowed the Geo team to fulfill all commitments a full week ahead of schedule.</p>
+      <p>Allowed the Geo team to fulfill all commitments… one full week ahead of schedule.</p>
       <div class="attrib">A peer engineer, after a cross-team migration wave</div>
     </div>
     <div class="quote-card">
