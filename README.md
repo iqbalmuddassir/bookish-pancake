@@ -45,6 +45,14 @@ Then visit [http://localhost:8000](http://localhost:8000).
 
 Pushes to `main` trigger the GitHub Actions workflow (`.github/workflows/digi-mar-ai-workflow.yml`), which deploys the `docs/` directory to GitHub Pages. No manual deploy step is needed.
 
+## Git history
+
+`main` follows a **strictly linear** history (no merge commits). Prefer squash or rebase merges. Admins can enforce this in GitHub with:
+
+```bash
+./scripts/enable-linear-history.sh
+```
+
 ## Tech stack
 
 - **HTML, CSS, JavaScript** — no frameworks or bundlers

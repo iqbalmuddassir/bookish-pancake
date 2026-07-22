@@ -1,0 +1,49 @@
+# Fail if merge commits appear on main or in PRs targeting main.
+# Complements GitHub "Require linear history" (squash/rebase merges only).
+name: Linear history
+
+on:
+  pull_request:
+    branches: ["main"]
+  push:
+    branches: ["main"]
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    name: No merge commits
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Reject merge commits
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          BASE_REF: ${{ github.base_ref }}
+          BEFORE: ${{ github.event.before }}
+          SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+
+          if [ "$EVENT_NAME" = "pull_request" ]; then
+            git fetch origin "$BASE_REF" --depth=1
+            RANGE="origin/${BASE_REF}..HEAD"
+          elif [ "$BEFORE" = "0000000000000000000000000000000000000000" ]; then
+            RANGE="HEAD"
+          else
+            RANGE="${BEFORE}..${SHA}"
+          fi
+
+          echo "Checking for merge commits in: $RANGE"
+          if merges="$(git rev-list --merges "$RANGE")" && [ -n "$merges" ]; then
+            echo "::error::Merge commits are not allowed. main must stay strictly linear (squash or rebase only)."
+            git log --oneline --merges "$RANGE"
+            exit 1
+          fi
+
+          echo "OK: linear history (no merge commits)."

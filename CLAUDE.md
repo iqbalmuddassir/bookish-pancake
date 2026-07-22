@@ -10,6 +10,11 @@ This is a static portfolio/documentation site ("Bridge to Purpose") hosted on **
 
 Pushes to `main` automatically trigger the GitHub Actions workflow (`.github/workflows/digi-mar-ai-workflow.yml`), which uploads the entire `docs/` directory to GitHub Pages. No manual deploy step is needed.
 
+## Git history
+
+`main` uses a **strictly linear** history. Merge via squash or rebase only — never create merge commits on `main`. See `AGENTS.md` and `scripts/enable-linear-history.sh`.
+
+
 ## Repository Structure
 
 All deliverables live under `docs/`:
