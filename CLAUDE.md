@@ -10,6 +10,16 @@ This is a static portfolio/documentation site ("Bridge to Purpose") hosted on **
 
 Pushes to `main` automatically trigger the GitHub Actions workflow (`.github/workflows/digi-mar-ai-workflow.yml`), which uploads the entire `docs/` directory to GitHub Pages. No manual deploy step is needed.
 
+## Git: linear history (strict)
+
+This repository **must** keep a linear commit history on `main`. No exceptions.
+
+- **Never** create merge commits (`git merge` without `--ff-only`, GitHub “Create a merge commit”, or merging `main` into a feature branch).
+- Integrate work with **rebase** (`git rebase` / `git pull --rebase`) or **squash** onto `main` only.
+- Keep feature branches up to date with `git fetch origin && git rebase origin/main` — not merge.
+- If history becomes non-linear, rewrite it to linear (rebase/cherry-pick) and force-push only when the user explicitly requests a force push.
+- GitHub is configured with merge commits disabled; only squash and rebase merges are allowed. Do not re-enable merge commits.
+
 ## Repository Structure
 
 All deliverables live under `docs/`:

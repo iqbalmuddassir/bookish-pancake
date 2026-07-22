@@ -13,3 +13,13 @@ Static portfolio/documentation site ("Bridge to Purpose") for GitHub Pages. All 
 - Deployable content is only under `docs/`. Edits outside that folder do not affect the live GitHub Pages site.
 - Theme toggles and other shared UI are duplicated per HTML file; update each page individually when changing shared patterns.
 - Pushes to `main` deploy `docs/` via `.github/workflows/digi-mar-ai-workflow.yml`.
+
+## Git: linear history (strict)
+
+This repository **must** keep a linear commit history on `main`. No exceptions.
+
+- **Never** create merge commits (`git merge` without `--ff-only`, GitHub “Create a merge commit”, or merging `main` into a feature branch).
+- Integrate work with **rebase** (`git rebase` / `git pull --rebase`) or **squash** onto `main` only.
+- Keep feature branches up to date with `git fetch origin && git rebase origin/main` — not merge.
+- If history becomes non-linear, rewrite it to linear (rebase/cherry-pick) and force-push only when the user explicitly requests a force push.
+- GitHub is configured with merge commits disabled; only squash and rebase merges are allowed. Do not re-enable merge commits.
