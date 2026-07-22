@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Grab SEM portfolio — internal promotion case for Consumer Maps leadership (not published).">
+<meta name="robots" content="noindex, nofollow">
+<title>Muddassir Iqbal — Senior Engineering Manager, Consumer Maps</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink: #0B111C;
+    --panel: #131C2B;
+    --panel-2: #182338;
+    --hairline: #26324A;
+    --text: #E8ECF4;
+    --muted: #8C97AF;
+    --route: #59E0C4;
+    --route-dim: #2A5C54;
+    --pin: #F5A94E;
+    --pin-dim: #6b5330;
+    display: block;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--ink);
+    color:var(--text);
+    font-family:'IBM Plex Sans', sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:600;
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+  .mono{font-family:'IBM Plex Mono', monospace;}
+  a{color:inherit;}
+  .wrap{max-width:1080px; margin:0 auto; padding:0 32px;}
+
+  /* background texture: faint lat/long grid, like a map viewport */
+  .map-grid{
+    position:fixed; inset:0; z-index:0; pointer-events:none;
+    background-image:
+      linear-gradient(var(--hairline) 1px, transparent 1px),
+      linear-gradient(90deg, var(--hairline) 1px, transparent 1px);
+    background-size:64px 64px;
+    opacity:0.16;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative; z-index:1;
+    min-height:100vh;
+    display:flex; flex-direction:column; justify-content:center;
+    padding:120px 0 80px;
+    border-bottom:1px solid var(--hairline);
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px; letter-spacing:0.14em; text-transform:uppercase;
+    color:var(--route);
+    display:flex; align-items:center; gap:10px;
+    margin-bottom:26px;
+    opacity:0; transform:translateY(8px);
+    animation:riseIn 0.7s ease forwards;
+  }
+  .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--route); box-shadow:0 0 10px var(--route);}
+  h1.name{
+    font-size:clamp(44px, 7vw, 84px);
+    line-height:1.02;
+    opacity:0; transform:translateY(14px);
+    animation:riseIn 0.8s ease 0.1s forwards;
+  }
+  .role{
+    font-size:clamp(17px,2.2vw,22px);
+    color:var(--muted);
+    margin-top:18px;
+    max-width:640px;
+    opacity:0; transform:translateY(14px);
+    animation:riseIn 0.8s ease 0.22s forwards;
+  }
+  .role strong{color:var(--text); font-weight:600;}
+  .loc-line{
+    margin-top:10px; font-size:14px; color:var(--muted);
+    font-family:'IBM Plex Mono', monospace;
+    display:flex; align-items:center; gap:8px;
+    opacity:0; transform:translateY(14px);
+    animation:riseIn 0.8s ease 0.3s forwards;
+  }
+  .summary{
+    margin-top:34px; max-width:680px; font-size:16.5px; color:var(--text); opacity:0.92;
+    opacity:0; transform:translateY(14px);
+    animation:riseIn 0.8s ease 0.4s forwards;
+  }
+  .calibration-card{
+    margin-top:34px; max-width:640px;
+    background:var(--panel);
+    border:1px solid var(--hairline);
+    border-left:3px solid var(--pin);
+    border-radius:6px;
+    padding:18px 22px;
+    font-size:14.5px; color:var(--muted);
+    opacity:0; transform:translateY(14px);
+    animation:riseIn 0.8s ease 0.5s forwards;
+  }
+  .calibration-card b{color:var(--text);}
+  @keyframes riseIn{to{opacity:1; transform:translateY(0);}}
+
+  .stat-strip{
+    margin-top:56px;
+    display:grid;
+    grid-template-columns:repeat(6, 1fr);
+    gap:1px;
+    background:var(--hairline);
+    border:1px solid var(--hairline);
+    border-radius:8px;
+    overflow:hidden;
+    opacity:0;
+    animation:riseIn 0.8s ease 0.6s forwards;
+  }
+  .stat-chip{
+    background:var(--panel);
+    padding:18px 14px;
+    text-align:left;
+  }
+  .stat-chip .num{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:22px; font-weight:600; color:var(--route);
+    display:block;
+  }
+  .stat-chip .lbl{
+    font-size:11.5px; color:var(--muted); letter-spacing:0.03em;
+    margin-top:4px; display:block;
+  }
+
+  /* ---------- ROUTE / JOURNEY SECTIONS ---------- */
+  .journey{
+    position:relative; z-index:1;
+    padding:100px 0 40px;
+  }
+  .journey-intro{
+    max-width:600px; margin:0 auto 64px; padding:0 32px;
+    color:var(--muted); font-size:15px;
+  }
+  .journey-intro .tag{
+    font-family:'IBM Plex Mono', monospace; color:var(--route);
+    font-size:12px; letter-spacing:0.12em; text-transform:uppercase;
+  }
+  .route-rail{
+    position:relative;
+    max-width:1080px; margin:0 auto; padding:0 32px;
+  }
+  .route-line{
+    position:absolute;
+    left:52px; top:8px; bottom:8px;
+    width:2px;
+    background:linear-gradient(to bottom, var(--route-dim), var(--route-dim));
+    z-index:0;
+  }
+  .route-line-fill{
+    position:absolute; left:0; top:0; width:100%; height:0%;
+    background:linear-gradient(to bottom, var(--route), var(--route));
+    transition:height 1.8s cubic-bezier(.2,.7,.2,1);
+    box-shadow:0 0 12px 0 var(--route);
+  }
+  .leg{
+    position:relative;
+    display:grid;
+    grid-template-columns:104px 1fr;
+    gap:8px;
+    padding-bottom:72px;
+    opacity:0; transform:translateY(24px);
+    transition:opacity 0.7s ease, transform 0.7s ease;
+  }
+  .leg:last-child{padding-bottom:0;}
+  .leg.in-view{opacity:1; transform:translateY(0);}
+  .pin{
+    position:relative; z-index:2;
+    width:40px; height:40px; border-radius:50%;
+    background:var(--panel-2);
+    border:2px solid var(--route-dim);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--muted);
+    margin-left:32px;
+    transition:border-color 0.5s ease, color 0.5s ease, box-shadow 0.5s ease;
+  }
+  .leg.in-view .pin{
+    border-color:var(--route); color:var(--route);
+    box-shadow:0 0 0 5px rgba(89,224,196,0.08);
+  }
+  .leg-body{padding-top:2px;}
+  .leg-eyebrow{
+    font-family:'IBM Plex Mono', monospace; font-size:11.5px;
+    color:var(--pin); letter-spacing:0.1em; text-transform:uppercase;
+    margin-bottom:8px;
+  }
+  .leg h3{font-size:24px; margin-bottom:14px;}
+  .leg p{color:var(--muted); font-size:15px; margin:0 0 12px;}
+  .leg p:last-child{margin-bottom:0;}
+  .leg strong{color:var(--text); font-weight:600;}
+  .leg .metrics{
+    display:flex; flex-wrap:wrap; gap:10px; margin-top:16px;
+  }
+  .metric-pill{
+    font-family:'IBM Plex Mono', monospace; font-size:12px;
+    background:var(--panel); border:1px solid var(--hairline);
+    padding:6px 12px; border-radius:20px; color:var(--muted);
+  }
+  .metric-pill b{color:var(--route);}
+
+  /* ---------- SIGNATURE GRID ---------- */
+  .section{position:relative; z-index:1; padding:90px 0;}
+  .section-head{margin-bottom:44px; max-width:640px;}
+  .section-head .tag{
+    font-family:'IBM Plex Mono', monospace; color:var(--route);
+    font-size:12px; letter-spacing:0.12em; text-transform:uppercase; display:block; margin-bottom:14px;
+  }
+  .section-head h2{font-size:clamp(28px,3.6vw,38px);}
+  .section-head p{color:var(--muted); margin-top:14px; font-size:15px;}
+
+  .ach-grid{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:1px;
+    background:var(--hairline); border:1px solid var(--hairline); border-radius:10px; overflow:hidden;
+  }
+  .ach-card{
+    background:var(--panel); padding:26px 22px; min-height:150px;
+    display:flex; flex-direction:column; justify-content:space-between;
+  }
+  .ach-card .big{
+    font-family:'IBM Plex Mono', monospace; font-size:26px; font-weight:600; color:var(--text);
+  }
+  .ach-card .cap{font-size:13px; color:var(--muted); margin-top:10px;}
+
+  /* AI native */
+  .ai-cols{display:grid; grid-template-columns:1.1fr 1fr; gap:48px; align-items:start;}
+  .ai-stats{display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:var(--hairline); border:1px solid var(--hairline); border-radius:10px; overflow:hidden; margin-bottom:32px;}
+  .ai-stats .stat-chip .num{font-size:19px;}
+  .list-block h4{
+    font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--pin);
+    letter-spacing:0.1em; text-transform:uppercase; margin-bottom:14px;
+  }
+  .list-block ul{margin:0 0 28px; padding:0; list-style:none;}
+  .list-block li{
+    padding:12px 0; border-top:1px solid var(--hairline); color:var(--muted); font-size:14.5px;
+  }
+  .list-block li:first-child{border-top:none;}
+  .list-block li strong{color:var(--text);}
+
+  /* competencies */
+  .comp-grid{display:grid; grid-template-columns:1fr 1fr; gap:20px 40px;}
+  .comp{padding:18px 0; border-top:1px solid var(--hairline);}
+  .comp-top{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:10px;}
+  .comp-top .name{font-size:15px; font-weight:600;}
+  .comp-top .lvl{font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:0.08em; color:var(--route);}
+  .comp-top .lvl.prof{color:var(--pin);}
+  .meter{height:4px; background:var(--panel-2); border-radius:2px; overflow:hidden; margin-bottom:10px;}
+  .meter-fill{height:100%; background:var(--route); border-radius:2px;}
+  .meter-fill.prof{background:var(--pin);}
+  .comp p{font-size:13.5px; color:var(--muted); margin:0;}
+
+  /* tech breadth */
+  .tech-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:20px;}
+  .tech-card{background:var(--panel); border:1px solid var(--hairline); border-radius:10px; padding:22px;}
+  .tech-card h4{font-size:14.5px; margin-bottom:10px; color:var(--route);}
+  .tech-card p{font-size:13.5px; color:var(--muted); margin:0;}
+
+  /* quotes */
+  .quotes{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+  .quote-card{
+    background:var(--panel); border:1px solid var(--hairline); border-left:3px solid var(--route);
+    border-radius:6px; padding:24px; font-size:14.5px; color:var(--text); position:relative;
+  }
+  .quote-card:before{content:"\201C"; font-family:'Space Grotesk',sans-serif; font-size:44px; color:var(--route-dim); position:absolute; top:6px; left:14px; line-height:1;}
+  .quote-card p{margin:18px 0 16px; position:relative; z-index:1;}
+  .quote-card .attrib{font-family:'IBM Plex Mono', monospace; font-size:11.5px; color:var(--muted); letter-spacing:0.03em;}
+
+  footer{
+    position:relative; z-index:1;
+    border-top:1px solid var(--hairline);
+    padding:56px 0 60px;
+  }
+  .foot-grid{display:grid; grid-template-columns:1fr 1fr; gap:32px;}
+  footer h4{font-size:13px; color:var(--pin); font-family:'IBM Plex Mono', monospace; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:12px;}
+  footer p{color:var(--muted); font-size:14px; margin:0 0 6px;}
+  .compiled{margin-top:40px; font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--muted); opacity:0.7;}
+
+  /* reveal-on-scroll for generic sections */
+  .reveal{opacity:0; transform:translateY(18px); transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in-view{opacity:1; transform:translateY(0);}
+
+  @media (max-width: 880px){
+    .ach-grid{grid-template-columns:repeat(2,1fr);}
+    .ai-cols{grid-template-columns:1fr;}
+    .comp-grid{grid-template-columns:1fr;}
+    .tech-grid{grid-template-columns:1fr 1fr;}
+    .quotes{grid-template-columns:1fr;}
+    .stat-strip{grid-template-columns:repeat(3,1fr);}
+    .foot-grid{grid-template-columns:1fr;}
+    .route-line{left:32px;}
+    .pin{margin-left:12px;}
+    .leg{grid-template-columns:64px 1fr;}
+  }
+  @media (max-width: 560px){
+    .wrap, .route-rail{padding:0 20px;}
+    .ach-grid{grid-template-columns:1fr 1fr;}
+    .tech-grid{grid-template-columns:1fr;}
+  }
+
+  .back-link{
+    position:fixed; top:18px; left:18px; z-index:20;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px; letter-spacing:0.06em; text-transform:uppercase;
+    color:var(--muted); text-decoration:none;
+    padding:8px 12px;
+    border:1px solid var(--hairline);
+    background:rgba(11,17,28,0.82);
+    backdrop-filter:blur(8px);
+  }
+  .back-link:hover{color:var(--route); border-color:var(--route-dim);}
+  .internal-banner{
+    position:relative; z-index:1;
+    max-width:1080px; margin:0 auto; padding:72px 32px 0;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px; letter-spacing:0.04em; color:var(--muted);
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important;}
+    .eyebrow,h1.name,.role,.loc-line,.summary,.calibration-card,.stat-strip,.leg,.reveal{opacity:1 !important; transform:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<div class="map-grid"></div>
+<a class="back-link" href="../index.html?mode=private">← Hub</a>
+<p class="internal-banner">Internal — not published · view hub with ?mode=private</p>
+
+<section class="hero wrap">
+  <div class="eyebrow"><span class="dot"></span>Portfolio — Senior Engineering Manager, Consumer Experience</div>
+  <h1 class="name">Muddassir Iqbal</h1>
+  <p class="role">Software Engineering Manager II, <strong>Geo Engineering</strong> at Grab — leading Consumer Maps across three hubs.</p>
+  <div class="loc-line">📍 Singapore — bridging Beijing &amp; Jakarta hubs · July 2026</div>
+  <p class="summary">Three years leading Grab's Consumer Maps engineering across three hubs — Singapore, Beijing, and Jakarta — spanning the SDKs behind the Grab app's home-screen map, wayfinding, and points-of-interest surfaces used by tens of millions of consumers every month. Engineering Owner for non-functional priorities across the Passenger, Driver, and Merchant apps, and technical gatekeeper for release stability across 20+ core SDKs. An AI-first builder-manager who has turned agentic tooling into a repeatable team practice, while personally shipping the org's hardest platform migrations and growing four direct reports into autonomous technical leads.</p>
+  <div class="calibration-card">
+    <b>Independently calibrated, not self-assessed:</b> his H1 2026 promotion case concluded he is already operating at G6 (Senior Manager) scope against Grab's Engineering &amp; Data Science Manager Career Ladder — leading across team boundaries, scaling reliability standards, and developing emerging leaders.
+  </div>
+  <div class="stat-strip">
+    <div class="stat-chip"><span class="num">3</span><span class="lbl">Hubs led — SG · Beijing · Jakarta</span></div>
+    <div class="stat-chip"><span class="num">8+1</span><span class="lbl">Direct reports, +1 in offer stage</span></div>
+    <div class="stat-chip"><span class="num">4</span><span class="lbl">Leads coached into autonomous owners</span></div>
+    <div class="stat-chip"><span class="num">20+</span><span class="lbl">SDKs owned as Eng. Owner, NFPs</span></div>
+    <div class="stat-chip"><span class="num">10+</span><span class="lbl">Tech families partnered, last 3 halves</span></div>
+    <div class="stat-chip"><span class="num">221</span><span class="lbl">MRs H1'26 — 140 AI-assisted</span></div>
+  </div>
+</section>
+
+<section class="journey">
+  <div class="journey-intro">
+    <span class="tag">The route so far</span>
+    <p style="margin-top:10px;">Five legs of a three-year build-out, from turning around a sinking platform to running crisis response for the whole Driver app.</p>
+  </div>
+  <div class="route-rail">
+    <div class="route-line"><div class="route-line-fill" id="routeFill"></div></div>
+
+    <div class="leg" data-leg="1">
+      <div class="pin">01</div>
+      <div class="leg-body">
+        <div class="leg-eyebrow">Strategic Leadership</div>
+        <h3>Turning technical bets into shipped roadmap</h3>
+        <p>Owns the Consumer Maps NFP roadmap — the <strong>Kotlin 2.1 / Android 36 migration</strong>, the <strong>Nav 2.0 / MapLibre rearchitecture</strong>, Garnet Taiwan localisation, and experimentation-infra cleanup — translating multi-quarter technical bets into shipped roadmap items.</p>
+        <p>Product surfaces under his scope reach massive consumer traffic, and he spotted that third-party map traffic could be converted into Grab bookings — turning that insight into <strong>"Grab as a Navigation App,"</strong> now an estimated ~US$80K/week revenue line. He also structured a DGNSS precise-positioning partnership spanning Qualcomm, OPPO, and SwiftNav — a hardware-to-software strategic bet, not just an internal roadmap line.</p>
+        <div class="metrics">
+          <span class="metric-pill"><b>1.97M</b>&nbsp;MEU Trip Planner</span>
+          <span class="metric-pill"><b>10.43M</b>&nbsp;/mo Search &amp; Discovery</span>
+          <span class="metric-pill"><b>~6M</b>&nbsp;weekly DineOut discovery</span>
+          <span class="metric-pill">CEO Award Q1'25 · TGW Award H1'25 — top 5%</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="leg" data-leg="2">
+      <div class="pin">02</div>
+      <div class="leg-body">
+        <div class="leg-eyebrow">Leader of Leaders</div>
+        <h3>Growing a team, not just inheriting one</h3>
+        <p>Manages <strong>8 direct reports today, with a 9th offer already out</strong>. Coached four leads — Parking, Trip Planner, ParaTransit, and Discovery — into autonomous "cyborg" owners of their own surfaces; their track record under his mentorship: 1 promotion, 2 TGW Awards, and 2 CEO Awards earned by the people he grew, plus a major contribution to a report's own G6 promotion.</p>
+        <p>Has handled the harder side of people leadership too: successfully managed 2 performance-improvement cases and coached two borderline performance ratings back to a positive trajectory. As hiring manager, he stood up a new navigation team in Jakarta from zero — new hires ship production code within roughly 10 days, backed by onboarding guides he built.</p>
+        <div class="metrics">
+          <span class="metric-pill"><b>8+1</b>&nbsp;reports</span>
+          <span class="metric-pill"><b>4</b>&nbsp;leads → autonomous owners</span>
+          <span class="metric-pill"><b>~10 days</b>&nbsp;to first production commit, Jakarta</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="leg" data-leg="3">
+      <div class="pin">03</div>
+      <div class="leg-body">
+        <div class="leg-eyebrow">Engineering Excellence</div>
+        <h3>The org's hardest migrations, shipped personally</h3>
+        <p>Turned around the Map Your City crowdsourcing platform as a first-time EM in Dec 2022, and built Grab's homegrown in-house navigation stack now powering the entire Driver app — both started as "sinking ships." Personally shipped the <strong>Kotlin 2.1 / K2 compiler and Android SDK 36 migration</strong> for kartapoi-sdk — KAPT→KSP, edge-to-edge UI across 22 screens, 5 SDK migrations, 1,385 unit tests green.</p>
+        <p>Sole architect of the Consumer Map Feature Flag Unification design, and led the 2.5-year, cross-platform KartaPOI Generic build spanning Android and iOS. As architectural gatekeeper for both release trains, he blocks non-compliant MRs on sight and is the primary investigator for the highest-severity native crashes, including historic <span class="mono">libgrabmap-gl.so</span> memory-corruption bugs no one else had traced.</p>
+        <div class="metrics">
+          <span class="metric-pill"><b>1,385</b>&nbsp;unit tests, migration</span>
+          <span class="metric-pill"><b>22</b>&nbsp;screens, edge-to-edge</span>
+          <span class="metric-pill"><b>2.5 yrs</b>&nbsp;KartaPOI Generic, Android+iOS</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="leg" data-leg="4">
+      <div class="pin">04</div>
+      <div class="leg-body">
+        <div class="leg-eyebrow">Cross-Functional Partnership</div>
+        <h3>The go-to bridge across ten-plus tech families</h3>
+        <p>Partnered across 10+ tech families in the last three halves — Omni, Transport, Food, Local Life, FinID, Driver App, PAX Core, CX, DAX Core, Map Ops — as the go-to bridge for Navigation, Map Your City, and Consumer Maps. Drove MapMyDeals as a "One Grab" collaboration across Geo, Omni, and Food, then formalised it into a reusable multi-domain blueprint.</p>
+        <p>Bridges the Garnet Taiwan market-entry effort with localisation and content-ops teams across the Passenger, Driver, and Merchant apps, and is sought out by peer engineering managers and senior ICs for review of org-level priorities documents beyond his own team's scope.</p>
+        <div class="metrics">
+          <span class="metric-pill"><b>10+</b>&nbsp;tech families</span>
+          <span class="metric-pill">MapMyDeals → reusable blueprint</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="leg" data-leg="5">
+      <div class="pin">05</div>
+      <div class="leg-body">
+        <div class="leg-eyebrow">Operational Rigor</div>
+        <h3>Command in the moments that matter</h3>
+        <p>Took command of the <strong>February 2026 Navigation Incident</strong> — coordinating engineering and QA reproduction, feature-flag rollback, and recovery across domains during a live crisis. Coordinated a separate CTO-1-level executive escalation and rollback approval during a severity-1 driver-app crash incident.</p>
+        <p>Runs structured "what went well / what could improve" incident retros, and has used them to fix real process gaps: criticality misclassification, delayed on-call escalation. Led the rotation of hardcoded API tokens across 5 SDKs after a security finding, and personally raised the fix for a DAX security vulnerability.</p>
+        <div class="metrics">
+          <span class="metric-pill">Sev-1 driver-app crash — CTO-1 escalation</span>
+          <span class="metric-pill"><b>5</b>&nbsp;SDKs, token rotation</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="section wrap reveal">
+  <div class="section-head">
+    <span class="tag">Signature achievements</span>
+    <h2>What the map actually covers</h2>
+    <p>Eight numbers that trace the reach and depth of his ownership — from the surfaces millions open daily to the platform work no one sees.</p>
+  </div>
+  <div class="ach-grid">
+    <div class="ach-card"><div class="big">1.97M MEU</div><div class="cap">Trip Planner — owns the engineering behind one of Consumer Maps' highest-reach planning surfaces.</div></div>
+    <div class="ach-card"><div class="big">10.43M/mo</div><div class="cap">Search &amp; Discovery sessions — engineering ownership of the discovery surface driving home-screen engagement.</div></div>
+    <div class="ach-card"><div class="big">6M weekly</div><div class="cap">Cross-sell DineOut deals — in-transit map discovery, forged across Geo, Omni, and Transport; 14M weekly sessions.</div></div>
+    <div class="ach-card"><div class="big">~$80K/wk</div><div class="cap">Grab as a Navigation App — turned 3rd-party map traffic into an estimated recurring revenue line.</div></div>
+    <div class="ach-card"><div class="big">1M/month</div><div class="cap">Crowdsourced weather reports — ~85% accuracy from driver-submitted data, feeding the in-app weather layer.</div></div>
+    <div class="ach-card"><div class="big">1,385 tests</div><div class="cap">Kotlin 2.1 / SDK 36 migration — personally authored KAPT→KSP + edge-to-edge migration on the org's core SDK.</div></div>
+    <div class="ach-card"><div class="big">2.5 yrs</div><div class="cap">KartaPOI Generic platform — cross-platform (Android + iOS) crowdsourced map-data contribution build, led start to finish.</div></div>
+    <div class="ach-card"><div class="big">5 SDKs</div><div class="cap">Security token remediation — led cross-codebase rotation of hardcoded credentials after a security finding.</div></div>
+  </div>
+</section>
+
+<section class="section wrap reveal">
+  <div class="section-head">
+    <span class="tag">AI-native engineering — track record, not a claim</span>
+    <h2>Agentic tooling as a team habit</h2>
+  </div>
+  <div class="ai-cols">
+    <div>
+      <div class="ai-stats">
+        <div class="stat-chip"><span class="num">92nd pct.</span><span class="lbl">AI tool usage, all of Grab</span></div>
+        <div class="stat-chip"><span class="num">86 → 140</span><span class="lbl">AI-assisted MRs, H2'25→H1'26 (+63%)</span></div>
+        <div class="stat-chip"><span class="num">144 → 221</span><span class="lbl">Total MRs, H2'25→H1'26 (+53%)</span></div>
+        <div class="stat-chip"><span class="num">123 / 453</span><span class="lbl">Commits / MR comments, 13 repos, one half</span></div>
+      </div>
+      <div class="list-block">
+        <h4>Talks he's given</h4>
+        <ul>
+          <li><strong>"[Geo] Road to Super Engineering"</strong> — Singapore, Beijing &amp; Romania — on shifting engineers from ICs to builders and managers of AI agents.</li>
+          <li><strong>"Vibe Coding POS"</strong> — AI BrownBag session on passion-project-driven engineering ideas.</li>
+          <li><strong>Sub-agent productivity methodology</strong> — Geo All Hands, Sep 2025.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="list-block">
+      <h4>Tools he built</h4>
+      <ul>
+        <li><strong>Claude Skills</strong> for the Kotlin 2.1 and Android SDK 36 migrations, now reused org-wide for platform upgrades.</li>
+        <li>Co-built the <strong>Mobile Development Kit</strong> and a Mobile Dev AI plugin with a peer engineer.</li>
+        <li>A <strong>QR-code / deep-link MCP server</strong> that lets the Map Ops team self-serve campaign links without engineering support.</li>
+        <li><strong>DevBot</strong> repo-mapping improvements for the NavKit Android SDK.</li>
+        <li>Authors and maintains the team's <strong>Gen AI Workshop guide</strong> (Claude Code / Cursor / MCP setup).</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section wrap reveal">
+  <div class="section-head">
+    <span class="tag">Leadership competencies</span>
+    <h2>Against Grab's Grade Guide</h2>
+  </div>
+  <div class="comp-grid">
+    <div class="comp">
+      <div class="comp-top"><span class="name">User-Centered Thinking</span><span class="lvl">EXPERT</span></div>
+      <div class="meter"><div class="meter-fill" style="width:92%"></div></div>
+      <p>Shaped initiatives reaching 10M+ monthly sessions by synthesising insight across Product, Data, and Design.</p>
+    </div>
+    <div class="comp">
+      <div class="comp-top"><span class="name">Adaptive Execution</span><span class="lvl">EXPERT</span></div>
+      <div class="meter"><div class="meter-fill" style="width:92%"></div></div>
+      <p>Ran 5+ major platform migrations in parallel in H1 2026 without breaking release stability.</p>
+    </div>
+    <div class="comp">
+      <div class="comp-top"><span class="name">Accountability &amp; Ownership</span><span class="lvl prof">PROFICIENT</span></div>
+      <div class="meter"><div class="meter-fill prof" style="width:74%"></div></div>
+      <p>Final go/no-go authority on PAX &amp; DAX release trains; primary investigator for the highest-severity native crashes.</p>
+    </div>
+    <div class="comp">
+      <div class="comp-top"><span class="name">Collaborative Engagement</span><span class="lvl prof">PROFICIENT</span></div>
+      <div class="meter"><div class="meter-fill prof" style="width:74%"></div></div>
+      <p>Brokered alignment across 10+ tech families in 3 halves — Omni, Transport, Food, FinID, Driver App.</p>
+    </div>
+    <div class="comp">
+      <div class="comp-top"><span class="name">Coaching with Care</span><span class="lvl prof">PROFICIENT</span></div>
+      <div class="meter"><div class="meter-fill prof" style="width:74%"></div></div>
+      <p>Grew 4 reports into autonomous leads; managed 2 PIP cases and reversed 2 borderline performance ratings.</p>
+    </div>
+    <div class="comp">
+      <div class="comp-top"><span class="name">Owning Growth</span><span class="lvl prof">PROFICIENT</span></div>
+      <div class="meter"><div class="meter-fill prof" style="width:74%"></div></div>
+      <p>Built the Jakarta navigation team from zero; new hires ship production code within ~10 days.</p>
+    </div>
+    <div class="comp">
+      <div class="comp-top"><span class="name">Innovation Leadership</span><span class="lvl prof">PROFICIENT</span></div>
+      <div class="meter"><div class="meter-fill prof" style="width:74%"></div></div>
+      <p>92nd-percentile AI tool usage at Grab; authored Claude Skills now used org-wide for migrations.</p>
+    </div>
+    <div class="comp">
+      <div class="comp-top"><span class="name">Problem Solving with Heart</span><span class="lvl prof">PROFICIENT</span></div>
+      <div class="meter"><div class="meter-fill prof" style="width:74%"></div></div>
+      <p>Root-caused native memory-corruption crashes (libgrabmap-gl.so) that had gone untraced for years.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section wrap reveal">
+  <div class="section-head">
+    <span class="tag">Technical breadth</span>
+    <h2>Where he actually sits in the stack</h2>
+  </div>
+  <div class="tech-grid">
+    <div class="tech-card">
+      <h4>Mobile Platform Engineering</h4>
+      <p>kartapoi-sdk, kampungmap-sdk, and dax-map-navigation across Android and iOS, plus review ownership on a native C++/JNI map-matching engine.</p>
+    </div>
+    <div class="tech-card">
+      <h4>Backend &amp; Experimentation</h4>
+      <p>Direct exposure to the Kampung Go backend; drove migration of legacy feature flags onto the ConsumerMapExpVar experimentation system.</p>
+    </div>
+    <div class="tech-card">
+      <h4>ML &amp; Personalization-Adjacent</h4>
+      <p>Reviews geosmartkit's computer-vision ID-verification models; owns the recommendation-driving Search &amp; Discovery and Trip Planner surfaces.</p>
+    </div>
+    <div class="tech-card">
+      <h4>LLM &amp; Agentic Workflows</h4>
+      <p>Built and demoed an internal AI coding orchestrator to peer EMs; authored Claude Skills used org-wide; gave "Road to Super Engineering" on managers of AI agents.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section wrap reveal">
+  <div class="section-head">
+    <span class="tag">What peers &amp; reports say</span>
+    <h2>The view from the rest of the map</h2>
+  </div>
+  <div class="quotes">
+    <div class="quote-card">
+      <p>Muddassir is a cornerstone of GEO stability, engineering excellence, and the mobile ecosystem — one of the few EMs in Grab who work in more than one domain.</p>
+      <div class="attrib">Igor Steblii, Engineering Manager — H1 2026 promotion case</div>
+    </div>
+    <div class="quote-card">
+      <p>His work allowed the Geo team to fulfill all commitments a full week ahead of schedule.</p>
+      <div class="attrib">A peer engineer, after a cross-team migration wave</div>
+    </div>
+    <div class="quote-card">
+      <p>Your leadership taught me more than just technical or execution skills — it shaped how I think about responsibility, clarity, and growth as an engineer.</p>
+      <div class="attrib">A mentee, on departure — Jan 2026</div>
+    </div>
+  </div>
+</section>
+
+<footer class="wrap reveal">
+  <div class="foot-grid">
+    <div>
+      <h4>Recognition — personal</h4>
+      <p>CEO Award (Q1'25) · TGW Award (H1'25) — top 5% at Grab.</p>
+    </div>
+    <div>
+      <h4>Recognition — team</h4>
+      <p>2 CEO Awards · 2 TGW Awards · 1 promotion earned by people he coached, plus a major contribution to a report's G6 promotion.</p>
+    </div>
+  </div>
+  <div class="compiled">Portfolio compiled from GitLab, Jira, Slack, Drive &amp; Confluence — July 2026</div>
+</footer>
+
+<script>
+  const legs = document.querySelectorAll('.leg');
+  const fill = document.getElementById('routeFill');
+  const rail = document.querySelector('.route-rail');
+
+  function updateRoute(){
+    const rect = rail.getBoundingClientRect();
+    const railTop = rect.top + window.scrollY;
+    const railHeight = rail.offsetHeight;
+    const viewportBottom = window.scrollY + window.innerHeight * 0.65;
+    let progress = (viewportBottom - railTop) / railHeight;
+    progress = Math.max(0, Math.min(1, progress));
+    fill.style.height = (progress * 100) + '%';
+  }
+
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('in-view'); }
+    });
+  }, {threshold:0.35});
+  legs.forEach(l=>io.observe(l));
+
+  const revealIo = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('in-view'); }
+    });
+  }, {threshold:0.12});
+  document.querySelectorAll('.reveal').forEach(el=>revealIo.observe(el));
+
+  window.addEventListener('scroll', updateRoute, {passive:true});
+  window.addEventListener('resize', updateRoute);
+  updateRoute();
+</script>
+
+</body>
+</html>
