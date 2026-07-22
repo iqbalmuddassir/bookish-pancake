@@ -5,350 +5,609 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Grab SEM portfolio — internal promotion case for Consumer Maps leadership (not published).">
 <meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#e5e9e6">
 <title>Muddassir Iqbal — Senior Engineering Manager, Consumer Maps</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --ink: #0B111C;
-    --panel: #131C2B;
-    --panel-2: #182338;
-    --hairline: #26324A;
-    --text: #E8ECF4;
-    --muted: #8C97AF;
-    --route: #59E0C4;
-    --route-dim: #2A5C54;
-    --pin: #F5A94E;
-    --pin-dim: #6b5330;
-    display: block;
+  :root {
+    --bg: #e5e9e6;
+    --bg-deep: #d2d8d3;
+    --surface: #eef1ee;
+    --ink: #171a18;
+    --text: #3d453f;
+    --muted: #5c645e;
+    --border: color-mix(in srgb, var(--ink) 18%, transparent);
+    --accent: #8c1f2f;
+    --green: #1f6b4a;
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body: 'Space Grotesk', sans-serif;
+    --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+    --max: 1120px;
   }
-  *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{
-    margin:0;
-    background:var(--ink);
-    color:var(--text);
-    font-family:'IBM Plex Sans', sans-serif;
-    line-height:1.55;
-    -webkit-font-smoothing:antialiased;
-  }
-  h1,h2,h3,h4{
-    font-family:'Space Grotesk', sans-serif;
-    font-weight:600;
-    margin:0;
-    letter-spacing:-0.01em;
-  }
-  .mono{font-family:'IBM Plex Mono', monospace;}
-  a{color:inherit;}
-  .wrap{max-width:1080px; margin:0 auto; padding:0 32px;}
 
-  /* background texture: faint lat/long grid, like a map viewport */
-  .map-grid{
-    position:fixed; inset:0; z-index:0; pointer-events:none;
-    background-image:
-      linear-gradient(var(--hairline) 1px, transparent 1px),
-      linear-gradient(90deg, var(--hairline) 1px, transparent 1px);
-    background-size:64px 64px;
-    opacity:0.16;
+  body.light {
+    --bg: #e5e9e6;
+    --bg-deep: #d2d8d3;
+    --surface: #eef1ee;
+    --ink: #171a18;
+    --text: #3d453f;
+    --muted: #5c645e;
+    --accent: #8c1f2f;
+    --green: #1f6b4a;
+    --border: color-mix(in srgb, var(--ink) 18%, transparent);
+  }
+
+  body.dark {
+    --bg: #141816;
+    --bg-deep: #1c211e;
+    --surface: #1c211e;
+    --ink: #e8ece9;
+    --text: #c5cbc6;
+    --muted: #a3aaa5;
+    --accent: #e07a86;
+    --green: #7dbaa8;
+    --border: color-mix(in srgb, var(--ink) 16%, transparent);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    body:not(.light) {
+      --bg: #141816;
+      --bg-deep: #1c211e;
+      --surface: #1c211e;
+      --ink: #e8ece9;
+      --text: #c5cbc6;
+      --muted: #a3aaa5;
+      --accent: #e07a86;
+      --green: #7dbaa8;
+      --border: color-mix(in srgb, var(--ink) 16%, transparent);
+    }
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    color: var(--text);
+    background:
+      linear-gradient(105deg, var(--bg) 0%, var(--bg) 58%, var(--bg-deep) 58%, var(--bg-deep) 100%);
+    line-height: 1.55;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: -0.03em;
+  }
+
+  a { color: inherit; }
+  strong { color: var(--ink); font-weight: 600; }
+  .mono { font-family: var(--font-mono); }
+
+  #themeToggle {
+    position: fixed;
+    top: 1.25rem;
+    right: 1.25rem;
+    z-index: 2000;
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 1.5px solid var(--ink);
+    border-radius: 0;
+    background: var(--surface);
+    color: var(--ink);
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+  #themeToggle:hover { background: var(--ink); color: var(--bg); }
+  #themeToggle svg { width: 1rem; height: 1rem; }
+  #themeToggle .icon-moon { display: none; }
+  body.dark #themeToggle .icon-sun { display: none; }
+  body.dark #themeToggle .icon-moon { display: block; }
+
+  @media (prefers-color-scheme: dark) {
+    body:not(.light) #themeToggle .icon-sun { display: none; }
+    body:not(.light) #themeToggle .icon-moon { display: block; }
+    body.light #themeToggle .icon-sun { display: block; }
+    body.light #themeToggle .icon-moon { display: none; }
+  }
+
+  .back-link {
+    position: fixed;
+    top: 1.25rem;
+    left: 1.25rem;
+    z-index: 2000;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 0.15rem;
+  }
+  .back-link:hover { color: var(--accent); }
+
+  .wrap {
+    width: min(100% - 3rem, var(--max));
+    margin: 0 auto;
+  }
+
+  .internal-banner {
+    width: min(100% - 3rem, var(--max));
+    margin: 0 auto;
+    padding: 4.75rem 0 0;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: var(--muted);
   }
 
   /* ---------- HERO ---------- */
-  .hero{
-    position:relative; z-index:1;
-    min-height:100vh;
-    display:flex; flex-direction:column; justify-content:center;
-    padding:120px 0 80px;
-    border-bottom:1px solid var(--hairline);
+  .hero {
+    padding: 1.25rem 0 3.5rem;
+    border-bottom: 2px solid var(--ink);
   }
-  .eyebrow{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:12.5px; letter-spacing:0.14em; text-transform:uppercase;
-    color:var(--route);
-    display:flex; align-items:center; gap:10px;
-    margin-bottom:26px;
-    opacity:0; transform:translateY(8px);
-    animation:riseIn 0.7s ease forwards;
+  .eyebrow {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 1rem;
+    opacity: 0;
+    animation: rise 0.7s ease forwards 0.05s;
   }
-  .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--route); box-shadow:0 0 10px var(--route);}
-  h1.name{
-    font-size:clamp(44px, 7vw, 84px);
-    line-height:1.02;
-    opacity:0; transform:translateY(14px);
-    animation:riseIn 0.8s ease 0.1s forwards;
+  h1.name {
+    font-size: clamp(2.75rem, 8vw, 5.5rem);
+    font-weight: 700;
+    line-height: 0.92;
+    letter-spacing: -0.05em;
+    max-width: 12ch;
+    margin-bottom: 1.1rem;
+    opacity: 0;
+    animation: rise 0.8s ease forwards 0.12s;
   }
-  .role{
-    font-size:clamp(17px,2.2vw,22px);
-    color:var(--muted);
-    margin-top:18px;
-    max-width:640px;
-    opacity:0; transform:translateY(14px);
-    animation:riseIn 0.8s ease 0.22s forwards;
+  .role {
+    font-size: clamp(1.05rem, 2vw, 1.25rem);
+    color: var(--muted);
+    max-width: 40rem;
+    margin-bottom: 0.55rem;
+    opacity: 0;
+    animation: rise 0.8s ease forwards 0.22s;
   }
-  .role strong{color:var(--text); font-weight:600;}
-  .loc-line{
-    margin-top:10px; font-size:14px; color:var(--muted);
-    font-family:'IBM Plex Mono', monospace;
-    display:flex; align-items:center; gap:8px;
-    opacity:0; transform:translateY(14px);
-    animation:riseIn 0.8s ease 0.3s forwards;
+  .loc-line {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--muted);
+    margin-bottom: 1.75rem;
+    opacity: 0;
+    animation: rise 0.8s ease forwards 0.3s;
   }
-  .summary{
-    margin-top:34px; max-width:680px; font-size:16.5px; color:var(--text); opacity:0.92;
-    opacity:0; transform:translateY(14px);
-    animation:riseIn 0.8s ease 0.4s forwards;
+  .summary {
+    max-width: 42rem;
+    font-size: 1.02rem;
+    color: var(--text);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: rise 0.8s ease forwards 0.38s;
   }
-  .calibration-card{
-    margin-top:34px; max-width:640px;
-    background:var(--panel);
-    border:1px solid var(--hairline);
-    border-left:3px solid var(--pin);
-    border-radius:6px;
-    padding:18px 22px;
-    font-size:14.5px; color:var(--muted);
-    opacity:0; transform:translateY(14px);
-    animation:riseIn 0.8s ease 0.5s forwards;
+  .calibration {
+    max-width: 40rem;
+    padding: 1rem 0 1rem 1rem;
+    border-left: 3px solid var(--accent);
+    font-size: 0.95rem;
+    color: var(--muted);
+    margin-bottom: 2.25rem;
+    opacity: 0;
+    animation: rise 0.8s ease forwards 0.48s;
   }
-  .calibration-card b{color:var(--text);}
-  @keyframes riseIn{to{opacity:1; transform:translateY(0);}}
+  .calibration b { color: var(--ink); }
 
-  .stat-strip{
-    margin-top:56px;
-    display:grid;
-    grid-template-columns:repeat(6, 1fr);
-    gap:1px;
-    background:var(--hairline);
-    border:1px solid var(--hairline);
-    border-radius:8px;
-    overflow:hidden;
-    opacity:0;
-    animation:riseIn 0.8s ease 0.6s forwards;
+  .stat-strip {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    border-top: 1.5px solid var(--ink);
+    border-bottom: 1.5px solid var(--ink);
+    opacity: 0;
+    animation: rise 0.8s ease forwards 0.58s;
   }
-  .stat-chip{
-    background:var(--panel);
-    padding:18px 14px;
-    text-align:left;
+  .stat-chip {
+    padding: 1.1rem 0.9rem;
+    border-right: 1px solid var(--border);
   }
-  .stat-chip .num{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:22px; font-weight:600; color:var(--route);
-    display:block;
+  .stat-chip:last-child { border-right: 0; }
+  .stat-chip .num {
+    display: block;
+    font-size: 1.45rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    line-height: 1.15;
   }
-  .stat-chip .lbl{
-    font-size:11.5px; color:var(--muted); letter-spacing:0.03em;
-    margin-top:4px; display:block;
-  }
-
-  /* ---------- ROUTE / JOURNEY SECTIONS ---------- */
-  .journey{
-    position:relative; z-index:1;
-    padding:100px 0 40px;
-  }
-  .journey-intro{
-    max-width:600px; margin:0 auto 64px; padding:0 32px;
-    color:var(--muted); font-size:15px;
-  }
-  .journey-intro .tag{
-    font-family:'IBM Plex Mono', monospace; color:var(--route);
-    font-size:12px; letter-spacing:0.12em; text-transform:uppercase;
-  }
-  .route-rail{
-    position:relative;
-    max-width:1080px; margin:0 auto; padding:0 32px;
-  }
-  .route-line{
-    position:absolute;
-    left:52px; top:8px; bottom:8px;
-    width:2px;
-    background:linear-gradient(to bottom, var(--route-dim), var(--route-dim));
-    z-index:0;
-  }
-  .route-line-fill{
-    position:absolute; left:0; top:0; width:100%; height:0%;
-    background:linear-gradient(to bottom, var(--route), var(--route));
-    transition:height 1.8s cubic-bezier(.2,.7,.2,1);
-    box-shadow:0 0 12px 0 var(--route);
-  }
-  .leg{
-    position:relative;
-    display:grid;
-    grid-template-columns:104px 1fr;
-    gap:8px;
-    padding-bottom:72px;
-    opacity:0; transform:translateY(24px);
-    transition:opacity 0.7s ease, transform 0.7s ease;
-  }
-  .leg:last-child{padding-bottom:0;}
-  .leg.in-view{opacity:1; transform:translateY(0);}
-  .pin{
-    position:relative; z-index:2;
-    width:40px; height:40px; border-radius:50%;
-    background:var(--panel-2);
-    border:2px solid var(--route-dim);
-    display:flex; align-items:center; justify-content:center;
-    font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--muted);
-    margin-left:32px;
-    transition:border-color 0.5s ease, color 0.5s ease, box-shadow 0.5s ease;
-  }
-  .leg.in-view .pin{
-    border-color:var(--route); color:var(--route);
-    box-shadow:0 0 0 5px rgba(89,224,196,0.08);
-  }
-  .leg-body{padding-top:2px;}
-  .leg-eyebrow{
-    font-family:'IBM Plex Mono', monospace; font-size:11.5px;
-    color:var(--pin); letter-spacing:0.1em; text-transform:uppercase;
-    margin-bottom:8px;
-  }
-  .leg h3{font-size:24px; margin-bottom:14px;}
-  .leg p{color:var(--muted); font-size:15px; margin:0 0 12px;}
-  .leg p:last-child{margin-bottom:0;}
-  .leg strong{color:var(--text); font-weight:600;}
-  .leg .metrics{
-    display:flex; flex-wrap:wrap; gap:10px; margin-top:16px;
-  }
-  .metric-pill{
-    font-family:'IBM Plex Mono', monospace; font-size:12px;
-    background:var(--panel); border:1px solid var(--hairline);
-    padding:6px 12px; border-radius:20px; color:var(--muted);
-  }
-  .metric-pill b{color:var(--route);}
-
-  /* ---------- SIGNATURE GRID ---------- */
-  .section{position:relative; z-index:1; padding:90px 0;}
-  .section-head{margin-bottom:44px; max-width:640px;}
-  .section-head .tag{
-    font-family:'IBM Plex Mono', monospace; color:var(--route);
-    font-size:12px; letter-spacing:0.12em; text-transform:uppercase; display:block; margin-bottom:14px;
-  }
-  .section-head h2{font-size:clamp(28px,3.6vw,38px);}
-  .section-head p{color:var(--muted); margin-top:14px; font-size:15px;}
-
-  .ach-grid{
-    display:grid; grid-template-columns:repeat(4,1fr); gap:1px;
-    background:var(--hairline); border:1px solid var(--hairline); border-radius:10px; overflow:hidden;
-  }
-  .ach-card{
-    background:var(--panel); padding:26px 22px; min-height:150px;
-    display:flex; flex-direction:column; justify-content:space-between;
-  }
-  .ach-card .big{
-    font-family:'IBM Plex Mono', monospace; font-size:26px; font-weight:600; color:var(--text);
-  }
-  .ach-card .cap{font-size:13px; color:var(--muted); margin-top:10px;}
-
-  /* AI native */
-  .ai-cols{display:grid; grid-template-columns:1.1fr 1fr; gap:48px; align-items:start;}
-  .ai-stats{display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:var(--hairline); border:1px solid var(--hairline); border-radius:10px; overflow:hidden; margin-bottom:32px;}
-  .ai-stats .stat-chip .num{font-size:19px;}
-  .list-block h4{
-    font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--pin);
-    letter-spacing:0.1em; text-transform:uppercase; margin-bottom:14px;
-  }
-  .list-block ul{margin:0 0 28px; padding:0; list-style:none;}
-  .list-block li{
-    padding:12px 0; border-top:1px solid var(--hairline); color:var(--muted); font-size:14.5px;
-  }
-  .list-block li:first-child{border-top:none;}
-  .list-block li strong{color:var(--text);}
-
-  /* competencies */
-  .comp-grid{display:grid; grid-template-columns:1fr 1fr; gap:20px 40px;}
-  .comp{padding:18px 0; border-top:1px solid var(--hairline);}
-  .comp-top{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:10px;}
-  .comp-top .name{font-size:15px; font-weight:600;}
-  .comp-top .lvl{font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:0.08em; color:var(--route);}
-  .comp-top .lvl.prof{color:var(--pin);}
-  .meter{height:4px; background:var(--panel-2); border-radius:2px; overflow:hidden; margin-bottom:10px;}
-  .meter-fill{height:100%; background:var(--route); border-radius:2px;}
-  .meter-fill.prof{background:var(--pin);}
-  .comp p{font-size:13.5px; color:var(--muted); margin:0;}
-
-  /* tech breadth */
-  .tech-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:20px;}
-  .tech-card{background:var(--panel); border:1px solid var(--hairline); border-radius:10px; padding:22px;}
-  .tech-card h4{font-size:14.5px; margin-bottom:10px; color:var(--route);}
-  .tech-card p{font-size:13.5px; color:var(--muted); margin:0;}
-
-  /* quotes */
-  .quotes{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
-  .quote-card{
-    background:var(--panel); border:1px solid var(--hairline); border-left:3px solid var(--route);
-    border-radius:6px; padding:24px; font-size:14.5px; color:var(--text); position:relative;
-  }
-  .quote-card:before{content:"\201C"; font-family:'Space Grotesk',sans-serif; font-size:44px; color:var(--route-dim); position:absolute; top:6px; left:14px; line-height:1;}
-  .quote-card p{margin:18px 0 16px; position:relative; z-index:1;}
-  .quote-card .attrib{font-family:'IBM Plex Mono', monospace; font-size:11.5px; color:var(--muted); letter-spacing:0.03em;}
-
-  footer{
-    position:relative; z-index:1;
-    border-top:1px solid var(--hairline);
-    padding:56px 0 60px;
-  }
-  .foot-grid{display:grid; grid-template-columns:1fr 1fr; gap:32px;}
-  footer h4{font-size:13px; color:var(--pin); font-family:'IBM Plex Mono', monospace; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:12px;}
-  footer p{color:var(--muted); font-size:14px; margin:0 0 6px;}
-  .compiled{margin-top:40px; font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--muted); opacity:0.7;}
-
-  /* reveal-on-scroll for generic sections */
-  .reveal{opacity:0; transform:translateY(18px); transition:opacity .7s ease, transform .7s ease;}
-  .reveal.in-view{opacity:1; transform:translateY(0);}
-
-  @media (max-width: 880px){
-    .ach-grid{grid-template-columns:repeat(2,1fr);}
-    .ai-cols{grid-template-columns:1fr;}
-    .comp-grid{grid-template-columns:1fr;}
-    .tech-grid{grid-template-columns:1fr 1fr;}
-    .quotes{grid-template-columns:1fr;}
-    .stat-strip{grid-template-columns:repeat(3,1fr);}
-    .foot-grid{grid-template-columns:1fr;}
-    .route-line{left:32px;}
-    .pin{margin-left:12px;}
-    .leg{grid-template-columns:64px 1fr;}
-  }
-  @media (max-width: 560px){
-    .wrap, .route-rail{padding:0 20px;}
-    .ach-grid{grid-template-columns:1fr 1fr;}
-    .tech-grid{grid-template-columns:1fr;}
+  .stat-chip .lbl {
+    display: block;
+    margin-top: 0.25rem;
+    font-size: 0.75rem;
+    color: var(--muted);
   }
 
-  .back-link{
-    position:fixed; top:18px; left:18px; z-index:20;
-    font-family:'IBM Plex Mono', monospace;
-    font-size:12px; letter-spacing:0.06em; text-transform:uppercase;
-    color:var(--muted); text-decoration:none;
-    padding:8px 12px;
-    border:1px solid var(--hairline);
-    background:rgba(11,17,28,0.82);
-    backdrop-filter:blur(8px);
+  /* ---------- SECTIONS ---------- */
+  .section {
+    padding: 4rem 0 1rem;
   }
-  .back-link:hover{color:var(--route); border-color:var(--route-dim);}
-  .internal-banner{
-    position:relative; z-index:1;
-    max-width:1080px; margin:0 auto; padding:72px 32px 0;
-    font-family:'IBM Plex Mono', monospace;
-    font-size:12px; letter-spacing:0.04em; color:var(--muted);
+  .section-head {
+    margin-bottom: 2rem;
+    padding-bottom: 0.85rem;
+    border-bottom: 2px solid var(--ink);
+  }
+  .section-head .tag {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 0.45rem;
+  }
+  .section-head h2 {
+    font-size: clamp(1.6rem, 3.5vw, 2.25rem);
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    margin-bottom: 0.55rem;
+  }
+  .section-head p {
+    max-width: 38rem;
+    color: var(--muted);
+    font-size: 0.98rem;
   }
 
-  @media (prefers-reduced-motion: reduce){
-    *{animation:none !important; transition:none !important;}
-    .eyebrow,h1.name,.role,.loc-line,.summary,.calibration-card,.stat-strip,.leg,.reveal{opacity:1 !important; transform:none !important;}
+  .reveal {
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+  }
+  .reveal.in-view {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* ---------- JOURNEY ---------- */
+  .journey-intro {
+    max-width: 36rem;
+    margin: 0 0 2.5rem;
+    color: var(--muted);
+    font-size: 0.98rem;
+  }
+  .journey-intro .tag {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 0.45rem;
+  }
+
+  .route-rail {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .leg {
+    display: grid;
+    grid-template-columns: 3.5rem minmax(0, 1fr);
+    gap: 1.25rem;
+    padding: 1.75rem 0;
+    border-bottom: 1px solid var(--border);
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .leg.in-view {
+    opacity: 1;
+    transform: none;
+  }
+  .pin {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--muted);
+    padding-top: 0.3rem;
+  }
+  .leg-eyebrow {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 0.35rem;
+  }
+  .leg-body h3 {
+    font-size: clamp(1.2rem, 2.4vw, 1.55rem);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.7rem;
+    line-height: 1.2;
+  }
+  .leg-body p {
+    max-width: 44rem;
+    margin-bottom: 0.75rem;
+    color: var(--text);
+    font-size: 0.98rem;
+  }
+  .metrics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.25rem;
+    margin-top: 0.85rem;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+  .metrics b {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  /* ---------- ACHIEVEMENTS ---------- */
+  .ach-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-top: 1.5px solid var(--ink);
+  }
+  .ach-card {
+    padding: 1.35rem 1.1rem;
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .ach-card:nth-child(4n) { border-right: 0; }
+  .ach-card .big {
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    margin-bottom: 0.4rem;
+    line-height: 1.15;
+  }
+  .ach-card .cap {
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.45;
+  }
+
+  /* ---------- AI ---------- */
+  .ai-cols {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 2.5rem;
+    align-items: start;
+  }
+  .ai-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-top: 1.5px solid var(--ink);
+    border-bottom: 1.5px solid var(--ink);
+    margin-bottom: 1.75rem;
+  }
+  .ai-stats .stat-chip:nth-child(odd) {
+    border-right: 1px solid var(--border);
+  }
+  .ai-stats .stat-chip:nth-child(-n+2) {
+    border-bottom: 1px solid var(--border);
+  }
+  .list-block h4 {
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .list-block ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+  .list-block li {
+    font-size: 0.95rem;
+    color: var(--text);
+    padding-left: 0.9rem;
+    border-left: 2px solid var(--accent);
+  }
+
+  /* ---------- COMPETENCIES ---------- */
+  .comp-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border-top: 1.5px solid var(--ink);
+  }
+  .comp {
+    padding: 1.35rem 1.25rem;
+    border-bottom: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+  }
+  .comp:nth-child(2n) { border-right: 0; }
+  .comp-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 0.55rem;
+  }
+  .comp-top .name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .comp-top .lvl {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: var(--accent);
+  }
+  .comp-top .lvl.prof { color: var(--muted); }
+  .meter {
+    height: 3px;
+    background: var(--border);
+    margin-bottom: 0.65rem;
+  }
+  .meter-fill {
+    height: 100%;
+    background: var(--accent);
+  }
+  .meter-fill.prof { background: var(--muted); }
+  .comp p {
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+
+  /* ---------- TECH ---------- */
+  .tech-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border-top: 1.5px solid var(--ink);
+  }
+  .tech-card {
+    padding: 1.5rem 1.25rem;
+    border-bottom: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+  }
+  .tech-card:nth-child(2n) { border-right: 0; }
+  .tech-card h4 {
+    font-size: 1.05rem;
+    margin-bottom: 0.45rem;
+  }
+  .tech-card p {
+    font-size: 0.95rem;
+    color: var(--muted);
+    max-width: 34rem;
+  }
+
+  /* ---------- QUOTES ---------- */
+  .quotes {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    border-top: 1.5px solid var(--ink);
+  }
+  .quote-card {
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .quote-card p {
+    font-size: 1.05rem;
+    color: var(--ink);
+    max-width: 44rem;
+    margin-bottom: 0.7rem;
+    line-height: 1.5;
+  }
+  .quote-card .attrib {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    margin-top: 3rem;
+    padding: 1.75rem 0 3rem;
+    border-top: 2px solid var(--ink);
+  }
+  .foot-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+  }
+  .foot-grid h4 {
+    font-size: 0.95rem;
+    margin-bottom: 0.4rem;
+  }
+  .foot-grid p {
+    font-size: 0.92rem;
+    color: var(--muted);
+  }
+  .compiled {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: none; }
+  }
+
+  @media (max-width: 900px) {
+    .stat-strip { grid-template-columns: repeat(3, 1fr); }
+    .stat-chip:nth-child(3) { border-right: 0; }
+    .stat-chip:nth-child(n+4) { border-top: 1px solid var(--border); }
+    .ach-grid { grid-template-columns: 1fr 1fr; }
+    .ach-card:nth-child(4n) { border-right: 1px solid var(--border); }
+    .ach-card:nth-child(2n) { border-right: 0; }
+    .ai-cols, .comp-grid, .tech-grid, .foot-grid { grid-template-columns: 1fr; }
+    .comp { border-right: 0; }
+    .tech-card { border-right: 0; }
+  }
+
+  @media (max-width: 640px) {
+    .wrap, .internal-banner { width: min(100% - 2rem, var(--max)); }
+    body {
+      background: var(--bg);
+    }
+    .stat-strip { grid-template-columns: 1fr 1fr; }
+    .stat-chip:nth-child(2n) { border-right: 0; }
+    .stat-chip:nth-child(3) { border-right: 1px solid var(--border); }
+    .leg { grid-template-columns: 2.5rem 1fr; gap: 0.85rem; }
+    .ach-grid { grid-template-columns: 1fr; }
+    .ach-card { border-right: 0; }
+    .ai-stats { grid-template-columns: 1fr; }
+    .ai-stats .stat-chip { border-right: 0; }
+    .back-link { left: 1rem; top: 1rem; }
+    #themeToggle { right: 1rem; top: 1rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation: none !important;
+      transition: none !important;
+    }
+    .eyebrow, h1.name, .role, .loc-line, .summary, .calibration, .stat-strip,
+    .leg, .reveal {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+
+  @media print {
+    #themeToggle, .back-link { display: none !important; }
+    body { background: white; color: black; }
   }
 </style>
 </head>
 <body>
 
-<div class="map-grid"></div>
+<button id="themeToggle" aria-label="Toggle theme" type="button">
+  <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+    <circle cx="12" cy="12" r="4"></circle>
+    <path d="M12 2v2.2M12 19.8V22M4.93 4.93l1.56 1.56M17.51 17.51l1.56 1.56M2 12h2.2M19.8 12H22M4.93 19.07l1.56-1.56M17.51 6.49l1.56-1.56"></path>
+  </svg>
+  <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+    <path d="M20.5 14.3A8.2 8.2 0 1 1 9.7 3.5a6.6 6.6 0 1 0 10.8 10.8z"></path>
+  </svg>
+</button>
 <a class="back-link" href="../index.html?mode=private">← Hub</a>
+
 <p class="internal-banner">Internal — not published · view hub with ?mode=private</p>
 
 <section class="hero wrap">
-  <div class="eyebrow"><span class="dot"></span>Portfolio — Senior Engineering Manager, Consumer Experience</div>
+  <div class="eyebrow">Portfolio — Senior Engineering Manager, Consumer Experience</div>
   <h1 class="name">Muddassir Iqbal</h1>
   <p class="role">Software Engineering Manager II, <strong>Geo Engineering</strong> at Grab — leading Consumer Maps across three hubs.</p>
-  <div class="loc-line">📍 Singapore — bridging Beijing &amp; Jakarta hubs · July 2026</div>
+  <div class="loc-line">Singapore — bridging Beijing &amp; Jakarta hubs · July 2026</div>
   <p class="summary">Three years leading Grab's Consumer Maps engineering across three hubs — Singapore, Beijing, and Jakarta — spanning the SDKs behind the Grab app's home-screen map, wayfinding, and points-of-interest surfaces used by tens of millions of consumers every month. Engineering Owner for non-functional priorities across the Passenger, Driver, and Merchant apps, and technical gatekeeper for release stability across 20+ core SDKs. An AI-first builder-manager who has turned agentic tooling into a repeatable team practice, while personally shipping the org's hardest platform migrations and growing four direct reports into autonomous technical leads.</p>
-  <div class="calibration-card">
+  <div class="calibration">
     <b>Independently calibrated, not self-assessed:</b> his H1 2026 promotion case concluded he is already operating at G6 (Senior Manager) scope against Grab's Engineering &amp; Data Science Manager Career Ladder — leading across team boundaries, scaling reliability standards, and developing emerging leaders.
   </div>
   <div class="stat-strip">
@@ -361,14 +620,12 @@
   </div>
 </section>
 
-<section class="journey">
+<section class="section wrap">
   <div class="journey-intro">
     <span class="tag">The route so far</span>
-    <p style="margin-top:10px;">Five legs of a three-year build-out, from turning around a sinking platform to running crisis response for the whole Driver app.</p>
+    <p>Five legs of a three-year build-out, from turning around a sinking platform to running crisis response for the whole Driver app.</p>
   </div>
   <div class="route-rail">
-    <div class="route-line"><div class="route-line-fill" id="routeFill"></div></div>
-
     <div class="leg" data-leg="1">
       <div class="pin">01</div>
       <div class="leg-body">
@@ -377,10 +634,10 @@
         <p>Owns the Consumer Maps NFP roadmap — the <strong>Kotlin 2.1 / Android 36 migration</strong>, the <strong>Nav 2.0 / MapLibre rearchitecture</strong>, Garnet Taiwan localisation, and experimentation-infra cleanup — translating multi-quarter technical bets into shipped roadmap items.</p>
         <p>Product surfaces under his scope reach massive consumer traffic, and he spotted that third-party map traffic could be converted into Grab bookings — turning that insight into <strong>"Grab as a Navigation App,"</strong> now an estimated ~US$80K/week revenue line. He also structured a DGNSS precise-positioning partnership spanning Qualcomm, OPPO, and SwiftNav — a hardware-to-software strategic bet, not just an internal roadmap line.</p>
         <div class="metrics">
-          <span class="metric-pill"><b>1.97M</b>&nbsp;MEU Trip Planner</span>
-          <span class="metric-pill"><b>10.43M</b>&nbsp;/mo Search &amp; Discovery</span>
-          <span class="metric-pill"><b>~6M</b>&nbsp;weekly DineOut discovery</span>
-          <span class="metric-pill">CEO Award Q1'25 · TGW Award H1'25 — top 5%</span>
+          <span><b>1.97M</b> MEU Trip Planner</span>
+          <span><b>10.43M</b> /mo Search &amp; Discovery</span>
+          <span><b>~6M</b> weekly DineOut discovery</span>
+          <span>CEO Award Q1'25 · TGW Award H1'25 — top 5%</span>
         </div>
       </div>
     </div>
@@ -393,9 +650,9 @@
         <p>Manages <strong>8 direct reports today, with a 9th offer already out</strong>. Coached four leads — Parking, Trip Planner, ParaTransit, and Discovery — into autonomous "cyborg" owners of their own surfaces; their track record under his mentorship: 1 promotion, 2 TGW Awards, and 2 CEO Awards earned by the people he grew, plus a major contribution to a report's own G6 promotion.</p>
         <p>Has handled the harder side of people leadership too: successfully managed 2 performance-improvement cases and coached two borderline performance ratings back to a positive trajectory. As hiring manager, he stood up a new navigation team in Jakarta from zero — new hires ship production code within roughly 10 days, backed by onboarding guides he built.</p>
         <div class="metrics">
-          <span class="metric-pill"><b>8+1</b>&nbsp;reports</span>
-          <span class="metric-pill"><b>4</b>&nbsp;leads → autonomous owners</span>
-          <span class="metric-pill"><b>~10 days</b>&nbsp;to first production commit, Jakarta</span>
+          <span><b>8+1</b> reports</span>
+          <span><b>4</b> leads → autonomous owners</span>
+          <span><b>~10 days</b> to first production commit, Jakarta</span>
         </div>
       </div>
     </div>
@@ -408,9 +665,9 @@
         <p>Turned around the Map Your City crowdsourcing platform as a first-time EM in Dec 2022, and built Grab's homegrown in-house navigation stack now powering the entire Driver app — both started as "sinking ships." Personally shipped the <strong>Kotlin 2.1 / K2 compiler and Android SDK 36 migration</strong> for kartapoi-sdk — KAPT→KSP, edge-to-edge UI across 22 screens, 5 SDK migrations, 1,385 unit tests green.</p>
         <p>Sole architect of the Consumer Map Feature Flag Unification design, and led the 2.5-year, cross-platform KartaPOI Generic build spanning Android and iOS. As architectural gatekeeper for both release trains, he blocks non-compliant MRs on sight and is the primary investigator for the highest-severity native crashes, including historic <span class="mono">libgrabmap-gl.so</span> memory-corruption bugs no one else had traced.</p>
         <div class="metrics">
-          <span class="metric-pill"><b>1,385</b>&nbsp;unit tests, migration</span>
-          <span class="metric-pill"><b>22</b>&nbsp;screens, edge-to-edge</span>
-          <span class="metric-pill"><b>2.5 yrs</b>&nbsp;KartaPOI Generic, Android+iOS</span>
+          <span><b>1,385</b> unit tests, migration</span>
+          <span><b>22</b> screens, edge-to-edge</span>
+          <span><b>2.5 yrs</b> KartaPOI Generic, Android+iOS</span>
         </div>
       </div>
     </div>
@@ -423,8 +680,8 @@
         <p>Partnered across 10+ tech families in the last three halves — Omni, Transport, Food, Local Life, FinID, Driver App, PAX Core, CX, DAX Core, Map Ops — as the go-to bridge for Navigation, Map Your City, and Consumer Maps. Drove MapMyDeals as a "One Grab" collaboration across Geo, Omni, and Food, then formalised it into a reusable multi-domain blueprint.</p>
         <p>Bridges the Garnet Taiwan market-entry effort with localisation and content-ops teams across the Passenger, Driver, and Merchant apps, and is sought out by peer engineering managers and senior ICs for review of org-level priorities documents beyond his own team's scope.</p>
         <div class="metrics">
-          <span class="metric-pill"><b>10+</b>&nbsp;tech families</span>
-          <span class="metric-pill">MapMyDeals → reusable blueprint</span>
+          <span><b>10+</b> tech families</span>
+          <span>MapMyDeals → reusable blueprint</span>
         </div>
       </div>
     </div>
@@ -437,12 +694,11 @@
         <p>Took command of the <strong>February 2026 Navigation Incident</strong> — coordinating engineering and QA reproduction, feature-flag rollback, and recovery across domains during a live crisis. Coordinated a separate CTO-1-level executive escalation and rollback approval during a severity-1 driver-app crash incident.</p>
         <p>Runs structured "what went well / what could improve" incident retros, and has used them to fix real process gaps: criticality misclassification, delayed on-call escalation. Led the rotation of hardcoded API tokens across 5 SDKs after a security finding, and personally raised the fix for a DAX security vulnerability.</p>
         <div class="metrics">
-          <span class="metric-pill">Sev-1 driver-app crash — CTO-1 escalation</span>
-          <span class="metric-pill"><b>5</b>&nbsp;SDKs, token rotation</span>
+          <span>Sev-1 driver-app crash — CTO-1 escalation</span>
+          <span><b>5</b> SDKs, token rotation</span>
         </div>
       </div>
     </div>
-
   </div>
 </section>
 
@@ -481,7 +737,7 @@
         <h4>Talks he's given</h4>
         <ul>
           <li><strong>"[Geo] Road to Super Engineering"</strong> — Singapore, Beijing &amp; Romania — on shifting engineers from ICs to builders and managers of AI agents.</li>
-          <li><strong>"Vibe Coding POS"</strong> — AI BrownBag session on passion-project-driven engineering ideas.</li>
+          <li><strong>"Vibe Coding POS"</strong> — AI Brown Bag session on passion-project-driven engineering ideas.</li>
           <li><strong>Sub-agent productivity methodology</strong> — Geo All Hands, Sep 2025.</li>
         </ul>
       </div>
@@ -609,37 +865,42 @@
 </footer>
 
 <script>
-  const legs = document.querySelectorAll('.leg');
-  const fill = document.getElementById('routeFill');
-  const rail = document.querySelector('.route-rail');
-
-  function updateRoute(){
-    const rect = rail.getBoundingClientRect();
-    const railTop = rect.top + window.scrollY;
-    const railHeight = rail.offsetHeight;
-    const viewportBottom = window.scrollY + window.innerHeight * 0.65;
-    let progress = (viewportBottom - railTop) / railHeight;
-    progress = Math.max(0, Math.min(1, progress));
-    fill.style.height = (progress * 100) + '%';
+  const body = document.body;
+  const themeToggle = document.getElementById('themeToggle');
+  const savedTheme = localStorage.getItem('grab-sem-theme');
+  if (savedTheme === 'light' || savedTheme === 'dark') {
+    body.classList.add(savedTheme);
   }
 
-  const io = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{
-      if(e.isIntersecting){ e.target.classList.add('in-view'); }
-    });
-  }, {threshold:0.35});
-  legs.forEach(l=>io.observe(l));
+  themeToggle.addEventListener('click', () => {
+    if (body.classList.contains('light')) {
+      body.classList.remove('light');
+      body.classList.add('dark');
+      localStorage.setItem('grab-sem-theme', 'dark');
+    } else if (body.classList.contains('dark')) {
+      body.classList.remove('dark');
+      body.classList.add('light');
+      localStorage.setItem('grab-sem-theme', 'light');
+    } else {
+      const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      body.classList.add(isDark ? 'light' : 'dark');
+      localStorage.setItem('grab-sem-theme', isDark ? 'light' : 'dark');
+    }
+  });
 
-  const revealIo = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{
-      if(e.isIntersecting){ e.target.classList.add('in-view'); }
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) e.target.classList.add('in-view');
     });
-  }, {threshold:0.12});
-  document.querySelectorAll('.reveal').forEach(el=>revealIo.observe(el));
+  }, { threshold: 0.2 });
+  document.querySelectorAll('.leg').forEach((el) => io.observe(el));
 
-  window.addEventListener('scroll', updateRoute, {passive:true});
-  window.addEventListener('resize', updateRoute);
-  updateRoute();
+  const revealIo = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) e.target.classList.add('in-view');
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach((el) => revealIo.observe(el));
 </script>
 
 </body>
